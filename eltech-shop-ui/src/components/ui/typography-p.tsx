@@ -11,6 +11,7 @@ export default function TypographyP({
     value,
     color = "base",
     textSize = 'md',
+    fontWeight = 'normal',
     className = ''
 }: Props) {
     const sizeClass = {
