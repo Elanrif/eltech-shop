@@ -2,10 +2,11 @@
 import React from "react";
 import TypographyP from "@/components/ui/typography-p";
 import { ModeToggle } from "@/components/mode-toggle";
-import { CircleUser, Search, Heart, ShoppingBag, X } from "lucide-react";
+import { Search, Heart, ShoppingBag, X } from "lucide-react";
 import Logo from "@/components/logo";
 import { Input } from "../ui/input";
 import TypographyA from "../ui/typography-a";
+import { MenuUser } from "./menu-user";
 
 export type Props = {
   value: string;
@@ -73,11 +74,16 @@ export default function HeaderBase() {
     ];
 
     const iconsData = [
-        {name: 'CircleUser', component: <CircleUser/>},
-        {name: 'Search', component: <Search/>,click: true},
-        {name: 'Heart', component: <Heart/>},
-        {name: 'ShoppingBad', component: <ShoppingBag/>},
-    ]
+      {
+        name: "CircleUser",
+        component: (
+          <MenuUser/>
+        ),
+      },
+      { name: "Search", component: <Search />, click: true },
+      { name: "Heart", component: <Heart /> },
+      { name: "ShoppingBad", component: <ShoppingBag /> },
+    ];
   return (
     <div>
       <div className="flex justify-between items-center gap-[10rem]">
@@ -92,8 +98,13 @@ export default function HeaderBase() {
           {iconsData.map((icon, index) => (
             <div key={index}>
               {icon.click === true
-                ? React.cloneElement(icon.component, { onClick: handleDisplay, className: "size-5 hover:cursor-pointer" })
-                : React.cloneElement(icon.component, { className: "size-5 hover:cursor-pointer" } )}
+                ? React.cloneElement(icon.component, {
+                    onClick: handleDisplay,
+                    className: "size-5 hover:cursor-pointer",
+                  })
+                : React.cloneElement(icon.component, {
+                    className: "size-5 hover:cursor-pointer",
+                  })}
             </div>
           ))}
           <ModeToggle />

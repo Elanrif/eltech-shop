@@ -26,7 +26,7 @@ export default function ShareSocilaMedia() {
     },
   ];
   return (
-    <div className='my-7 text-center flex justify-center gap-7'>
+    <div className='my-4 text-center flex justify-center gap-7'>
       {socialMedia.map((icon,index)=>(
         <Link href={icon.url} key={index}>
           {icon.component}

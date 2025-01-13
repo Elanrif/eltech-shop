@@ -3,6 +3,7 @@ import React from 'react'
 
 export type Props = {
     value: string;
+    url?: string;
     color?: 'base' | 'muted' | 'light';
     textSize?: 'xs' |'sm' | 'base' | 'lg' | 'xl';
     fontWeight?: 'thin' | 'light' |'normal' | 'medium' | 'semibold' | 'bold' | 'black'; 
@@ -11,6 +12,7 @@ export type Props = {
 }
 export default function TypographyA({
     value,
+    url="#",
     color = "base",
     textSize = 'base',
     fontWeight = 'normal',
@@ -50,5 +52,5 @@ export default function TypographyA({
         light: "text-white",
     }[color]
 
-  return <Link href="#" className={`hover:text-shop-secondary duration-400 ease-in-out ${transformClass} ${colorClass} ${sizeClass} ${weightClass} ${className}`}>{value}</Link>;
+  return <Link href={url} className={`hover:text-shop-secondary duration-400 ease-in-out ${transformClass} ${colorClass} ${sizeClass} ${weightClass} ${className}`}>{value}</Link>;
 }
