@@ -16,10 +16,10 @@ export function AuthSign() {
   return (
     <Tabs defaultValue="account" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">
+        <TabsTrigger value="account" asChild>
           <AppSwitch id="sign-up" name="Je suis un nouveau client" />
         </TabsTrigger>
-        <TabsTrigger value="password">
+        <TabsTrigger value="password" asChild>
           <AppSwitch id="sign-in" name="Je déjà client" />
         </TabsTrigger>
       </TabsList>
