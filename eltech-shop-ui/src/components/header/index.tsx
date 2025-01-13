@@ -74,7 +74,7 @@ export default function HeaderBase() {
 
     const iconsData = [
         {name: 'CircleUser', component: <CircleUser/>},
-        {name: 'Search', component: <Search/>},
+        {name: 'Search', component: <Search/>,click: true},
         {name: 'Heart', component: <Heart/>},
         {name: 'ShoppingBad', component: <ShoppingBag/>},
     ]
@@ -91,7 +91,7 @@ export default function HeaderBase() {
         <div className="flex gap-3 items-center">
           {iconsData.map((icon, index) => (
             <div key={index}>
-              {icon.name === "Search"
+              {icon.click === true
                 ? React.cloneElement(icon.component, { onClick: handleDisplay, className: "size-5" })
                 : React.cloneElement(icon.component, { className: "size-5" } )}
             </div>
@@ -115,7 +115,7 @@ export default function HeaderBase() {
         <X onClick={handleDisplay} className="text-slate-100" />
       </div>
 
-      <div className="text-center">
+      <div className="text-center mt-3">
         <TypographyP
           value="eltech-shop"
           transform="uppercase"
