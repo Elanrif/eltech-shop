@@ -1,14 +1,22 @@
 import React from 'react'
 
 export type Props = {
-    value: string;
-    color?: 'base' | 'muted' | 'light';
-    textSize?: 'xs' |'sm' | 'base' | 'lg' | 'xl';
-    fontWeight?: 'thin' | 'light' |'normal' | 'medium' | 'semibold' | 'bold' | 'black'; 
-    transform?: 'uppercase' | 'lowercase' | 'capitalize' | 'normal'
-    className?: string;
+  value: string;
+  color?: "base" | "muted" | "light";
+  textSize?: "xs" | "sm" | "base" | "lg" | "xl";
+  fontWeight?:
+    | "thin"
+    | "light"
+    | "normal"
+    | "medium"
+    | "semibold"
+    | "bold"
+    | "black";
+  transform?: "uppercase" | "lowercase" | "capitalize" | "normal";
+  className?: string;
 }
-export default function TypographyP({
+
+export default function TypographyLabel({
     value,
     color = "base",
     textSize = 'sm',
@@ -50,5 +58,12 @@ export default function TypographyP({
         light: "text-white",
     }[color]
 
-  return <p {...props} className={`${transformClass} ${colorClass} ${sizeClass} ${weightClass} ${className}`}>{value}</p>;
+  return (
+    <label
+      className={`${transformClass} ${colorClass} ${sizeClass} ${weightClass} ${className}`}
+      {...props}
+    >
+      {value}
+    </label>
+  );
 }

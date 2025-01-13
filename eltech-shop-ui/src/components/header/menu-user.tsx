@@ -11,20 +11,25 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { CircleUser } from "lucide-react";
+import Link from "next/link";
 
 export function MenuUser() {
   return (
     <Menubar className="w-10 h-10">
       <MenubarMenu>
-        <MenubarTrigger><CircleUser/></MenubarTrigger>
+        <MenubarTrigger>
+          <CircleUser />
+        </MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>
-            New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-          </MenubarItem>
+          <Link href={`/sign-in-up`}>
+            <MenubarItem>
+              Se connecter <MenubarShortcut>⌘T</MenubarShortcut>
+            </MenubarItem>
+          </Link>
           <MenubarItem>
             New Window <MenubarShortcut>⌘N</MenubarShortcut>
           </MenubarItem>
-          <MenubarItem disabled>New Incognito Window</MenubarItem>
+          <MenubarItem disabled>Autre options</MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
             <MenubarSubTrigger>Share</MenubarSubTrigger>
@@ -36,7 +41,8 @@ export function MenuUser() {
           </MenubarSub>
           <MenubarSeparator />
           <MenubarItem>
-            Print... <MenubarShortcut>⌘P</MenubarShortcut>
+            <span className="text-red-500">Déconnexion</span>
+            <MenubarShortcut>⌘P</MenubarShortcut>
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
