@@ -14,7 +14,7 @@ export type Props = {
     | "black";
   transform?: "uppercase" | "lowercase" | "capitalize" | "normal";
   className?: string;
-}
+} & React.LabelHTMLAttributes<HTMLLabelElement>;
 
 export default function TypographyLabel({
     value,
