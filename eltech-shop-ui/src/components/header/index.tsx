@@ -89,13 +89,11 @@ export default function HeaderBase() {
           color="muted"
         />
         <div className="flex gap-3 items-center">
-          {iconsData.map((icon,index)=> (
+          {iconsData.map((icon, index) => (
             <div key={index}>
-                {icon.name === 'Search' ? (
-                 React.cloneElement(icon.component, {onClick: handleDisplay})
-                ):(
-                icon.component
-                )}
+              {icon.name === "Search"
+                ? React.cloneElement(icon.component, { onClick: handleDisplay, className: "size-5" })
+                : React.cloneElement(icon.component, { className: "size-5" } )}
             </div>
           ))}
           <ModeToggle />
@@ -125,19 +123,19 @@ export default function HeaderBase() {
           textSize="xl"
         />
         <div className="flex gap-3 items-center justify-center mt-3">
-            {subMenu.map((payload,index)=>{
-                return (
-                  <React.Fragment key={index}>
-                    <TypographyA
-                      color="muted"
-                      value={payload.value}
-                      transform={payload.transform}
-                      fontWeight={payload.fontWeight}
-                      textSize={payload.textSize}
-                    />
-                  </React.Fragment>
-                );
-            })}
+          {subMenu.map((payload, index) => {
+            return (
+              <React.Fragment key={index}>
+                <TypographyA
+                  color="muted"
+                  value={payload.value}
+                  transform={payload.transform}
+                  fontWeight={payload.fontWeight}
+                  textSize={payload.textSize}
+                />
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
     </div>
