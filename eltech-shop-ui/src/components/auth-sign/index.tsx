@@ -10,7 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TypographyP from "../ui/typography-p";
 import { AppSwitch } from "../app-switch";
 
 export function AuthSign() {
@@ -18,10 +17,10 @@ export function AuthSign() {
     <Tabs defaultValue="account" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="account">
-          <AppSwitch id="sign-up" name="Je suis un nouveau client"/>
+          <AppSwitch id="sign-up" name="Je suis un nouveau client" />
         </TabsTrigger>
         <TabsTrigger value="password">
-          <TypographyP value="Je suis déjà client" textSize="sm" color="muted"/>
+          <AppSwitch id="sign-in" name="Je déjà client" />
         </TabsTrigger>
       </TabsList>
       <TabsContent value="account">

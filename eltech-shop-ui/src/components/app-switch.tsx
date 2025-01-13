@@ -1,22 +1,28 @@
-import { Label } from "@/components/ui/label";
+"use client";
 import { Switch } from "@/components/ui/switch";
 import TypographyLabel from "./ui/typography-label";
+import React from "react";
 
 export interface Props {
     id: string
     name: string
 }
 export function AppSwitch(data:Props) {
+    const [checked,setChecked] = React.useState(false);
+    
+    const onChange = ()=> {
+        setChecked(true)
+    }
+
   return (
     <div className="flex items-center space-x-2">
-      <Switch id={data.id} />
+      <Switch id={data.id} checked={checked} onCheckedChange={onChange} />
       <TypographyLabel
-        value="Je suis un nouveau client"
+        value={data.name}
         textSize="sm"
         color="muted"
         htmlFor={data.id}
       />
-      <Label htmlFor={data.id}>{data.name}</Label>
     </div>
   );
 }
