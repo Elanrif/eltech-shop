@@ -10,7 +10,7 @@ export default function HeaderBase() {
     <div>
       <div className="flex justify-between items-center gap-[10rem]">
         <Logo/>
-        <TypographyP value="SOLDES | -10% supplémentaires dès 2 articles" textSize="sm" fontWeight="bold"/>
+        <TypographyP value="SOLDES | -10% supplémentaires dès 2 articles" textSize="sm" fontWeight="thin" color="muted"/>
         <div className="flex gap-3 items-center">
           <CircleUser className="size-5"/>
           <Search className="size-5"/>
