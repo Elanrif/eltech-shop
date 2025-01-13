@@ -21,10 +21,10 @@ export default function TypographyP({
     }[textSize];
 
     const weightClass = {
-    normal: 'font-normal',
-    bold: 'font-bold',
-    light: 'font-light',
-  }
+      normal: "font-normal",
+      bold: "font-bold",
+      light: "font-light",
+    }[fontWeight];
 
   return <p className={`${color} ${sizeClass} ${weightClass} ${className}`}>{value}</p>;
 }
