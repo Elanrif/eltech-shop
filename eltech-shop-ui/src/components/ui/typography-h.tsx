@@ -3,15 +3,15 @@ import React from 'react'
 export type Props = {
     value: string;
     color?: 'base' | 'muted' | 'light';
-    textSize?: 'xs' |'sm' | 'base' | 'lg' | 'xl';
+    textSize?: 'h1' |'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     fontWeight?: 'thin' | 'light' |'normal' | 'medium' | 'semibold' | 'bold' | 'black'; 
     transform?: 'uppercase' | 'lowercase' | 'capitalize' | 'normal'
     className?: string;
 }
-export default function TypographyP({
+export default function TypographyH({
     value,
     color = "base",
-    textSize = 'sm',
+    textSize = 'h6',
     fontWeight = 'normal',
     transform = 'normal',
     className = ''
@@ -25,11 +25,12 @@ export default function TypographyP({
     }[transform];
 
     const sizeClass = {
-        xs: 'text-xs',
-        sm : 'text-sm',
-        base: 'text-base',
-        lg: 'text-lg',
-        xl: 'text-xl',
+        h1: 'text-6xl',
+        h2 : 'text-5xl',
+        h3: 'text-4xl',
+        h4: 'text-3xl',
+        h5: 'text-2xl',
+        h6: 'text-xl'
     }[textSize];
 
     /* si fontWeight = "black", alors weightClass = {black: "font-black"} */

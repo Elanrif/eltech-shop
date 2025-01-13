@@ -92,8 +92,8 @@ export default function HeaderBase() {
           {iconsData.map((icon, index) => (
             <div key={index}>
               {icon.click === true
-                ? React.cloneElement(icon.component, { onClick: handleDisplay, className: "size-5" })
-                : React.cloneElement(icon.component, { className: "size-5" } )}
+                ? React.cloneElement(icon.component, { onClick: handleDisplay, className: "size-5 hover:cursor-pointer" })
+                : React.cloneElement(icon.component, { className: "size-5 hover:cursor-pointer" } )}
             </div>
           ))}
           <ModeToggle />
