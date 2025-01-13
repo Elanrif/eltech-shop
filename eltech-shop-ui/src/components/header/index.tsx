@@ -71,6 +71,13 @@ export default function HeaderBase() {
         color: "muted",
       },
     ];
+
+    const iconsData = [
+        {name: 'CircleUser', component: <CircleUser/>},
+        {name: 'Search', component: <Search/>},
+        {name: 'Heart', component: <Heart/>},
+        {name: 'ShoppingBad', component: <ShoppingBag/>},
+    ]
   return (
     <div>
       <div className="flex justify-between items-center gap-[10rem]">
@@ -82,10 +89,15 @@ export default function HeaderBase() {
           color="muted"
         />
         <div className="flex gap-3 items-center">
-          <CircleUser className="size-5" />
-          <Search className="size-5" onClick={handleDisplay} />
-          <Heart className="size-5" />
-          <ShoppingBag className="size-5" />
+          {iconsData.map((icon,index)=> (
+            <div key={index}>
+                {icon.name === 'Search' ? (
+                 React.cloneElement(icon.component, {onClick: handleDisplay})
+                ):(
+                icon.component
+                )}
+            </div>
+          ))}
           <ModeToggle />
         </div>
       </div>
