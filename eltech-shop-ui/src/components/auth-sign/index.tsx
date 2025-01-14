@@ -10,10 +10,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { InputLabel } from "../forms/input-label";
 
 export function AuthSign() {
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <Tabs defaultValue="account" className="w-[800px]">
       <TabsList className="grid w-full grid-cols-2 p-10">
         <TabsTrigger value="account">
           <span className="text-slate-500">Je suis un nouveau client</span>
@@ -34,6 +35,7 @@ export function AuthSign() {
             <div className="space-y-1">
               <Label htmlFor="name">Name</Label>
               <Input id="name" defaultValue="Pedro Duarte" />
+              <InputLabel variant="lg" placeholder="Entrer votre prénom"/>
             </div>
             <div className="space-y-1">
               <Label htmlFor="username">Username</Label>
