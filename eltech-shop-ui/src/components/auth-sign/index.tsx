@@ -138,7 +138,7 @@ export function AuthSign() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save password</Button>
+            <Button>Se connecter</Button>
           </CardFooter>
         </Card>
       </TabsContent>

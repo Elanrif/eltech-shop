@@ -2,11 +2,12 @@
 import React from "react";
 import TypographyP from "@/components/ui/typography-p";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Search, Heart, ShoppingBag, X } from "lucide-react";
+import { Search, Heart, X } from "lucide-react";
 import Logo from "@/components/logo";
 import { Input } from "../ui/input";
 import TypographyA from "../ui/typography-a";
 import { MenuUser } from "./menu-user";
+import { CardBasketSheet } from "../products/card-basket-sheet";
 
 export type Props = {
   value: string;
@@ -82,7 +83,7 @@ export default function HeaderBase() {
       },
       { name: "Search", component: <Search />, click: true },
       { name: "Heart", component: <Heart /> },
-      { name: "ShoppingBad", component: <ShoppingBag /> },
+      { name: "ShoppingBad", component: <CardBasketSheet /> },
     ];
   return (
     <div>
@@ -127,8 +128,10 @@ export default function HeaderBase() {
       </div>
 
       <div className="text-center mt-3">
-        <TypographyP
+        <TypographyA
+          url="/"
           value="eltech-shop"
+          color="base"
           transform="uppercase"
           fontWeight="black"
           textSize="xl"

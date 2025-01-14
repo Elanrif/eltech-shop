@@ -19,7 +19,9 @@ export default function Home() {
           />
         </div>
 
-        <div className="min-h-[18rem] bg-slate-100">CONTENU CARD</div>
+        <div className="min-h-[18rem] m-10 bg-slate-100">
+          main 
+        </div>
       </main>
       <Newsletter />
     </div>

@@ -52,5 +52,5 @@ export default function TypographyA({
         light: "text-white",
     }[color]
 
-  return <Link href={url} className={`hover:text-shop-secondary duration-400 ease-in-out ${transformClass} ${colorClass} ${sizeClass} ${weightClass} ${className}`}>{value}</Link>;
+  return <Link href={url} className={`hover:text-shop-secondary transition-all duration-400 ease-in-out ${transformClass} ${colorClass} ${sizeClass} ${weightClass} ${className}`}>{value}</Link>;
 }
