@@ -1,4 +1,5 @@
 import Newsletter from '@/components/newsletter'
+import { CardsCarousel } from '@/components/products/cards-carousel';
 import Image from 'next/image'
 import React from 'react'
 
@@ -19,8 +20,8 @@ export default function Home() {
           />
         </div>
 
-        <div className="min-h-[18rem] m-10 bg-slate-100">
-          main 
+        <div className="min-h-[18rem] flex justify-center items-center gap-3 py-5 px-2 m-10 bg-slate-100">
+          <CardsCarousel/>
         </div>
       </main>
       <Newsletter />
