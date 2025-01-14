@@ -5,16 +5,19 @@ import { LucideProps } from "lucide-react";
 
 export type PropsInput = {
   variant?: "base" | "md" | "lg" | "xl";
+  iconClass?: string;
   className?: string;
 };
 const Input = React.forwardRef<
   HTMLInputElement,
-  React.ComponentProps<"input"> & {
+  {iconClass?: string} &
+  React.ComponentProps<"input"> &
+   {
     icon?: React.ForwardRefExoticComponent<
       Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
     >;
   }
->(({ className, type, icon:Icon, ...props }, ref) => {
+>(({ className, type, iconClass = 'right-10 top-2', icon:Icon, ...props }, ref) => {
   return (
     <div className={cn("flex justify-between relative", className)}>
       <input
@@ -26,7 +29,7 @@ const Input = React.forwardRef<
         ref={ref}
         {...props}
       />
-      {Icon && <Icon/>}
+      {Icon && <Icon className={cn("relative text-shop-muted", iconClass)} />}
     </div>
   );
 });

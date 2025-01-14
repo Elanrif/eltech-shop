@@ -7,7 +7,7 @@ import InputEmail from '../forms/input-email';
 export default function Newsletter() {
   return (
     <div className="bg-shop-accent py-5">
-      <div className="flex flex-col gap-6 text-center mt-3 p-3 max-w-[35rem] mx-auto">
+      <div className="flex flex-col gap-6 text-center mt-3 p-3 max-w-[50rem] mx-auto">
         <TypographyH
           value="newsletter"
           textSize="h6"
@@ -21,8 +21,10 @@ export default function Newsletter() {
           textSize="sm"
         />
 
-        <div className="flex justify-center gap-3">
-          <InputEmail placeholder="Entrez votre email"/>
+        <div className="flex w-full items-center justify-center gap-3">
+          <InputEmail 
+          variant="md"
+          placeholder="Entrez votre email"/>
           <Button> valider</Button>
         </div>
         <TypographyP value="En vous inscrivant, vous acceptez notre politique de confidentialité et nos conditions générales de vente." />

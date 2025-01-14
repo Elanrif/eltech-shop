@@ -11,10 +11,10 @@ function InputEmail(
     {variant = 'lg', className, ...props}: React.ComponentPropsWithoutRef<"input"> & PropsEmail ,ref: React.Ref<HTMLInputElement>
 ) {
     const variantClass = {
-      base: "text-sm py-2 px-3",
-      md: "text-md py-2.5 px-4",
-      lg: "w-[50rem] text-lg py-5 px-5",
-      xl: "text-xl py-4 px-6",
+      base: "text-sm py-4 px-3 xs:w-[10rem]",
+      md: "text-md md:w-[30rem] py-5 px-5",
+      lg: "w-full lg:w-[50rem] py-5 px-5",
+      xl: "py-4 px-6 w-full xl:w-[64rem] py-5 px-5",
     }[variant];
     
     return (
