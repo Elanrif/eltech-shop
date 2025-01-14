@@ -10,9 +10,11 @@ export type PropsInput = {
 const Input = React.forwardRef<
   HTMLInputElement,
   React.ComponentProps<"input"> & {
-    icon?: React.ReactElement<LucideProps>;
+    icon?: React.ForwardRefExoticComponent<
+      Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+    >;
   }
->(({ className, type, icon, ...props }, ref) => {
+>(({ className, type, icon:Icon, ...props }, ref) => {
   return (
     <div className={cn("flex justify-between relative", className)}>
       <input
@@ -24,10 +26,7 @@ const Input = React.forwardRef<
         ref={ref}
         {...props}
       />
-      {icon &&
-        React.cloneElement(icon, {
-          className: cn("absolute right-2 size-5 top-2 text-shop-muted"),
-        })}
+      {Icon && <Icon/>}
     </div>
   );
 });

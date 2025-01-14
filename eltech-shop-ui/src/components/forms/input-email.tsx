@@ -13,13 +13,13 @@ function InputEmail(
     const variantClass = {
       base: "text-sm py-2 px-3",
       md: "text-md py-2.5 px-4",
-      lg: "text-lg py-12 px-5",
+      lg: "w-[50rem] text-lg py-5 px-5",
       xl: "text-xl py-4 px-6",
     }[variant];
     
     return (
       <Input
-        icon={<Mail className="size-5" />}
+        icon={Mail}
         ref={ref}
         className={cn(className,variantClass)}
         {...props}
