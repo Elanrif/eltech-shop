@@ -8,7 +8,7 @@ export type PropsEmail = {
     className: string;
 }
 function InputEmail(
-    {variant = 'lg', className, ...props}: React.ComponentPropsWithoutRef<"input"> & {className?:string},ref: React.Ref<HTMLInputElement>
+    {variant = 'lg', className, ...props}: React.ComponentPropsWithoutRef<"input"> & PropsEmail & {className?:string},ref: React.Ref<HTMLInputElement>
 ) {
     const variantClass = {
       base: "text-sm py-2 px-3",
