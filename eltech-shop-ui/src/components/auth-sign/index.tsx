@@ -19,12 +19,12 @@ import TypographyP from "../ui/typography-p";
 export function AuthSign() {
   return (
     <Tabs defaultValue="account" className="w-full md:w-[800px]">
-      <TabsList className="grid w-full grid-cols-2 p-10">
+      <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="account">
-          <span className="text-slate-500">Je suis un nouveau client</span>
+          <span className="font-medium">Je suis un nouveau client</span>
         </TabsTrigger>
         <TabsTrigger value="password">
-          <span className="text-slate-500">Je suis déjà client</span>
+          <span className="font-medium">Je suis déjà client</span>
         </TabsTrigger>
       </TabsList>
       <TabsContent value="account">
