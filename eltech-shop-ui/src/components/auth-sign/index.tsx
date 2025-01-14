@@ -7,14 +7,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InputLabel } from "../forms/input-label";
+import InputEmail from "../forms/input-email";
+import InputDate from "../forms/input-date";
+import InputPassword from "../forms/input-password";
+import TypographyH from "../ui/typography-h";
+import TypographyP from "../ui/typography-p";
 
 export function AuthSign() {
   return (
-    <Tabs defaultValue="account" className="w-[800px]">
+    <Tabs defaultValue="account" className="w-full md:w-[800px]">
       <TabsList className="grid w-full grid-cols-2 p-10">
         <TabsTrigger value="account">
           <span className="text-slate-500">Je suis un nouveau client</span>
@@ -26,43 +30,111 @@ export function AuthSign() {
       <TabsContent value="account">
         <Card>
           <CardHeader>
-            <CardTitle>Account</CardTitle>
+            <CardTitle>
+              <TypographyH value="Créer un compte" fontWeight="bold" />
+            </CardTitle>
             <CardDescription>
-              Make changes to your account here. Click save when you are done.
+              <TypographyP
+                value="Créer un compte,pour faciliter vos achats et béneficier des promotions."
+                textSize="sm"
+                color="muted"
+              />
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-              <InputLabel variant="lg" placeholder="Entrer votre prénom"/>
+              <Label htmlFor="lastName">Nom</Label>
+              <InputLabel
+                id="lastName"
+                className="text-shop-muted"
+                defaultValue="saidbaco"
+                variant="lg"
+                placeholder="Entrer votre prénom"
+              />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
+              <Label htmlFor="firstName">Prénom</Label>
+              <InputLabel
+                id="firstName"
+                className="text-shop-muted"
+                defaultValue="elanrif"
+                variant="lg"
+                placeholder="Entrer votre prénom"
+              />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="date">Date</Label>
+              <InputDate
+                id="date"
+                className="text-shop-muted"
+                defaultValue="elanrif"
+                variant="lg"
+                placeholder="Entrer votre prénom"
+              />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="email">Email</Label>
+              <InputEmail
+                id="email"
+                className="text-shop-muted"
+                defaultValue="elanrif@gmail.com"
+                variant="lg"
+                placeholder="Entrer votre prénom"
+              />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="password">Mot de passe</Label>
+              <InputPassword
+                id="password"
+                className="text-shop-muted"
+                defaultValue="elanrif"
+                variant="lg"
+                placeholder="Entrer votre prénom"
+              />
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save changes</Button>
+            <Button>Enregistrer</Button>
           </CardFooter>
         </Card>
       </TabsContent>
       <TabsContent value="password">
         <Card>
           <CardHeader>
-            <CardTitle>Password</CardTitle>
+            <CardTitle>
+              <TypographyH
+                value="Connecter vous à votre compte"
+                fontWeight="bold"
+              />
+            </CardTitle>
             <CardDescription>
-              Change your password here. After saving, you will be logged out.
+              <TypographyP
+                value="Ravi de vous revoir ! Veuillez vous connecter pour profiter pleinement de nos services."
+                textSize="sm"
+                color="muted"
+              />
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
+              <Label htmlFor="email">Email</Label>
+              <InputEmail
+                id="email"
+                className="text-shop-muted"
+                defaultValue="elanrif@gmail.com"
+                variant="lg"
+                placeholder="Entrer votre prénom"
+              />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
+              <Label htmlFor="password">Mot de passe</Label>
+              <InputPassword
+                id="password"
+                className="text-shop-muted"
+                defaultValue="elanrif"
+                variant="lg"
+                placeholder="Entrer votre prénom"
+              />
             </div>
           </CardContent>
           <CardFooter>
