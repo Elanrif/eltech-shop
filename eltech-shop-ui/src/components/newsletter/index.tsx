@@ -2,7 +2,7 @@ import React from 'react'
 import TypographyP from '../ui/typography-p'
 import TypographyH from '../ui/typography-h';
 import { Button } from '../ui/button';
-import { Input } from '../ui/input';
+import InputEmail from '../forms/input-email';
 
 export default function Newsletter() {
   return (
@@ -22,10 +22,10 @@ export default function Newsletter() {
         />
 
         <div className="flex justify-center gap-3">
-          <Input placeholder="Entrer votre email" />
+          <InputEmail placeholder="Entrer votre email"/>
           <Button> valider</Button>
         </div>
-        <TypographyP value="En vous inscrivant, vous acceptez notre politique de confidentialité et nos conditions générales de vente."/>
+        <TypographyP value="En vous inscrivant, vous acceptez notre politique de confidentialité et nos conditions générales de vente." />
       </div>
     </div>
   );
