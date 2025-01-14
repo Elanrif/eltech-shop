@@ -19,7 +19,7 @@ const Input = React.forwardRef<
   }
 >(({ className, type, iconClass = 'right-10 top-2', icon:Icon, ...props }, ref) => {
   return (
-    <div className={cn("flex justify-between relative", className)}>
+    <div className={cn("flex justify-between relative")}>
       <input
         type={type}
         className={cn(
