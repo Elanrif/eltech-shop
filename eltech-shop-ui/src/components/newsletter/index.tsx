@@ -22,7 +22,7 @@ export default function Newsletter() {
         />
 
         <div className="flex justify-center gap-3">
-          <InputEmail placeholder="Entrer votre email"/>
+          <InputEmail placeholder="Entrez votre email"/>
           <Button> valider</Button>
         </div>
         <TypographyP value="En vous inscrivant, vous acceptez notre politique de confidentialité et nos conditions générales de vente." />
