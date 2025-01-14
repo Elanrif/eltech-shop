@@ -8,21 +8,16 @@ export interface Props {
     name: string
 }
 export function AppSwitch(data:Props) {
-    const [checked,setChecked] = React.useState(false);
-    
-    const onChange = ()=> {
-        setChecked(true)
-    }
-
+   
   return (
-    <div className="flex items-center space-x-2">
-      <Switch id={data.id} checked={checked} onCheckedChange={onChange} />
+    <span className="flex items-center space-x-2">
+      <Switch id={data.id}/>
       <TypographyLabel
         value={data.name}
         textSize="sm"
         color="muted"
         htmlFor={data.id}
       />
-    </div>
+    </span>
   );
 }

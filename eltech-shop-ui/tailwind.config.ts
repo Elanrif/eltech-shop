@@ -11,8 +11,12 @@ export default {
     extend: {
       colors: {
         shop: {
-          primary: "#ffd1a2",
-          secondary: "#27c51d",
+          primary: "#000000", // noire
+          secondary: "#00a86b", // verte
+          background: "#f5f5f5", // grille-claire
+          foreground: "#ffffff", // blanc
+          accent: "#fffee9", // orange
+          muted: "#6f6f6f",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -62,5 +66,6 @@ export default {
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

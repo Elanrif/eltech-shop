@@ -10,7 +10,7 @@ export type Props = {
 }
 export default function TypographyP({
     value,
-    color = "base",
+    color = "muted",
     textSize = 'sm',
     fontWeight = 'normal',
     transform = 'normal',
@@ -46,7 +46,7 @@ export default function TypographyP({
 
     const colorClass = {
         base: "text-black",
-        muted: "text-slate-500",
+        muted: "text-shop-muted",
         light: "text-white",
     }[color]
 

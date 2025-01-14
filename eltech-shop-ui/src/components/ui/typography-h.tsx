@@ -46,7 +46,7 @@ export default function TypographyH({
 
     const colorClass = {
         base: "text-black",
-        muted: "text-slate-500",
+        muted: "text-shop-muted",
         light: "text-white",
     }[color]
 

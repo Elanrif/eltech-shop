@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 
 export default function Newsletter() {
   return (
-    <div className="bg-shop-primary py-5">
+    <div className="bg-shop-accent py-5">
       <div className="flex flex-col gap-6 text-center mt-3 p-3 max-w-[35rem] mx-auto">
         <TypographyH
           value="newsletter"

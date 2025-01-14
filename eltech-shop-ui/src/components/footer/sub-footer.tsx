@@ -49,7 +49,7 @@ export default function SubFooter() {
       },
     ];
   return (
-    <div className='flex justify-center gap-10 items-center bg-shop-primary px-10 py-5 text-center flex-wrap'>
+    <div className='flex justify-center gap-10 items-center bg-shop-accent px-10 py-5 text-center flex-wrap'>
         {links.map((data,index)=> (
             <React.Fragment key={index}>
                 <TypographyA value={data.name} url={data.url} transform='uppercase' textSize='xs'/>

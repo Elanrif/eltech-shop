@@ -54,7 +54,7 @@ export default function TypographyLabel({
 
     const colorClass = {
         base: "text-black",
-        muted: "text-slate-500",
+        muted: "text-shop-muted",
         light: "text-white",
     }[color]
 
