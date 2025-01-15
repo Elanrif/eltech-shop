@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { ArrowRight, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -22,37 +22,29 @@ type CardProps = React.ComponentProps<typeof Card> & { product: Product };
 export function CardProduct({ product, className, ...props }: CardProps) {
   const [isActive_, setIsActive_] = React.useState(false);
   const [isChecked, setIschecked] = React.useState(false);
-  const {counter, increment, decrement} = useCounter(1);
+  const { counter, increment, decrement } = useCounter(1);
   const handleIsChecked = () => {
     setIschecked(!isChecked);
   };
 
   const handleClick = () => {
-    setIsActive_(true)
-    increment(0)
-  }
-  React.useEffect(()=>{
-    if(counter.isActive){
-        setIsActive_(false)
+    setIsActive_(true);
+    increment(0);
+  };
+  React.useEffect(() => {
+    if (counter.isActive) {
+      setIsActive_(false);
     }
-  },[counter.isActive])
-  
+  }, [counter.isActive]);
+
   const button = isActive_ ? (
     <ButtonIncrement
-      className="w-full h-12"
       counter={counter}
       increment={increment}
       decrement={decrement}
     />
   ) : (
-    <ButtonAdd
-      onClick={handleClick}
-      variant="secondary"
-      className="group flex items-center gap-4 justify-around w-full h-12"
-    >
-      <span>Ajouté aux panier</span>
-      <ArrowRight className="group-hover:block duration-400 ease-in hidden" />
-    </ButtonAdd>
+    <ButtonAdd onClick={handleClick} />
   );
   return (
     <Card className={cn("w-[300px] h-[500px] relative", className)} {...props}>

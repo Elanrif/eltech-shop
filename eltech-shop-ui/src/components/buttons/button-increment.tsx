@@ -54,7 +54,7 @@ const ButtonIncrement = React.forwardRef<
     <div
       className={cn(
         ButtonIncrementVariants({ variant, size, className }),
-        "flex gap-0 items-center"
+        "w-full h-12 flex gap-0 items-center"
       )}
     >
       <ButtonShopUi
