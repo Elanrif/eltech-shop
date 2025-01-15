@@ -15,11 +15,19 @@ import { Product } from "@/lib/basket/models/basket.model";
 import { SwitchProduct } from "../ui/switch-product";
 import { ButtonAdd } from "../buttons/button-add";
 import { ButtonIncrement } from "../buttons/button-increment";
+import { useCounter } from "@/lib/hooks/useIncrement";
+
 type CardProps = React.ComponentProps<typeof Card> & { product: Product };
+type CounterProps = {
+  count: number;
+  increment: (step?: number) => void;
+  decrement: (step?: number) => void;
+};
 
 export function CardProduct({ product, className, ...props }: CardProps) {
   const [isActive, setIsActive] = React.useState(false);
   const [isChecked, setIschecked] = React.useState(false);
+  const {count, increment, decrement} = useCounter(1);
   const handleIsChecked = () => {
     setIschecked(!isChecked);
   };

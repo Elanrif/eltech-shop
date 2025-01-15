@@ -3,8 +3,6 @@ import * as React from 'react'
 import { ButtonShopUi } from "../ui/button-shop-ui";
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { useCounter } from '@/lib/hooks/useIncrement';
-
 const ButtonIncrementVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
@@ -42,36 +40,49 @@ export interface ButtonIncrementProps
     VariantProps<typeof ButtonIncrementVariants> {
   asChild?: boolean;
 }
+export type CounterProps = {
+  count: number;
+  increment: (step?: number) => void;
+  decrement: (step?: number) => void;
+};
+
 const ButtonIncrement = React.forwardRef<
   HTMLButtonElement,
   ButtonIncrementProps
 >(({ className, variant, size, ...props }, ref) => {
-  const {count, increment, decrement} = useCounter(1);
   return (
-    <ButtonShopUi
+    <div
       className={cn(
         ButtonIncrementVariants({ variant, size, className }),
         "flex gap-0 items-center"
       )}
-      ref={ref}
-      {...props}
     >
-      <button
-        className="w-full h-full hover:bg-shop-secondary bg-shop-muted/30"
-        onClick={()=> decrement(1)}
+      <ButtonShopUi
+        className={cn(
+          ButtonIncrementVariants({ variant, size, className }),
+          "w-full h-full hover:bg-shop-secondary bg-shop-muted/30"
+        )}
+        ref={ref}
+        {...props}
+        onClick={() => decrement(1)}
       >
         -
-      </button>
+      </ButtonShopUi>
       <button className="w-full h-full text-center bg-shop-muted/90">
         {count}
       </button>
-      <button
-        className="w-full h-full hover:bg-shop-secondary bg-shop-muted/30"
-        onClick={()=> increment(1)}
+      <ButtonShopUi
+        className={cn(
+          ButtonIncrementVariants({ variant, size, className }),
+          "w-full h-full hover:bg-shop-secondary bg-shop-muted/30"
+        )}
+        ref={ref}
+        {...props}
+        onClick={() => increment(1)}
       >
         +
-      </button>
-    </ButtonShopUi>
+      </ButtonShopUi>
+    </div>
   );
 });
 ButtonIncrement.displayName = "ButtonIncrement";
