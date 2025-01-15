@@ -7,7 +7,7 @@ import Logo from "@/components/logo";
 import { Input } from "../ui/input";
 import TypographyA from "../ui/typography-a";
 import { MenuUser } from "./menu-user";
-import { CardBasketSheet } from "../products/card-basket-sheet";
+import { CardBasketSheet } from "../card/card-basket-sheet";
 
 export type Props = {
   value: string;
@@ -26,65 +26,62 @@ export type Props = {
 };
 
 export default function HeaderBase() {
-  
-    const [display, setDisplay] = React.useState(false);
-    const [mounted, setMounted] = React.useState(false);
+  const [display, setDisplay] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
-    React.useEffect(()=>{
-        setMounted(true);
-    },[])
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    if(!mounted) {
-        return false;
-    }
+  if (!mounted) {
+    return false;
+  }
 
-    const handleDisplay = ()=> {
-        setDisplay(!display);
-        console.log("cliqué")
-    }
+  const handleDisplay = () => {
+    setDisplay(!display);
+    console.log("cliqué");
+  };
 
-    const subMenu:Props[] = [
-      {
-        value: "soldes",
-        transform: "capitalize",
-        textSize: "sm",
-        fontWeight: "thin",
-        color: "muted",
-      },
-      {
-        value: "produits",
-        transform: "capitalize",
-        textSize: "sm",
-        fontWeight: "thin",
-        color: "muted",
-      },
-      {
-        value: "collection",
-        transform: "capitalize",
-        textSize: "sm",
-        fontWeight: "thin",
-        color: "muted",
-      },
-      {
-        value: "La marque",
-        transform: "normal",
-        textSize: "sm",
-        fontWeight: "thin",
-        color: "muted",
-      },
-    ];
+  const subMenu: Props[] = [
+    {
+      value: "soldes",
+      transform: "capitalize",
+      textSize: "sm",
+      fontWeight: "thin",
+      color: "muted",
+    },
+    {
+      value: "produits",
+      transform: "capitalize",
+      textSize: "sm",
+      fontWeight: "thin",
+      color: "muted",
+    },
+    {
+      value: "collection",
+      transform: "capitalize",
+      textSize: "sm",
+      fontWeight: "thin",
+      color: "muted",
+    },
+    {
+      value: "La marque",
+      transform: "normal",
+      textSize: "sm",
+      fontWeight: "thin",
+      color: "muted",
+    },
+  ];
 
-    const iconsData = [
-      {
-        name: "CircleUser",
-        component: (
-          <MenuUser/>
-        ),
-      },
-      { name: "Search", component: <Search />, click: true },
-      { name: "Heart", component: <Heart /> },
-      { name: "ShoppingBad", component: <CardBasketSheet /> },
-    ];
+  const iconsData = [
+    {
+      name: "CircleUser",
+      component: <MenuUser />,
+    },
+    { name: "Search", component: <Search />, click: true },
+    { name: "Heart", component: <Heart /> },
+    { name: "ShoppingBad", component: <CardBasketSheet /> },
+  ];
   return (
     <div>
       <div className="flex justify-between items-center gap-[10rem]">

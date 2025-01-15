@@ -1,11 +1,11 @@
-import CardSpeechClient from '@/components/card-speech-client';
-import Newsletter from '@/components/newsletter'
-import { CardsCarousel } from '@/components/products/cards-carousel';
-import TypographyA from '@/components/ui/typography-a';
-import TypographyH from '@/components/ui/typography-h';
-import { Eye } from 'lucide-react';
-import Image from 'next/image'
-import React from 'react'
+import CardSpeechClient from "@/components/card-speech-client";
+import Newsletter from "@/components/newsletter";
+import { CardsCarousel } from "@/components/card/cards-carousel";
+import TypographyA from "@/components/ui/typography-a";
+import TypographyH from "@/components/ui/typography-h";
+import { Eye } from "lucide-react";
+import Image from "next/image";
+import React from "react";
 
 const speechs = [
   {
@@ -64,7 +64,7 @@ export default function Home() {
             </div>
           </div>
           <CardsCarousel />
-          <div className='flex mt-7 justify-center gap-10 items-center'>
+          <div className="flex mt-7 justify-center gap-10 items-center">
             {speechs.map((speech, index) => (
               <React.Fragment key={index}>
                 <CardSpeechClient speech={speech} />

@@ -70,7 +70,8 @@ export function CardProduct({ product, className, ...props }: CardProps) {
         )}
         <TypographyP
           value={product.in_stock ? "En stock" : "Rupture de stock"}
-          className={`${!product.in_stock && "text-shop-danger"} w-full text-end pr-4 pb-2`}
+          color={product.in_stock ? "muted" : "danger"}
+          className={`w-full text-end pr-4 pb-2`}
         />
       </CardHeader>
       <CardContent className="grid gap-4 my-3">

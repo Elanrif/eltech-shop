@@ -2,7 +2,7 @@ import React from 'react'
 
 export type Props = {
     value: string;
-    color?: 'base' | 'muted' | 'light';
+    color?: 'base' | 'muted' | 'light' | 'danger';
     textSize?: 'xs' |'sm' | 'base' | 'lg' | 'xl';
     fontWeight?: 'thin' | 'light' |'normal' | 'medium' | 'semibold' | 'bold' | 'black'; 
     transform?: 'uppercase' | 'lowercase' | 'capitalize' | 'normal'
@@ -45,9 +45,10 @@ export default function TypographyP({
     }[fontWeight];
 
     const colorClass = {
-        base: "text-black",
+        base: "text-shop-primary",
         muted: "text-shop-muted",
-        light: "text-white",
+        light: "text-shop-foreground",
+        danger: "text-shop-danger"
     }[color]
 
   return <p {...props} className={`${transformClass} ${colorClass} ${sizeClass} ${weightClass} ${className}`}>{value}</p>;

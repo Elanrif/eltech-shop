@@ -17,8 +17,8 @@ export interface Category {
   id: number;
   name: string;
   description?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Basket {
@@ -26,8 +26,8 @@ export interface Basket {
   userId?: string;
   items: BasketItem[];
   totalPrice: number;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export type BasketItem = {
