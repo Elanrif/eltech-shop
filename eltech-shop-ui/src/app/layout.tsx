@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import HeaderBase from "@/components/header";
 import Footer from "@/components/footer";
+import ProductProvider from "@/contexts/product/product.context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +37,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <HeaderBase/>
-          {children}
-          <Footer/>
+          <ProductProvider>
+            <HeaderBase />
+            {children}
+            <Footer />
+          </ProductProvider>
         </ThemeProvider>
       </body>
     </html>

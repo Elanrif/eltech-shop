@@ -21,7 +21,8 @@ export const eltechShopData = {
       description: "T-shirt de haute qualit\u00e9, confortable et l\u00e9ger.",
       detail:
         "Id\u00e9al pour un usage quotidien, disponible en plusieurs couleurs.",
-      image: "https://example.com/images/tshirt.jpg",
+      image: "soldes.webp",
+      imageUrl: "soldes.webp",
       is_new: true,
       in_stock: true,
       brand: "Olivia Garden",
@@ -39,7 +40,8 @@ export const eltechShopData = {
         "Casquette l\u00e9g\u00e8re et respirante pour les activit\u00e9s sportives.",
       detail:
         "Disponible en diff\u00e9rentes couleurs, l\u00e9g\u00e8re et ajustable.",
-      image: "https://example.com/images/casquette.jpg",
+      image: "soldes.webp",
+      imageUrl: "soldes.webp",
       is_new: false,
       in_stock: true,
       brand: "Nike",
