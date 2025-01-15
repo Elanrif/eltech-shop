@@ -6,9 +6,9 @@ import React from 'react'
 export default function Home() {
   const img = { src: "/assets/soldes.webp", alt: "logo de la boutique" };
   return (
-    <div className="min-h-[24rem] p-5">
+    <div className="min-h-[24rem] py-5">
       <main>
-        <div className="hover:cursor-pointer w-full border border-gray-300 shadow-md rounded-lg">
+        <div className="hover:cursor-pointer w-full shadow-md rounded-lg">
           <Image
             src={img.src}
             alt={img.alt}
@@ -20,7 +20,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="min-h-[18rem] flex justify-center items-center gap-3 py-5 px-2 m-10 bg-slate-100">
+        <div className="min-h-[18rem] flex justify-center items-center gap-3 py-5 m-10">
           <CardsCarousel/>
         </div>
       </main>

@@ -5,46 +5,30 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import Image from "next/image";
-
-const notifications = [
-  {
-    title: "Your call has been confirmed.",
-    description: "1 hour ago",
-  },
-  {
-    title: "You have a new message!",
-    description: "1 hour ago",
-  },
-  {
-    title: "Your subscription is expiring soon!",
-    description: "2 hours ago",
-  },
-];
-
+import TypographyP from "../ui/typography-p";
+import TypographyH from "../ui/typography-h";
 type CardProps = React.ComponentProps<typeof Card>;
 
 export function CardProduct({ className, ...props }: CardProps) {
   return (
-    <Card className={cn("w-[380px]", className)} {...props}>
+    <Card className={cn("w-[300px]", className)} {...props}>
       <CardHeader>
         <Image
           src={`/assets/soldes.webp`}
           alt={`image product`}
           width={1040}
           height={450}
-          className="h-[3rem] w-[3rem] rounded-md object-cover"
+          className="object-cover"
         />
-        <CardTitle>Notifications</CardTitle>
-        <CardDescription>You have 3 unread messages.</CardDescription>
+        <TypographyP value={"Nouveau"} color="light" className="w-32 p-2 bg-shop-primary"/>
+        <TypographyP value="En stock" className="w-full text-end pr-4 pb-2"/>
       </CardHeader>
-      <CardContent className="grid gap-4">
+      <CardContent className="grid gap-4 my-7">
         <div className=" flex items-center space-x-4 rounded-md border p-4">
           <BellRing />
           <div className="flex-1 space-y-1">
@@ -57,28 +41,15 @@ export function CardProduct({ className, ...props }: CardProps) {
           </div>
           <Switch />
         </div>
-        <div>
-          {notifications.map((notification, index) => (
-            <div
-              key={index}
-              className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-            >
-              <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-              <div className="space-y-1">
-                <p className="text-sm font-medium leading-none">
-                  {notification.title}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {notification.description}
-                </p>
-              </div>
-            </div>
-          ))}
+        <div className="flex flex-col gap-3 justify-start">
+            <TypographyH value="olivia garden" transform="uppercase" fontWeight="semibold"/>
+            <TypographyP value="coloration ton sur ton couleur touch" transform="uppercase"/>
+            <TypographyP value="29,3 €"/>
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">
-          <Check /> Mark all as read
+        <Button className="w-full h-12">
+          <Check /> Ajouter au panier
         </Button>
       </CardFooter>
     </Card>
