@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -15,6 +14,7 @@ import InputDate from "../forms/input-date";
 import InputPassword from "../forms/input-password";
 import TypographyH from "../ui/typography-h";
 import TypographyP from "../ui/typography-p";
+import { ButtonBase } from "../buttons/button-base";
 
 export function AuthSign() {
   return (
@@ -94,7 +94,7 @@ export function AuthSign() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Enregistrer</Button>
+           <ButtonBase size="md">Valider</ButtonBase>
           </CardFooter>
         </Card>
       </TabsContent>
@@ -138,7 +138,7 @@ export function AuthSign() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Se connecter</Button>
+            <ButtonBase size="md">Se connecter</ButtonBase>
           </CardFooter>
         </Card>
       </TabsContent>

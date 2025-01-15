@@ -1,8 +1,8 @@
 import React from 'react'
 import TypographyP from '../ui/typography-p'
 import TypographyH from '../ui/typography-h';
-import { Button } from '../ui/button';
 import InputEmail from '../forms/input-email';
+import { ButtonBase } from '../buttons/button-base';
 
 export default function Newsletter() {
   return (
@@ -25,7 +25,7 @@ export default function Newsletter() {
           <InputEmail 
           variant="md"
           placeholder="Entrez votre email"/>
-          <Button> valider</Button>
+          <ButtonBase size="md">valider</ButtonBase>
         </div>
         <TypographyP value="En vous inscrivant, vous acceptez notre politique de confidentialité et nos conditions générales de vente." />
       </div>

@@ -27,14 +27,3 @@ const ButtonAdd = React.forwardRef<HTMLButtonElement,ButtonAddProps>(
 ButtonAdd.displayName = "ButtonAdd"
 
 export {ButtonAdd}
-
-/* 
-<ButtonAdd
-      onClick={handleClick}
-      variant="secondary"
-      className="group flex items-center gap-4 justify-around w-full h-12"
-    >
-      <span>Ajouté aux panier</span>
-      <ArrowRight className="group-hover:block duration-400 ease-in hidden" />
-    </ButtonAdd>
-*/
