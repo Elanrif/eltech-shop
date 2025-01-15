@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { Heart } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -48,11 +48,15 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           <Heart className={`${isChecked && "text-shop-secondary"}`} />
           <div className="flex-1 space-y-1">
             <p className="text-sm font-medium leading-none">Favoris</p>
-            <p className={`${isChecked && "text-shop-secondary"} text-sm text-muted-foreground`}>
+            <p
+              className={`${
+                isChecked && "text-shop-secondary"
+              } text-sm text-muted-foreground`}
+            >
               {isChecked ? "Produit ajouté" : "Ajouté aux favoris"}
             </p>
           </div>
-          <SwitchProduct checked={isChecked}/>
+          <SwitchProduct checked={isChecked} />
         </div>
         <div className="flex flex-col gap-3 justify-start">
           <TypographyP
@@ -72,7 +76,10 @@ export function CardProduct({ product, className, ...props }: CardProps) {
         </div>
       </CardContent>
       <CardFooter className="absolute bottom-0 w-full">
-        <ButtonAdd className="w-full h-12">Ajouté aux panier</ButtonAdd>
+        <ButtonAdd variant="secondary" className="group flex items-center gap-4 justify-around w-full h-12">
+          <span>Ajouté aux panier</span>
+          <ArrowRight className="group-hover:block duration-400 ease-in hidden"/>
+        </ButtonAdd>
       </CardFooter>
     </Card>
   );
