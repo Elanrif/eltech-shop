@@ -20,17 +20,29 @@ import { useCounter } from "@/lib/hooks/useIncrement";
 type CardProps = React.ComponentProps<typeof Card> & { product: Product };
 
 export function CardProduct({ product, className, ...props }: CardProps) {
-  const [isActive, setIsActive] = React.useState(false);
+  const [isActive_, setIsActive_] = React.useState(false);
   const [isChecked, setIschecked] = React.useState(false);
-  const {count, increment, decrement} = useCounter(1);
+  const {counter, increment, decrement} = useCounter(1);
   const handleIsChecked = () => {
     setIschecked(!isChecked);
   };
 
-  const handleClick = () => {
-        setIsActive(true);
+  const handleClick = () => {setIsActive_(true)
   }
-  const button = !isActive ? (
+  React.useEffect(()=>{
+    if(counter.isActive){
+        setIsActive_(false)
+    }
+  },[counter.isActive])
+  
+  const button = isActive_ ? (
+    <ButtonIncrement
+      className="w-full h-12"
+      counter={counter}
+      increment={increment}
+      decrement={decrement}
+    />
+  ) : (
     <ButtonAdd
       onClick={handleClick}
       variant="secondary"
@@ -39,8 +51,6 @@ export function CardProduct({ product, className, ...props }: CardProps) {
       <span>Ajouté aux panier</span>
       <ArrowRight className="group-hover:block duration-400 ease-in hidden" />
     </ButtonAdd>
-  ) : (
-    <ButtonIncrement className="w-full h-12" count={count} increment={increment} decrement={decrement} />
   );
   return (
     <Card className={cn("w-[300px] h-[500px] relative", className)} {...props}>

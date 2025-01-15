@@ -3,6 +3,8 @@ import * as React from 'react'
 import { ButtonShopUi } from "../ui/button-shop-ui";
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { Minus, Plus } from 'lucide-react';
+import { PayloadProps } from '@/lib/hooks/useIncrement';
 const ButtonIncrementVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
@@ -39,21 +41,15 @@ export interface ButtonIncrementProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof ButtonIncrementVariants> {
   asChild?: boolean;
-  count: number;
+  counter: PayloadProps;
   increment: (step?: number) => void;
   decrement: (step?: number) => void;
 }
-export type CounterProps = {
-  count: number;
-  increment: (step?: number) => void;
-  decrement: (step?: number) => void;
-};
-
 /* forwardRed passe 2 argument: type de référence HTMLDivElement et les props ButtonIncrementProps */
 const ButtonIncrement = React.forwardRef<
   HTMLButtonElement,
   ButtonIncrementProps
->(({ className, variant, size, count, increment, decrement, ...props }, ref) => {
+>(({ className, variant, size, counter, increment, decrement, ...props }, ref) => {
   return (
     <div
       className={cn(
@@ -70,10 +66,10 @@ const ButtonIncrement = React.forwardRef<
         {...props}
         onClick={() => decrement(1)}
       >
-        -
+        <Minus />
       </ButtonShopUi>
       <button className="w-full h-full text-center bg-shop-muted/90">
-        {count}
+        {counter?.count} {JSON.stringify(counter.isActive)}
       </button>
       <ButtonShopUi
         className={cn(
@@ -84,7 +80,7 @@ const ButtonIncrement = React.forwardRef<
         {...props}
         onClick={() => increment(1)}
       >
-        +
+        <Plus />
       </ButtonShopUi>
     </div>
   );
