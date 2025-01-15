@@ -15,27 +15,23 @@ import { Product } from "@/lib/basket/models/basket.model";
 import { SwitchProduct } from "../ui/switch-product";
 import { ButtonAdd } from "../buttons/button-add";
 import { ButtonIncrement } from "../buttons/button-increment";
-import { useCounter } from "@/lib/hooks/useIncrement";
+import useCardLogic from "@/lib/hooks/useCardLogic";
 
 type CardProps = React.ComponentProps<typeof Card> & { product: Product };
 
 export function CardProduct({ product, className, ...props }: CardProps) {
-  const [isActive_, setIsActive_] = React.useState(false);
-  const [isChecked, setIschecked] = React.useState(false);
-  const { counter, increment, decrement } = useCounter(1);
-  const handleIsChecked = () => {
-    setIschecked(!isChecked);
-  };
-
-  const handleClick = () => {
-    setIsActive_(true);
-    increment(0);
-  };
-  React.useEffect(() => {
-    if (counter.isActive) {
-      setIsActive_(false);
-    }
-  }, [counter.isActive]);
+  const {
+    isDisplay,
+    isActive_,
+    isChecked,
+    handleIsChecked,
+    handleClick,
+    handleOnMouseEnter,
+    handleOnMouseLeave,
+    counter,
+    increment,
+    decrement,
+  } = useCardLogic();
 
   const button = isActive_ ? (
     <ButtonIncrement
@@ -47,7 +43,12 @@ export function CardProduct({ product, className, ...props }: CardProps) {
     <ButtonAdd onClick={handleClick} />
   );
   return (
-    <Card className={cn("w-[300px] h-[500px] relative", className)} {...props}>
+    <Card
+      className={cn("group/card w-[300px] h-[500px] relative", className)}
+      onMouseEnter={handleOnMouseEnter}
+      onMouseLeave={handleOnMouseLeave}
+      {...props}
+    >
       <CardHeader>
         <Image
           src={`/assets/${product.imageUrl}`}
@@ -100,7 +101,11 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           <TypographyP value={`${product.price} €`} color="base" />
         </div>
       </CardContent>
-      <CardFooter className="absolute bottom-0 w-full">{button}</CardFooter>
+      <CardFooter
+        className={`${isDisplay ? "block" : "hidden"} absolute bottom-0 w-full`}
+      >
+        {button}
+      </CardFooter>
     </Card>
   );
 }
