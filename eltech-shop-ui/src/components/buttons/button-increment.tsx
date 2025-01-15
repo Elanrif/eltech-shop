@@ -3,6 +3,7 @@ import * as React from 'react'
 import { ButtonShopUi } from "../ui/button-shop-ui";
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { useCounter } from '@/lib/hooks/useIncrement';
 
 const ButtonIncrementVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -36,25 +37,6 @@ const ButtonIncrementVariants = cva(
   }
 );
 
-type Action = 
-| {type: "increment";payload: number}
-| {type: "decrement"; payload: number}
-
-function reducer(state:number, action: Action): number {
-  switch(action.type) {
-    case "increment":
-      return state + action.payload;
-    case "decrement":
-      {
-        if(state === 1) {
-          return state
-        }
-        return state - action.payload;
-      }
-    default:
-      throw new Error(`Action type non suporé: ${action}`)
-  }
-}
 export interface ButtonIncrementProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof ButtonIncrementVariants> {
@@ -64,7 +46,7 @@ const ButtonIncrement = React.forwardRef<
   HTMLButtonElement,
   ButtonIncrementProps
 >(({ className, variant, size, ...props }, ref) => {
-  const [value, dispatch] = React.useReducer(reducer, 1);
+  const {count, increment, decrement} = useCounter(1);
   return (
     <ButtonShopUi
       className={cn(
@@ -76,16 +58,16 @@ const ButtonIncrement = React.forwardRef<
     >
       <button
         className="w-full h-full hover:bg-shop-secondary bg-shop-muted/30"
-        onClick={() => dispatch({ type: "decrement", payload: 1 })}
+        onClick={()=> decrement(1)}
       >
         -
       </button>
       <button className="w-full h-full text-center bg-shop-muted/90">
-        {value}
+        {count}
       </button>
       <button
         className="w-full h-full hover:bg-shop-secondary bg-shop-muted/30"
-        onClick={() => dispatch({ type: "increment", payload: 1 })}
+        onClick={()=> increment(1)}
       >
         +
       </button>

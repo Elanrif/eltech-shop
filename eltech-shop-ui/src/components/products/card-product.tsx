@@ -15,13 +15,30 @@ import { Product } from "@/lib/basket/models/basket.model";
 import { SwitchProduct } from "../ui/switch-product";
 import { ButtonAdd } from "../buttons/button-add";
 import { ButtonIncrement } from "../buttons/button-increment";
-type CardProps = React.ComponentProps<typeof Card>  & {product: Product};
+type CardProps = React.ComponentProps<typeof Card> & { product: Product };
 
 export function CardProduct({ product, className, ...props }: CardProps) {
-    const [isChecked, setIschecked] = React.useState(false);
-    const handleIsChecked = ()=> {
-        setIschecked(!isChecked)
-    }
+  const [isActive, setIsActive] = React.useState(false);
+  const [isChecked, setIschecked] = React.useState(false);
+  const handleIsChecked = () => {
+    setIschecked(!isChecked);
+  };
+
+  const handleClick = () => {
+        setIsActive(true);
+  }
+  const button = !isActive ? (
+    <ButtonAdd
+      onClick={handleClick}
+      variant="secondary"
+      className="group flex items-center gap-4 justify-around w-full h-12"
+    >
+      <span>Ajouté aux panier</span>
+      <ArrowRight className="group-hover:block duration-400 ease-in hidden" />
+    </ButtonAdd>
+  ) : (
+    <ButtonIncrement className="w-full h-12" />
+  );
   return (
     <Card className={cn("w-[300px] h-[500px] relative", className)} {...props}>
       <CardHeader>
@@ -76,13 +93,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           <TypographyP value={`${product.price} €`} color="base" />
         </div>
       </CardContent>
-      <CardFooter className="absolute bottom-0 w-full">
-        {/* <ButtonAdd variant="secondary" className="group flex items-center gap-4 justify-around w-full h-12">
-          <span>Ajouté aux panier</span>
-          <ArrowRight className="group-hover:block duration-400 ease-in hidden"/>
-        </ButtonAdd> */}
-        <ButtonIncrement className="w-full h-12"/>
-      </CardFooter>
+      <CardFooter className="absolute bottom-0 w-full">{button}</CardFooter>
     </Card>
   );
 }
