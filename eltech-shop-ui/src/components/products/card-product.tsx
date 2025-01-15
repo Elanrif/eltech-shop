@@ -14,6 +14,7 @@ import TypographyP from "../ui/typography-p";
 import { Product } from "@/lib/basket/models/basket.model";
 import { SwitchProduct } from "../ui/switch-product";
 import { ButtonAdd } from "../buttons/button-add";
+import { ButtonIncrement } from "../buttons/button-increment";
 type CardProps = React.ComponentProps<typeof Card>  & {product: Product};
 
 export function CardProduct({ product, className, ...props }: CardProps) {
@@ -76,10 +77,11 @@ export function CardProduct({ product, className, ...props }: CardProps) {
         </div>
       </CardContent>
       <CardFooter className="absolute bottom-0 w-full">
-        <ButtonAdd variant="secondary" className="group flex items-center gap-4 justify-around w-full h-12">
+        {/* <ButtonAdd variant="secondary" className="group flex items-center gap-4 justify-around w-full h-12">
           <span>Ajouté aux panier</span>
           <ArrowRight className="group-hover:block duration-400 ease-in hidden"/>
-        </ButtonAdd>
+        </ButtonAdd> */}
+        <ButtonIncrement className="w-full h-12"/>
       </CardFooter>
     </Card>
   );
