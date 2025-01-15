@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -13,6 +12,7 @@ import {
 import { Basket } from "@/lib/basket/models/basket.model";
 import { ShoppingBag } from "lucide-react";
 import CardBasketLineSheet from "./card-basket-line-sheet";
+import { ButtonBase } from "../buttons/button-base";
 
 export function CardBasketSheet() {
 const basket: Basket = {
@@ -93,7 +93,7 @@ const basket: Basket = {
       <SheetTrigger asChild>
         <ShoppingBag />
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="overflow-auto">
         <SheetHeader>
           <SheetTitle>Mon panier</SheetTitle>
           <SheetDescription>
@@ -101,15 +101,15 @@ const basket: Basket = {
           </SheetDescription>
         </SheetHeader>
         <div className="flex flex-col gap-4 items-center">
-          {[...basket.items, ...basket.items]?.map((basketItem, index) => (
+          {[...basket.items, ...basket.items, ...basket.items]?.map((basketItem, index) => (
             <React.Fragment key={index}>
               <CardBasketLineSheet basketItem={basketItem} />
             </React.Fragment>
           ))}
         </div>
-        <SheetFooter>
+        <SheetFooter className="text-center mt-3 w-full flex justify-center">
           <SheetClose asChild>
-            <Button type="submit">Passer à la caisse</Button>
+            <ButtonBase type="submit">Passer à la caisse</ButtonBase>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

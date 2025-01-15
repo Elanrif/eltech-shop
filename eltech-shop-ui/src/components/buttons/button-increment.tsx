@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Minus, Plus } from 'lucide-react';
 import { PayloadProps } from '@/lib/hooks/useIncrement';
 const ButtonIncrementVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -24,9 +24,10 @@ const ButtonIncrementVariants = cva(
       },
       size: {
         default: "h-9 px-4 py-2",
-        base: "h-9 p-0",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
+        base: "h-12 p-0",
+        sm: "h-8  px-3 text-xs",
+        xs: "h-7 px-3 text-xs",
+        lg: "py-4 text-xs px-8",
         icon: "h-9 w-9",
       },
     },
@@ -51,16 +52,11 @@ const ButtonIncrement = React.forwardRef<
   ButtonIncrementProps
 >(({ className, variant, size, counter, increment, decrement, ...props }, ref) => {
   return (
-    <div
-      className={cn(
-        ButtonIncrementVariants({ variant, size, className }),
-        "w-full h-12 flex gap-0 items-center"
-      )}
-    >
+    <div className={cn("w-full flex gap-0 items-center")}>
       <ButtonShopUi
         className={cn(
           ButtonIncrementVariants({ variant, size, className }),
-          "w-full h-full hover:bg-shop-secondary bg-shop-muted/30"
+          "w-full h-full hover:bg-shop-secondary bg-shop-muted/60"
         )}
         ref={ref}
         {...props}
@@ -68,13 +64,20 @@ const ButtonIncrement = React.forwardRef<
       >
         <Minus />
       </ButtonShopUi>
-      <button className="w-full h-full text-center bg-shop-muted/90">
-        {counter?.count}
-      </button>
       <ButtonShopUi
         className={cn(
           ButtonIncrementVariants({ variant, size, className }),
-          "w-full h-full hover:bg-shop-secondary bg-shop-muted/30"
+          "w-full h-full bg-shop-muted"
+        )}
+        ref={ref}
+        {...props}
+      >
+        {counter?.count}
+      </ButtonShopUi>
+      <ButtonShopUi
+        className={cn(
+          ButtonIncrementVariants({ variant, size, className }),
+          "w-full h-full hover:bg-shop-secondary bg-shop-muted/60"
         )}
         ref={ref}
         {...props}

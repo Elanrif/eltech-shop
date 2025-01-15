@@ -37,6 +37,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
      if(isActive_ && isStock){
       return(
        <ButtonIncrement
+         size={"lg"}
          counter={counter}
          increment={increment}
          decrement={decrement}
