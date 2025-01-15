@@ -19,6 +19,7 @@ function reducer(counter: PayloadProps, action: Action): PayloadProps {
     case "decrement":
        {
         if(counter.count < 2) {
+            console.log("counter 2");
             return {
                 ...counter,
                 isActive: true

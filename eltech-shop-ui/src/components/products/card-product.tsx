@@ -27,7 +27,9 @@ export function CardProduct({ product, className, ...props }: CardProps) {
     setIschecked(!isChecked);
   };
 
-  const handleClick = () => {setIsActive_(true)
+  const handleClick = () => {
+    setIsActive_(true)
+    increment(0)
   }
   React.useEffect(()=>{
     if(counter.isActive){

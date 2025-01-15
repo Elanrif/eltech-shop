@@ -69,7 +69,7 @@ const ButtonIncrement = React.forwardRef<
         <Minus />
       </ButtonShopUi>
       <button className="w-full h-full text-center bg-shop-muted/90">
-        {counter?.count} {JSON.stringify(counter.isActive)}
+        {counter?.count}
       </button>
       <ButtonShopUi
         className={cn(
