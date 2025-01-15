@@ -18,11 +18,12 @@ export function CardsCarousel() {
       opts={{
         align: "start",
       }}
-      className="w-full max-w-[75rem]"
+      className="w-full max-w-[100rem]"
     >
       <CarouselContent>
         {products.map((product, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+          /* basis-1/n va afficher n elements */
+          <CarouselItem key={index} className="lg:basis-1/4">
             <div className="p-1">
               <CardProduct product={product}/>
             </div>

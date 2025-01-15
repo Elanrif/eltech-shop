@@ -44,19 +44,20 @@ export function CardProduct({ product, className, ...props }: CardProps) {
   );
   return (
     <Card
-      className={cn("group/card w-[300px] h-[500px] relative", className)}
+      className={cn("group/card w-[300px] h-[530px] relative", className)}
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
       {...props}
     >
       <CardHeader>
-        <Image
-          src={`/assets/${product.imageUrl}`}
-          alt={`image product ${product.imageUrl}`}
-          width={1040}
-          height={450}
-          className="object-cover"
-        />
+        <div className="relative w-full h-[150px]">
+          <Image
+            src={`/assets/products/${product.imageUrl}`}
+            alt={`image product ${product.imageUrl}`}
+            layout="fill"
+            objectFit="cover"
+          />
+        </div>
         {product.is_new && (
           <TypographyP
             value={"Nouveau"}
@@ -66,7 +67,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
         )}
         <TypographyP value="En stock" className="w-full text-end pr-4 pb-2" />
       </CardHeader>
-      <CardContent className="grid gap-4 my-7">
+      <CardContent className="grid gap-4 my-3">
         <div
           className="group hover:cursor-pointer flex items-center space-x-4 rounded-md border p-4"
           onClick={handleIsChecked}
