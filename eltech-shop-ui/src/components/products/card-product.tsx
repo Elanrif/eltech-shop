@@ -1,9 +1,8 @@
 "use client";
 import * as React from "react";
-import { Check, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,6 +13,7 @@ import Image from "next/image";
 import TypographyP from "../ui/typography-p";
 import { Product } from "@/lib/basket/models/basket.model";
 import { SwitchProduct } from "../ui/switch-product";
+import { ButtonAdd } from "../buttons/button-add";
 type CardProps = React.ComponentProps<typeof Card>  & {product: Product};
 
 export function CardProduct({ product, className, ...props }: CardProps) {
@@ -72,9 +72,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
         </div>
       </CardContent>
       <CardFooter className="absolute bottom-0 w-full">
-        <Button className="w-full h-12">
-          <Check /> Ajouter au panier
-        </Button>
+        <ButtonAdd className="w-full h-12">Ajouté aux panier</ButtonAdd>
       </CardFooter>
     </Card>
   );
