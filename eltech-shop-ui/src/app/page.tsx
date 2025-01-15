@@ -1,3 +1,4 @@
+import CardSpeechClient from '@/components/card-speech-client';
 import Newsletter from '@/components/newsletter'
 import { CardsCarousel } from '@/components/products/cards-carousel';
 import TypographyA from '@/components/ui/typography-a';
@@ -5,6 +6,23 @@ import TypographyH from '@/components/ui/typography-h';
 import { Eye } from 'lucide-react';
 import Image from 'next/image'
 import React from 'react'
+
+const speechs = [
+  {
+    title: "Des tarifs préférentiels pros/étudiants",
+    imageUrl: "jenna-ortega.webp",
+    message:
+      "Inscrivez-vous simplement et bénéficiez des tarifs préférentiels et d'avantages!",
+    url: "je suis un pro-étudiants",
+  },
+  {
+    title: "Des clients satisfais",
+    imageUrl: "el-anrif.png",
+    message:
+      "Nos clients sont satisfaits et ils n'hésitent pas à nous le dire! Consultez leurs avis pour en savoir plus sur Bleu eltech-shop FAQ",
+    url: "Lire les avis clients",
+  },
+];
 
 export default function Home() {
   const img = { src: "/assets/soldes.webp", alt: "logo de la boutique" };
@@ -32,20 +50,27 @@ export default function Home() {
               textSize="h5"
               transform="uppercase"
             />
-            <div className='group/list hover:cursor-pointer flex justify-center items-center gap-2'>
+            <div className="group/list hover:cursor-pointer flex justify-center items-center gap-2">
               <TypographyA
                 value="Voir tout les produits"
                 url="#"
-                color='muted'
+                color="muted"
                 fontWeight="semibold"
                 textSize="sm"
                 transform="uppercase"
-                className='group-hover/list:text-shop-secondary'
+                className="group-hover/list:text-shop-secondary"
               />
-              <Eye className='group-hover/list:text-shop-secondary text-shop-muted'/>
+              <Eye className="group-hover/list:text-shop-secondary text-shop-muted" />
             </div>
           </div>
           <CardsCarousel />
+          <div className='flex mt-7 justify-center gap-10 items-center'>
+            {speechs.map((speech, index) => (
+              <React.Fragment key={index}>
+                <CardSpeechClient speech={speech} />
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       </main>
       <Newsletter />

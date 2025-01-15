@@ -3,7 +3,7 @@ import { useCounter } from "./useIncrement";
 
 const useCardLogic = () => {
 const [isDisplay, setIsDisplay] = React.useState(false);
-const [isActive_, setIsActive_] = React.useState(false);
+const [isActive_, setIsActive_] = React.useState(true);
 const [isChecked, setIschecked] = React.useState(false);
 const { counter, increment, decrement } = useCounter(1);
 const handleIsChecked = () => {

@@ -109,7 +109,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
         </div>
       </CardContent>
       <CardFooter
-        className={`${isDisplay ? "block" : "hidden"} absolute bottom-0 w-full`}
+        className={`${isDisplay ? "block" : "hidden"} p-0 absolute bottom-0 w-full`}
       >
         {button(product.in_stock)}
       </CardFooter>

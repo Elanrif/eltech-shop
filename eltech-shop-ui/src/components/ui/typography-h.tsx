@@ -3,7 +3,7 @@ import React from 'react'
 export type Props = {
     value: string;
     color?: 'base' | 'muted' | 'light';
-    textSize?: 'h1' |'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    textSize?: 'h1' |'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7';
     fontWeight?: 'thin' | 'light' |'normal' | 'medium' | 'semibold' | 'bold' | 'black'; 
     transform?: 'uppercase' | 'lowercase' | 'capitalize' | 'normal'
     className?: string;
@@ -30,7 +30,8 @@ export default function TypographyH({
         h3: 'text-4xl',
         h4: 'text-3xl',
         h5: 'text-2xl',
-        h6: 'text-xl'
+        h6: 'text-xl',
+        h7: 'text-md'
     }[textSize];
 
     /* si fontWeight = "black", alors weightClass = {black: "font-black"} */
