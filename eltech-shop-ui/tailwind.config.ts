@@ -16,6 +16,7 @@ export default {
           background: "#f5f5f5", // grille-claire
           foreground: "#ffffff", // blanc
           accent: "#fffee9", // orange
+          danger: "#ff0000", // red
           muted: "#6f6f6f",
         },
         background: "hsl(var(--background))",

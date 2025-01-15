@@ -40,8 +40,8 @@ export const eltechShopData = {
       detail: "Semelle rembourrée, disponibles en plusieurs tailles.",
       image: "baskets.webp",
       imageUrl: "basket-airmax.jpeg",
-      is_new: true,
-      in_stock: true,
+      is_new: false,
+      in_stock: false,
       brand: "Nike",
       color: "Blanc",
       category: {
@@ -94,7 +94,7 @@ export const eltechShopData = {
       image: "robe-ete.jpeg",
       imageUrl: "robe-ete.webp",
       is_new: false,
-      in_stock: true,
+      in_stock: false,
       brand: "Zara",
       color: "Rose",
       category: {
@@ -128,7 +128,7 @@ export const eltechShopData = {
                 "Id\u00e9al pour un usage quotidien, disponible en plusieurs couleurs.",
               image: "https://example.com/images/tshirt.jpg",
               is_new: true,
-              in_stock: true,
+              in_stock: false,
               brand: "Olivia Garden",
               color: "Blanc",
               category: {

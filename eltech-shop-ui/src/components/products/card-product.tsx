@@ -33,15 +33,18 @@ export function CardProduct({ product, className, ...props }: CardProps) {
     decrement,
   } = useCardLogic();
 
-  const button = isActive_ ? (
-    <ButtonIncrement
-      counter={counter}
-      increment={increment}
-      decrement={decrement}
-    />
-  ) : (
-    <ButtonAdd onClick={handleClick} />
-  );
+   const button = (isStock: boolean) =>{
+     if(isActive_ && isStock){
+      return(
+       <ButtonIncrement
+         counter={counter}
+         increment={increment}
+         decrement={decrement}
+       />)
+     }
+     return <ButtonAdd onClick={handleClick} className={`${isActive_ && "hover:cursor-not-allowed hover:bg-shop-muted"}`} />
+   }
+
   return (
     <Card
       className={cn("group/card w-[300px] h-[530px] relative", className)}
@@ -65,7 +68,10 @@ export function CardProduct({ product, className, ...props }: CardProps) {
             className="w-32 p-2 bg-shop-primary"
           />
         )}
-        <TypographyP value="En stock" className="w-full text-end pr-4 pb-2" />
+        <TypographyP
+          value={product.in_stock ? "En stock" : "Rupture de stock"}
+          className={`${!product.in_stock && "text-shop-danger"} w-full text-end pr-4 pb-2`}
+        />
       </CardHeader>
       <CardContent className="grid gap-4 my-3">
         <div
@@ -105,7 +111,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
       <CardFooter
         className={`${isDisplay ? "block" : "hidden"} absolute bottom-0 w-full`}
       >
-        {button}
+        {button(product.in_stock)}
       </CardFooter>
     </Card>
   );
