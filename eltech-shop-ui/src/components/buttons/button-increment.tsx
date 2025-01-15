@@ -39,6 +39,9 @@ export interface ButtonIncrementProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof ButtonIncrementVariants> {
   asChild?: boolean;
+  count: number;
+  increment: (step?: number) => void;
+  decrement: (step?: number) => void;
 }
 export type CounterProps = {
   count: number;
@@ -46,10 +49,11 @@ export type CounterProps = {
   decrement: (step?: number) => void;
 };
 
+/* forwardRed passe 2 argument: type de référence HTMLDivElement et les props ButtonIncrementProps */
 const ButtonIncrement = React.forwardRef<
   HTMLButtonElement,
   ButtonIncrementProps
->(({ className, variant, size, ...props }, ref) => {
+>(({ className, variant, size, count, increment, decrement, ...props }, ref) => {
   return (
     <div
       className={cn(

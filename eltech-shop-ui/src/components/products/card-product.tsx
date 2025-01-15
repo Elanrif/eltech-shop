@@ -18,11 +18,6 @@ import { ButtonIncrement } from "../buttons/button-increment";
 import { useCounter } from "@/lib/hooks/useIncrement";
 
 type CardProps = React.ComponentProps<typeof Card> & { product: Product };
-type CounterProps = {
-  count: number;
-  increment: (step?: number) => void;
-  decrement: (step?: number) => void;
-};
 
 export function CardProduct({ product, className, ...props }: CardProps) {
   const [isActive, setIsActive] = React.useState(false);
@@ -45,7 +40,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
       <ArrowRight className="group-hover:block duration-400 ease-in hidden" />
     </ButtonAdd>
   ) : (
-    <ButtonIncrement className="w-full h-12" />
+    <ButtonIncrement className="w-full h-12" count={count} increment={increment} decrement={decrement} />
   );
   return (
     <Card className={cn("w-[300px] h-[500px] relative", className)} {...props}>
