@@ -3,9 +3,10 @@ import Newsletter from "@/components/newsletter";
 import { CardsCarousel } from "@/components/card/cards-carousel";
 import TypographyA from "@/components/ui/typography-a";
 import TypographyH from "@/components/ui/typography-h";
-import { Eye } from "lucide-react";
+import { Eye, HomeIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { ButtonShopUi } from "@/components/ui/button-shop-ui";
 
 const speechs = [
   {
@@ -28,6 +29,18 @@ export default function Home() {
   const img = { src: "/assets/soldes.webp", alt: "logo de la boutique" };
   return (
     <div className="min-h-[24rem] py-5">
+      {/* test button */}
+      <div className="flex gap-3 items-center p-10">
+        <ButtonShopUi> soumettre </ButtonShopUi>
+        <ButtonShopUi variant="primary" size="base"> soumettre </ButtonShopUi>
+        <ButtonShopUi variant="destructive" size="sm"> soumettre </ButtonShopUi>
+        <ButtonShopUi variant="secondary" size="lg" icon={<HomeIcon className="w-24 h-24 text-yellow-400"/>}>
+        <HomeIcon className="w-[50rem] h-[50rem] text-yellow-400"/>soumettre </ButtonShopUi>
+        <ButtonShopUi variant="secondary" size="lg"> soumettre </ButtonShopUi>
+        <ButtonShopUi variant="link" size="sm"> soumettre </ButtonShopUi>
+        <ButtonShopUi variant="ghost" size="lg"> soumettre </ButtonShopUi>
+      </div>
+      {/* fin test */}
       <main>
         <div className="hover:cursor-pointer w-full shadow-md rounded-lg">
           <Image
