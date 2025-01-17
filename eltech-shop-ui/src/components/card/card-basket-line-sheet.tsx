@@ -4,7 +4,6 @@ import { BasketItem } from "@/lib/basket/models/basket.model";
 import { ButtonIncrement } from "../buttons/button-increment";
 import { useCounter } from "@/lib/hooks/useIncrement";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
-import TypographyAnchor from "../ui/typography-anchor";
 
 
 export default function CardBasketLineSheet({ basketItem }: { basketItem: BasketItem }) {
@@ -26,7 +25,7 @@ export default function CardBasketLineSheet({ basketItem }: { basketItem: Basket
           className="max-w-[24rem]"
         >{basketItem.product?.name}</TypographyShopUi>
         <TypographyShopUi>{basketItem.product?.name}</TypographyShopUi>
-        <TypographyAnchor value={basketItem.product?.name} url={"#"} textSize="sm" />
+        <TypographyShopUi isLink={true} href="#">{basketItem.product?.name}</TypographyShopUi>
         <ButtonIncrement size={"xs"} counter={counter} increment={increment} decrement={decrement}/>
       </CardContent>
     </Card>

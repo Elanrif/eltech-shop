@@ -31,19 +31,22 @@ export function CardProduct({ product, className, ...props }: CardProps) {
     counter,
     increment,
     decrement,
-  } = useCardLogic();
+  } = useCardLogic(product.in_stock);
 
    const button = (isStock: boolean) =>{
      if(isActive_ && isStock){
       return(
        <ButtonIncrement
-         size={"lg"}
          counter={counter}
          increment={increment}
          decrement={decrement}
        />)
      }
-     return <ButtonAdd onClick={handleClick} className={`${isActive_ && "hover:cursor-not-allowed hover:bg-shop-muted"}`} />
+     return <ButtonAdd 
+              onClick={handleClick} 
+              className={`${!isStock && 
+                    "hover:cursor-not-allowed hover:bg-shop-muted"}`} 
+              />
    }
 
   return (
@@ -63,7 +66,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           />
         </div>
         {product.is_new && (
-          <TypographyShopUi className="w-32 p-2 bg-shop-primary">
+          <TypographyShopUi variant={"foreground"} className="w-32 p-2 bg-shop-primary">
             Nouveau
           </TypographyShopUi>
         )}
@@ -93,14 +96,14 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           <SwitchProduct checked={isChecked} />
         </div>
         <div className="flex flex-col gap-3 justify-start">
-          <TypographyShopUi transform="upper">{product.name}</TypographyShopUi>
-          <TypographyShopUi transform="upper">{product.description}</TypographyShopUi>
-          <TypographyShopUi transform="upper">{product.price} €</TypographyShopUi>
+          <TypographyShopUi transform="uppercase" variant={"primary"} fontWeight={"semibold"}>{product.name}</TypographyShopUi>
+          <TypographyShopUi transform="uppercase" variant={"primary"} size={"xs"} fontWeight={"medium"}>{product.description}</TypographyShopUi>
+          <TypographyShopUi transform="uppercase" variant={"primary"}>{product.price} €</TypographyShopUi>
         </div>
       </CardContent>
       <CardFooter
         className={`${
-          isDisplay ? "block" : "hidden"
+          isDisplay  ? "block" : "hidden"
         } p-0 absolute bottom-0 w-full`}
       >
         {button(product.in_stock)}

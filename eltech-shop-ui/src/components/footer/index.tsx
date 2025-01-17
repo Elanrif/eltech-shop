@@ -3,7 +3,7 @@ import CardFooter from './card-footer'
 import { ShoppingBag, RefreshCcw, Send, MessageCircleQuestion} from "lucide-react";
 import SubFooter from './sub-footer';
 import ShareSocilaMedia from './share-social-media';
-import TypographyAnchor from '../ui/typography-anchor';
+import { TypographyShopUi } from '../ui/typograpy-shop-ui';
 
 export default function Footer() {
   const payload = [
@@ -28,8 +28,8 @@ export default function Footer() {
     },
   ];
   return (
-    <div className='flex my-3 flex-col gap-5 justify-center'>
-      <ShareSocilaMedia/>
+    <div className="flex my-3 flex-col gap-5 justify-center">
+      <ShareSocilaMedia />
       <div className="flex gap-7 items-center justify-center">
         {payload.map((data, index) => {
           return (
@@ -39,13 +39,10 @@ export default function Footer() {
           );
         })}
       </div>
-      <SubFooter/>
-      <TypographyAnchor
-        value="© ELTECH-SHOP & THE OZ - 2025 LEGAL NOTICE - PARAMÉTRER LES COOKIES" 
-        className='mt-5'
-        textSize='xs'
-        fontWeight='semibold'
-        />
+      <SubFooter />
+      <TypographyShopUi size={"sm"} isLink={true} href="#">
+        © ELTECH-SHOP & THE OZ - 2025 LEGAL NOTICE - PARAMÉTRER LES COOKIES
+      </TypographyShopUi>
     </div>
   );
 }

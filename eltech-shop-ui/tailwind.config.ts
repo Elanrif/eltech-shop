@@ -17,7 +17,7 @@ export default {
           foreground: "#ffffff", // blanc
           accent: "#fffee9", // orange
           danger: "#ff0000", // red
-          muted: "#6f6f6f",
+          muted: "#686767",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

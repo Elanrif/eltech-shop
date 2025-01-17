@@ -8,10 +8,10 @@ export type Props = {
 }
 export default function CardFooter({data}:{data:Props}) {
   return (
-    <div className='flex my-3 gap-5 items-center'>
-      <div className="flex flex-col gap-4 justify-center items-center">
+    <div className='group/links hover:cursor-pointer flex my-3 gap-5 items-center'>
+      <div className="flex group-hover/links:text-shop-secondary flex-col gap-4 justify-center items-center">
         {data.icon}
-        <TypographyShopUi>{data.value}</TypographyShopUi>
+        <TypographyShopUi className='group-hover/links:text-shop-secondary' transform={"uppercase"} size={"sm"}>{data.value}</TypographyShopUi>
       </div>
         {data.bar && <span className="w-[1px] bg-slate-500 h-10" />}
     </div>

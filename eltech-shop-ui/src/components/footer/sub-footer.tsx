@@ -1,5 +1,5 @@
 import React from 'react'
-import TypographyAnchor from '../ui/typography-anchor';
+import { TypographyShopUi } from '../ui/typograpy-shop-ui';
 
 export default function SubFooter() {
     const links = [
@@ -52,7 +52,7 @@ export default function SubFooter() {
     <div className='flex justify-center gap-10 items-center bg-shop-accent px-10 py-5 text-center flex-wrap'>
         {links.map((data,index)=> (
             <React.Fragment key={index}>
-                <TypographyAnchor value={data.name} url={data.url} transform='uppercase' textSize='xs'/>
+                <TypographyShopUi size={"sm"} transform="uppercase" isLink={true} href={data.url}>{data.name}</TypographyShopUi>
             </React.Fragment>
         ))}
     </div>

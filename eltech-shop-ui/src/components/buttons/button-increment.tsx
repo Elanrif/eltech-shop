@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Minus, Plus } from 'lucide-react';
 import { PayloadProps } from '@/lib/hooks/useIncrement';
 const ButtonIncrementVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "w-full h-full inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -52,11 +52,11 @@ const ButtonIncrement = React.forwardRef<
   ButtonIncrementProps
 >(({ className, variant, size, counter, increment, decrement, ...props }, ref) => {
   return (
-    <div className={cn("w-full bg-black flex gap-0 items-center")}>
+    <div className={cn("bg-black flex gap-0 items-center")}>
       <ButtonShopUi
         className={cn(
           ButtonIncrementVariants({ variant, size, className }),
-          "w-full h-full rounded-none hover:bg-shop-secondary bg-shop-muted/60"
+          "rounded-none hover:bg-shop-secondary bg-shop-muted/60"
         )}
         ref={ref}
         {...props}
@@ -67,7 +67,7 @@ const ButtonIncrement = React.forwardRef<
       <ButtonShopUi
         className={cn(
           ButtonIncrementVariants({ variant, size, className }),
-          "w-full h-full rounded-none bg-shop-primary/10"
+          "text-md rounded-none bg-shop-primary/10 "
         )}
         ref={ref}
         {...props}
@@ -77,7 +77,7 @@ const ButtonIncrement = React.forwardRef<
       <ButtonShopUi
         className={cn(
           ButtonIncrementVariants({ variant, size, className }),
-          "w-full h-full rounded-none hover:bg-shop-secondary bg-shop-muted/60"
+          "rounded-none hover:bg-shop-secondary bg-shop-muted/60"
         )}
         ref={ref}
         {...props}

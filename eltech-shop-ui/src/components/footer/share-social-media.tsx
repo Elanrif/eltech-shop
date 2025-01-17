@@ -1,6 +1,6 @@
 import React from 'react'
 import { Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
-import Link from 'next/link';
+import { TypographyShopUi } from '../ui/typograpy-shop-ui';
 export default function ShareSocilaMedia() {
 
   const socialMedia = [
@@ -26,12 +26,18 @@ export default function ShareSocilaMedia() {
     },
   ];
   return (
-    <div className='my-4 text-center flex justify-center gap-7'>
-      {socialMedia.map((icon,index)=>(
-        <Link href={icon.url} key={index}>
+    <div className="my-4 text-center flex justify-center gap-7">
+      {socialMedia.map((icon, index) => (
+        <TypographyShopUi
+          transform={"uppercase"}
+          size={"sm"}
+          isLink={true}
+          href={icon.url}
+          key={index}
+        >
           {icon.component}
-        </Link>
+        </TypographyShopUi>
       ))}
     </div>
-  )
+  );
 }

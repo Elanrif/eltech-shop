@@ -7,23 +7,7 @@ import { Input } from "../ui/input";
 import { MenuUser } from "./menu-user";
 import { CardBasketSheet } from "../card/card-basket-sheet";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
-import TypographyAnchor from "../ui/typography-anchor";
-
-export type Props = {
-  value: string;
-  color?: "base" | "muted" | "light";
-  textSize?: "xs" | "sm" | "base" | "lg" | "xl";
-  fontWeight?:
-    | "thin"
-    | "light"
-    | "normal"
-    | "medium"
-    | "semibold"
-    | "bold"
-    | "black";
-  transform?: "uppercase" | "lowercase" | "capitalize" | "normal";
-  className?: string;
-};
+import { TypographyHeading } from "../ui/typography-heading";
 
 export default function HeaderBase() {
   const [display, setDisplay] = React.useState(false);
@@ -42,34 +26,18 @@ export default function HeaderBase() {
     console.log("cliqué");
   };
 
-  const subMenu: Props[] = [
+  const subMenu: {value: string}[] = [
     {
       value: "soldes",
-      transform: "capitalize",
-      textSize: "sm",
-      fontWeight: "thin",
-      color: "muted",
     },
     {
       value: "produits",
-      transform: "capitalize",
-      textSize: "sm",
-      fontWeight: "thin",
-      color: "muted",
     },
     {
       value: "collection",
-      transform: "capitalize",
-      textSize: "sm",
-      fontWeight: "thin",
-      color: "muted",
     },
     {
       value: "La marque",
-      transform: "normal",
-      textSize: "sm",
-      fontWeight: "thin",
-      color: "muted",
     },
   ];
 
@@ -122,25 +90,15 @@ export default function HeaderBase() {
       </div>
 
       <div className="text-center mt-3">
-        <TypographyAnchor
-          url="/"
-          value="eltech-shop"
-          color="base"
-          transform="uppercase"
-          fontWeight="black"
-          textSize="xl"
-        />
+        <TypographyHeading
+          isLink={true}
+          href="/"
+        >eltech-shop</TypographyHeading>
         <div className="flex gap-3 items-center justify-center mt-3">
           {subMenu.map((payload, index) => {
             return (
               <React.Fragment key={index}>
-                <TypographyAnchor
-                  color="muted"
-                  value={payload.value}
-                  transform={payload.transform}
-                  fontWeight={payload.fontWeight}
-                  textSize={payload.textSize}
-                />
+                <TypographyShopUi isLink={true} href="#">{payload.value}</TypographyShopUi>
               </React.Fragment>
             );
           })}

@@ -5,7 +5,6 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { TypographyShopUi } from "./ui/typograpy-shop-ui";
-import TypographyAnchor from "./ui/typography-anchor";
 
 export type SpeechProps = {
     title: string;
@@ -33,7 +32,7 @@ export default function CardSpeechClient({speech}:{speech: SpeechProps}) {
         <TypographyShopUi className="max-w-[24rem]">
           {speech.message}
         </TypographyShopUi>
-        <TypographyAnchor value={speech.url} url={"#"} textSize="sm" />
+        <TypographyShopUi isLink={true} href={"#"}>{speech.url}</TypographyShopUi>
       </CardContent>
     </Card>
   );

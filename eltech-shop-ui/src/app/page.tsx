@@ -5,7 +5,6 @@ import { Eye } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { TypographyShopUi } from "@/components/ui/typograpy-shop-ui";
-import TypographyAnchor from "@/components/ui/typography-anchor";
 const speechs = [
   {
     title: "Des tarifs préférentiels pros/étudiants",
@@ -46,15 +45,11 @@ export default function Home() {
             <TypographyShopUi
             >Nouveauté</TypographyShopUi>
             <div className="group/list hover:cursor-pointer flex justify-center items-center gap-2">
-              <TypographyAnchor
-                value="Voir tout les produits"
-                url="#"
-                color="muted"
-                fontWeight="semibold"
-                textSize="sm"
-                transform="uppercase"
+              <TypographyShopUi
+                isLink={true}
+                href="#"
                 className="group-hover/list:text-shop-secondary"
-              />
+              >Voir tout les produits</TypographyShopUi>
               <Eye className="group-hover/list:text-shop-secondary text-shop-muted" />
             </div>
           </div>

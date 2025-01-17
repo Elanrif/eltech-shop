@@ -1,32 +1,31 @@
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 import React from "react";
-import Link from "next/link";
+import { TypographyShopUi } from "./typograpy-shop-ui";
 
-const typographyVariants = cva("text-shop-muted", {
+const typographyHeadingVariants = cva("text-shop-muted", {
   variants: {
     variant: {
-      default: "text-shop-muted",
+      default: "text-shop-primary",
       primary: "text-shop-primary",
       muted: "text-shop-muted",
-      foreground: "text-shop-foreground"
     },
     size: {
-      default: "text-base",
-      xs: "text-xs",
+      default: "text-3xl",
       sm: "text-sm",
       md: "text-md",
       lg: "text-lg",
       xl: "text-3xl",
     },
     transform: {
-      default: "normal-case",
+      default: "uppercase",
       uppercase: "uppercase",
       lowercase: "lowercase",
       capitalize: "capitalize",
+      nomal: "normal-case"
     },
     fontWeight: {
-      default: "font-normal",
+      default: "font-medium",
       thin: "font-thin",
       light: "font-light",
       normal: "font-normal",
@@ -47,12 +46,12 @@ const typographyVariants = cva("text-shop-muted", {
 
 export interface TypographyProps
   extends React.HTMLAttributes<HTMLParagraphElement | HTMLAnchorElement>,
-    VariantProps<typeof typographyVariants> {
+    VariantProps<typeof typographyHeadingVariants> {
   isLink?: boolean;
   href?: string;
 }
 
-const TypographyShopUi = React.forwardRef<
+const TypographyHeading = React.forwardRef<
   HTMLParagraphElement | HTMLAnchorElement,
   TypographyProps
 >(
@@ -62,34 +61,17 @@ const TypographyShopUi = React.forwardRef<
       variant,
       transform,
       fontWeight,
-      isLink = false,
       size,
-      href,
       ...props
     },
     ref
   ) => {
-    if (isLink && href) {
-      return (
-        <Link
-          href={href}
-          ref={ref as React.Ref<HTMLAnchorElement>}
-          passHref
-          className={cn(
-            typographyVariants({ variant, transform, fontWeight, size }),
-            "hover:cursor-pointer hover:text-shop-secondary",
-            className
-          )}
-          {...props}
-        />
-      );
-    }
 
     return (
-      <p
+      <TypographyShopUi
         ref={ref as React.Ref<HTMLParagraphElement>}
         className={cn(
-          typographyVariants({ variant, transform, fontWeight, size }),
+          typographyHeadingVariants({ variant, transform, fontWeight, size }),
           className
         )}
         {...props}
@@ -98,6 +80,6 @@ const TypographyShopUi = React.forwardRef<
   }
 );
 
-TypographyShopUi.displayName = "TypographyShopUi";
+TypographyHeading.displayName = "TypographyHeading";
 
-export { TypographyShopUi, typographyVariants };
+export { TypographyHeading, typographyHeadingVariants };
