@@ -1,38 +1,61 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { LucideProps } from "lucide-react";
+import { cva, VariantProps } from "class-variance-authority"
 
-export type PropsInput = {
-  variant?: "base" | "md" | "lg" | "xl";
-  iconClass?: string;
-  className?: string;
-};
-const Input = React.forwardRef<
-  HTMLInputElement,
-  {iconClass?: string} &
-  React.ComponentProps<"input"> &
-   {
-    icon?: React.ForwardRefExoticComponent<
-      Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
-    >;
+const inputVariants = cva(
+  "group text-shop-muted flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus:ring-2 focus:ring-bg focus-visible:ring-5 focus-visible:ring-shop-secondary disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+  {
+    variants: {
+      variant: {
+        default: "w-full py-8 px-4",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
   }
->(({ className, type, iconClass = 'right-10 top-2', icon:Icon, ...props }, ref) => {
-  return (
-    <div className={cn("flex justify-between group relative")}>
+);
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement>,
+    VariantProps<typeof inputVariants> {
+      icon?: React.ReactNode
+      widthOption?: string
+    }
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, widthOption="w-full", icon, variant, ...props }, ref) => {
+    
+    if(icon) {
+      return (
+        <div
+          className={
+            `flex relative justify-between items-center ${widthOption}`}
+        >
+          <input
+            type={type}
+            className={cn(inputVariants({ variant, className }))}
+            ref={ref}
+            {...props}
+          />
+          <div className="group-focus-within:text-shop-secondary absolute right-2">
+            {icon}
+          </div>
+        </div>
+      );
+    }
+
+    return (
       <input
         type={type}
-        className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus:ring-2 focus:ring-bg focus-visible:ring-5 focus-visible:ring-shop-secondary disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          className
-        )}
+        className={cn(inputVariants({ variant, className }))}
         ref={ref}
         {...props}
       />
-      {Icon && <Icon className={cn("relative group-focus-within:text-shop-secondary text-shop-muted", iconClass)} />}
-    </div>
-  );
-});
+    );
+  }
+)
 Input.displayName = "Input"
 
 export { Input }

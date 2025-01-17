@@ -66,13 +66,15 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           />
         </div>
         {product.is_new && (
-          <TypographyShopUi variant={"foreground"} className="w-32 p-2 bg-shop-primary">
+          <TypographyShopUi
+            variant={"foreground"}
+            className="w-32 p-2 bg-shop-primary"
+          >
             Nouveau
           </TypographyShopUi>
         )}
         <TypographyShopUi
-          color={product.in_stock ? "muted" : "danger"}
-          className={`w-full text-end pr-4 pb-2`}
+          className={cn(`w-full text-end pr-4 pb-2`, product.in_stock ? "text-shop-muted" : "text-shop-danger")}
         >
           {product.in_stock ? "En stock" : "Rupture de stock"}
         </TypographyShopUi>
@@ -96,14 +98,29 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           <SwitchProduct checked={isChecked} />
         </div>
         <div className="flex flex-col gap-3 justify-start">
-          <TypographyShopUi transform="uppercase" variant={"primary"} fontWeight={"semibold"}>{product.name}</TypographyShopUi>
-          <TypographyShopUi transform="uppercase" variant={"primary"} size={"xs"} fontWeight={"medium"}>{product.description}</TypographyShopUi>
-          <TypographyShopUi transform="uppercase" variant={"primary"}>{product.price} €</TypographyShopUi>
+          <TypographyShopUi
+            transform="uppercase"
+            variant={"primary"}
+            fontWeight={"semibold"}
+          >
+            {product.name}
+          </TypographyShopUi>
+          <TypographyShopUi
+            transform="uppercase"
+            variant={"primary"}
+            size={"xs"}
+            fontWeight={"medium"}
+          >
+            {product.description}
+          </TypographyShopUi>
+          <TypographyShopUi transform="uppercase" variant={"primary"}>
+            {product.price} €
+          </TypographyShopUi>
         </div>
       </CardContent>
       <CardFooter
         className={`${
-          isDisplay  ? "block" : "hidden"
+          isDisplay ? "block" : "hidden"
         } p-0 absolute bottom-0 w-full`}
       >
         {button(product.in_stock)}

@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -8,12 +9,13 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { InputLabel } from "../forms/input-label";
 import InputEmail from "../forms/input-email";
 import InputDate from "../forms/input-date";
 import InputPassword from "../forms/input-password";
 import { ButtonShopUi } from "../ui/button-shop-ui";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
+import { Input } from "../ui/input";
+import { MapPinHouse, User } from "lucide-react";
 
 export function AuthSign() {
   return (
@@ -40,33 +42,40 @@ export function AuthSign() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="lastName">Nom</Label>
-              <InputLabel
-                id="lastName"
-                className="text-shop-muted"
-                defaultValue="saidbaco"
-                variant="lg"
-                placeholder="Entrer votre prénom"
-              />
+            <div className="flex mt-3 items-center gap-3">
+              <div className="space-y-1 w-full">
+                <Label htmlFor="lastName">Nom</Label>
+                <Input
+                  id="lastName"
+                  icon={<User />}
+                  defaultValue="saidbaco"
+                  placeholder="Entrer votre prénom"
+                />
+              </div>
+              <div className="space-y-1 w-full">
+                <Label htmlFor="firstName">Prénom</Label>
+                <Input
+                  id="firstName"
+                  icon={<User />}
+                  defaultValue="elanrif"
+                  placeholder="Entrer votre prénom"
+                />
+              </div>
             </div>
-            <div className="space-y-1">
-              <Label htmlFor="firstName">Prénom</Label>
-              <InputLabel
-                id="firstName"
-                className="text-shop-muted"
-                defaultValue="elanrif"
-                variant="lg"
-                placeholder="Entrer votre prénom"
+            <div className="space-y-1 w-full">
+              <Label htmlFor="lastName">Addresse</Label>
+              <Input
+                id="addresse"
+                icon={<MapPinHouse />}
+                defaultValue="Mixtaa bloc 6 Apprt..."
+                placeholder="Mixtaa bloc 6 Apprt..."
               />
             </div>
             <div className="space-y-1">
               <Label htmlFor="date">Date</Label>
               <InputDate
                 id="date"
-                className="text-shop-muted"
                 defaultValue="elanrif"
-                variant="lg"
                 placeholder="Entrer votre prénom"
               />
             </div>
@@ -74,25 +83,30 @@ export function AuthSign() {
               <Label htmlFor="email">Email</Label>
               <InputEmail
                 id="email"
-                className="text-shop-muted"
                 defaultValue="elanrif@gmail.com"
-                variant="lg"
                 placeholder="Entrer votre prénom"
               />
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 w-full">
               <Label htmlFor="password">Mot de passe</Label>
               <InputPassword
                 id="password"
-                className="text-shop-muted"
                 defaultValue="elanrif"
-                variant="lg"
-                placeholder="Entrer votre prénom"
+                placeholder="Entrer votre mote de passe"
+              />
+            </div>
+            <div className="space-y-1 w-full">
+              <Label htmlFor="password">Confirmer mot de passe</Label>
+              <InputPassword
+                id="password"
+                defaultValue="elanrif"
+                placeholder="confirmer votre mot de passe"
+                display={true}
               />
             </div>
           </CardContent>
           <CardFooter>
-            <ButtonShopUi>Valider</ButtonShopUi>
+            <ButtonShopUi>Créer votre compte</ButtonShopUi>
           </CardFooter>
         </Card>
       </TabsContent>
@@ -114,9 +128,7 @@ export function AuthSign() {
               <Label htmlFor="email">Email</Label>
               <InputEmail
                 id="email"
-                className="text-shop-muted"
                 defaultValue="elanrif@gmail.com"
-                variant="lg"
                 placeholder="Entrer votre prénom"
               />
             </div>
@@ -124,9 +136,7 @@ export function AuthSign() {
               <Label htmlFor="password">Mot de passe</Label>
               <InputPassword
                 id="password"
-                className="text-shop-muted"
                 defaultValue="elanrif"
-                variant="lg"
                 placeholder="Entrer votre prénom"
               />
             </div>

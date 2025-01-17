@@ -9,7 +9,7 @@ export default function Newsletter() {
     <div className="bg-shop-accent py-5">
       <div className="flex flex-col gap-6 text-center mt-3 p-3 max-w-[50rem] mx-auto">
         <TypographyHeading>newsletter</TypographyHeading>
-        <TypographyShopUi transform="uppercase">
+        <TypographyShopUi size={"sm"} transform="uppercase">
           INSCRIVEZ-VOUS POUR BÉNÉFICIER DE -10% SUR VOTRE PROCHAINE COMMANDE.
           DÉCOUVREZ EN AVANT-PREMIÈRE NOS LANCEMENTS ET RÉASSORTS DE COLLECTION
         </TypographyShopUi>

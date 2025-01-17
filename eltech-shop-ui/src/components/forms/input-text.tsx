@@ -8,7 +8,7 @@ export type PropsEmail = {
   className?: string;
 };
 
-const InputLabel = React.forwardRef<HTMLInputElement, React.ComponentProps<"input"> & PropsEmail>(
+const InputText = React.forwardRef<HTMLInputElement, React.ComponentProps<"input"> & PropsEmail>(
     ({variant= 'md', className, ...props }, ref) => {
          const variantClass = {
            base: "text-sm py-4 px-3 xs:w-[10rem]",
@@ -18,7 +18,7 @@ const InputLabel = React.forwardRef<HTMLInputElement, React.ComponentProps<"inpu
          }[variant];
         return (
           <Input
-            icon={User}
+            icon={<User/>}
             ref={ref}
             className={cn(className, variantClass)}
             {...props}
@@ -27,6 +27,6 @@ const InputLabel = React.forwardRef<HTMLInputElement, React.ComponentProps<"inpu
     }
 );
 
-InputLabel.displayName = "InputLabel";
+InputText.displayName = "InputText";
 
-export { InputLabel}
+export { InputText}

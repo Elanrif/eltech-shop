@@ -20,7 +20,7 @@ function InputDate(
     return (
       <Input
         type='date'
-        icon={Calendar}
+        icon={<Calendar/>}
         ref={ref}
         className={cn(className,variantClass)}
         {...props}

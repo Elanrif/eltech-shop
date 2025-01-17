@@ -19,7 +19,7 @@ function InputEmail(
     
     return (
       <Input
-        icon={Mail}
+        icon={<Mail/>}
         ref={ref}
         className={cn(className,variantClass)}
         {...props}

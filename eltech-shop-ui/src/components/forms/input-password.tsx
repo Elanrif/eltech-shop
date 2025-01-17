@@ -4,18 +4,17 @@ import { Input } from '../ui/input'
 import { Lock, Unlock } from 'lucide-react'
 import { cn } from '@/lib/utils';
 import TypographyLabel from '../ui/typography-label';
+import { usePasswordContext } from './context/password-context';
 
 export type PropsPassword = {
     variant?: 'base' | 'md' | 'lg' | 'xl';
+    display?: boolean;
     className?: string;
 }
 function InputPassword(
-    {variant = 'lg', className, ...props}: React.ComponentPropsWithoutRef<"input"> & PropsPassword ,ref: React.Ref<HTMLInputElement>
+    {variant = 'lg', display=false, className, ...props}: React.ComponentPropsWithoutRef<"input"> & PropsPassword ,ref: React.Ref<HTMLInputElement>
 ) {
-    const [isChecked, setIsChecked] = React.useState(false);
-    const handleCheckboxChange = () => {
-      setIsChecked((prev) => !prev);
-    };
+    const { isPasswordVisible, togglePasswordVisibility} = usePasswordContext();
     const variantClass = {
       base: "text-sm py-4 xs:w-[10rem]",
       md: "text-md md:w-[30rem] py-5",
@@ -23,8 +22,8 @@ function InputPassword(
       xl: "py-4 px-6 w-full xl:w-[64rem] py-5 px-5",
     }[variant];
     
-    const typeInput = isChecked ? 'text': 'password';
-    const lockIcon = isChecked ? Unlock : Lock
+    const typeInput = isPasswordVisible ? 'text': 'password';
+    const lockIcon = isPasswordVisible ? <Unlock/> : <Lock/>
 
     return (
       <div>
@@ -35,15 +34,21 @@ function InputPassword(
           className={cn(className, variantClass)}
           {...props}
         />
-        <div className="flex gap-2 mt-3 items-center">
-          <input
-            id="display-pwd"
-            type="checkbox"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-          />
-          <TypographyLabel htmlFor='display-pwd' value="afficher le mot de passe" className="mt-0" />
-        </div>
+        {display && (
+          <div className="flex gap-2 mt-3 items-center">
+            <input
+              id="display-pwd"
+              type="checkbox"
+              checked={isPasswordVisible}
+              onChange={togglePasswordVisibility}
+            />
+            <TypographyLabel
+              htmlFor="display-pwd"
+              value="afficher le mot de passe"
+              className="mt-0"
+            />
+          </div>
+        )}
       </div>
     );
 }
