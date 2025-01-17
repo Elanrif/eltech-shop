@@ -10,7 +10,7 @@ export type Props = {
     transform?: 'uppercase' | 'lowercase' | 'capitalize' | 'normal'
     className?: string;
 }
-export default function TypographyA({
+export default function TypographyAnchor({
     value,
     url="#",
     color = "base",

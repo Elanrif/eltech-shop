@@ -3,10 +3,9 @@ import {
   CardContent,
   CardHeader,
 } from "@/components/ui/card";
-import TypographyH from "./ui/typography-h";
-import TypographyP from "./ui/typography-p";
-import TypographyA from "./ui/typography-a";
 import Image from "next/image";
+import { TypographyShopUi } from "./ui/typograpy-shop-ui";
+import TypographyAnchor from "./ui/typography-anchor";
 
 export type SpeechProps = {
     title: string;
@@ -28,9 +27,13 @@ export default function CardSpeechClient({speech}:{speech: SpeechProps}) {
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-3">
-        <TypographyH value={speech.title} textSize="h7" fontWeight="semibold" className="max-w-[24rem]" />
-        <TypographyP value={speech.message} textSize="sm" className="max-w-[24rem]"/>
-        <TypographyA value={speech.url} url={"#"} textSize="sm"/>
+        <TypographyShopUi className="max-w-[24rem]">
+          {speech.title}
+        </TypographyShopUi>
+        <TypographyShopUi className="max-w-[24rem]">
+          {speech.message}
+        </TypographyShopUi>
+        <TypographyAnchor value={speech.url} url={"#"} textSize="sm" />
       </CardContent>
     </Card>
   );

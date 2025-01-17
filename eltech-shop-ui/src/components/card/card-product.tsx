@@ -10,12 +10,12 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import Image from "next/image";
-import TypographyP from "../ui/typography-p";
 import { Product } from "@/lib/basket/models/basket.model";
 import { SwitchProduct } from "../ui/switch-product";
 import { ButtonAdd } from "../buttons/button-add";
 import { ButtonIncrement } from "../buttons/button-increment";
 import useCardLogic from "@/lib/hooks/useCardLogic";
+import { TypographyShopUi } from "../ui/typograpy-shop-ui";
 
 type CardProps = React.ComponentProps<typeof Card> & { product: Product };
 
@@ -63,17 +63,16 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           />
         </div>
         {product.is_new && (
-          <TypographyP
-            value={"Nouveau"}
-            color="light"
-            className="w-32 p-2 bg-shop-primary"
-          />
+          <TypographyShopUi className="w-32 p-2 bg-shop-primary">
+            Nouveau
+          </TypographyShopUi>
         )}
-        <TypographyP
-          value={product.in_stock ? "En stock" : "Rupture de stock"}
+        <TypographyShopUi
           color={product.in_stock ? "muted" : "danger"}
           className={`w-full text-end pr-4 pb-2`}
-        />
+        >
+          {product.in_stock ? "En stock" : "Rupture de stock"}
+        </TypographyShopUi>
       </CardHeader>
       <CardContent className="grid gap-4 my-3">
         <div
@@ -94,24 +93,15 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           <SwitchProduct checked={isChecked} />
         </div>
         <div className="flex flex-col gap-3 justify-start">
-          <TypographyP
-            value={product.name}
-            transform="uppercase"
-            fontWeight="semibold"
-            textSize="sm"
-            color="base"
-          />
-          <TypographyP
-            value={product.description}
-            transform="uppercase"
-            textSize="xs"
-            color="base"
-          />
-          <TypographyP value={`${product.price} €`} color="base" />
+          <TypographyShopUi transform="upper">{product.name}</TypographyShopUi>
+          <TypographyShopUi transform="upper">{product.description}</TypographyShopUi>
+          <TypographyShopUi transform="upper">{product.price} €</TypographyShopUi>
         </div>
       </CardContent>
       <CardFooter
-        className={`${isDisplay ? "block" : "hidden"} p-0 absolute bottom-0 w-full`}
+        className={`${
+          isDisplay ? "block" : "hidden"
+        } p-0 absolute bottom-0 w-full`}
       >
         {button(product.in_stock)}
       </CardFooter>

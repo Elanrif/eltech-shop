@@ -12,9 +12,8 @@ import { InputLabel } from "../forms/input-label";
 import InputEmail from "../forms/input-email";
 import InputDate from "../forms/input-date";
 import InputPassword from "../forms/input-password";
-import TypographyH from "../ui/typography-h";
-import TypographyP from "../ui/typography-p";
-import { ButtonBase } from "../buttons/button-base";
+import { ButtonShopUi } from "../ui/button-shop-ui";
+import { TypographyShopUi } from "../ui/typograpy-shop-ui";
 
 export function AuthSign() {
   return (
@@ -31,14 +30,13 @@ export function AuthSign() {
         <Card>
           <CardHeader>
             <CardTitle>
-              <TypographyH value="Créer un compte" fontWeight="bold" />
+              <TypographyShopUi>Créer un compte</TypographyShopUi>
             </CardTitle>
             <CardDescription>
-              <TypographyP
-                value="Créer un compte,pour faciliter vos achats et béneficier des promotions."
-                textSize="sm"
-                color="muted"
-              />
+              <TypographyShopUi>
+                Créer un compte,pour faciliter vos achats et béneficier des
+                promotions
+              </TypographyShopUi>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -94,7 +92,7 @@ export function AuthSign() {
             </div>
           </CardContent>
           <CardFooter>
-           <ButtonBase size="md">Valider</ButtonBase>
+            <ButtonShopUi>Valider</ButtonShopUi>
           </CardFooter>
         </Card>
       </TabsContent>
@@ -102,17 +100,13 @@ export function AuthSign() {
         <Card>
           <CardHeader>
             <CardTitle>
-              <TypographyH
-                value="Connecter vous à votre compte"
-                fontWeight="bold"
-              />
+              <TypographyShopUi>Connecter vous à votre compte</TypographyShopUi>
             </CardTitle>
             <CardDescription>
-              <TypographyP
-                value="Ravi de vous revoir ! Veuillez vous connecter pour profiter pleinement de nos services."
-                textSize="sm"
-                color="muted"
-              />
+              <TypographyShopUi>
+                Ravi de vous revoir ! Veuillez vous connecter pour profiter
+                pleinement de nos services
+              </TypographyShopUi>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -138,7 +132,7 @@ export function AuthSign() {
             </div>
           </CardContent>
           <CardFooter>
-            <ButtonBase size="md">Se connecter</ButtonBase>
+            <ButtonShopUi>Se connecter</ButtonShopUi>
           </CardFooter>
         </Card>
       </TabsContent>

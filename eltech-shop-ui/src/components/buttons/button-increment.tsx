@@ -52,11 +52,11 @@ const ButtonIncrement = React.forwardRef<
   ButtonIncrementProps
 >(({ className, variant, size, counter, increment, decrement, ...props }, ref) => {
   return (
-    <div className={cn("w-full flex gap-0 items-center")}>
+    <div className={cn("w-full bg-black flex gap-0 items-center")}>
       <ButtonShopUi
         className={cn(
           ButtonIncrementVariants({ variant, size, className }),
-          "w-full h-full hover:bg-shop-secondary bg-shop-muted/60"
+          "w-full h-full rounded-none hover:bg-shop-secondary bg-shop-muted/60"
         )}
         ref={ref}
         {...props}
@@ -67,7 +67,7 @@ const ButtonIncrement = React.forwardRef<
       <ButtonShopUi
         className={cn(
           ButtonIncrementVariants({ variant, size, className }),
-          "w-full h-full bg-shop-muted"
+          "w-full h-full rounded-none bg-shop-primary/10"
         )}
         ref={ref}
         {...props}
@@ -77,7 +77,7 @@ const ButtonIncrement = React.forwardRef<
       <ButtonShopUi
         className={cn(
           ButtonIncrementVariants({ variant, size, className }),
-          "w-full h-full hover:bg-shop-secondary bg-shop-muted/60"
+          "w-full h-full rounded-none hover:bg-shop-secondary bg-shop-muted/60"
         )}
         ref={ref}
         {...props}

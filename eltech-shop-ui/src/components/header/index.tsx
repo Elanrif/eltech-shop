@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
-import TypographyP from "@/components/ui/typography-p";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Search, Heart, X } from "lucide-react";
 import Logo from "@/components/logo";
 import { Input } from "../ui/input";
-import TypographyA from "../ui/typography-a";
 import { MenuUser } from "./menu-user";
 import { CardBasketSheet } from "../card/card-basket-sheet";
+import { TypographyShopUi } from "../ui/typograpy-shop-ui";
+import TypographyAnchor from "../ui/typography-anchor";
 
 export type Props = {
   value: string;
@@ -86,12 +86,9 @@ export default function HeaderBase() {
     <div>
       <div className="flex justify-between items-center gap-[10rem]">
         <Logo />
-        <TypographyP
-          value="SOLDES | -10% supplémentaires dès 2 articles"
-          textSize="sm"
-          fontWeight="thin"
-          color="muted"
-        />
+        <TypographyShopUi
+        className="text-sm font-thin text-shop-muted"
+        >SOLDES | -10% supplémentaires dès 2 articles</TypographyShopUi>
         <div className="flex gap-3 items-center">
           {iconsData.map((icon, index) => (
             <div key={index}>
@@ -125,7 +122,7 @@ export default function HeaderBase() {
       </div>
 
       <div className="text-center mt-3">
-        <TypographyA
+        <TypographyAnchor
           url="/"
           value="eltech-shop"
           color="base"
@@ -137,7 +134,7 @@ export default function HeaderBase() {
           {subMenu.map((payload, index) => {
             return (
               <React.Fragment key={index}>
-                <TypographyA
+                <TypographyAnchor
                   color="muted"
                   value={payload.value}
                   transform={payload.transform}

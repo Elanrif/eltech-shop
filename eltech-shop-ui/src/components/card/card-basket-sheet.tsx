@@ -12,7 +12,7 @@ import {
 import { Basket } from "@/lib/basket/models/basket.model";
 import { ShoppingBag } from "lucide-react";
 import CardBasketLineSheet from "./card-basket-line-sheet";
-import { ButtonBase } from "../buttons/button-base";
+import { ButtonShopUi } from "../ui/button-shop-ui";
 
 export function CardBasketSheet() {
 const basket: Basket = {
@@ -109,7 +109,7 @@ const basket: Basket = {
         </div>
         <SheetFooter className="text-center mt-3 w-full flex justify-center">
           <SheetClose asChild>
-            <ButtonBase type="submit">Passer à la caisse</ButtonBase>
+            <ButtonShopUi type="submit">Passer à la caisse</ButtonShopUi>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
