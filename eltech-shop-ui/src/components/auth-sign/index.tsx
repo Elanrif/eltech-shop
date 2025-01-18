@@ -9,13 +9,11 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import InputEmail from "../forms/input-email";
-import InputDate from "../forms/input-date";
-import InputPassword from "../forms/input-password";
+import {InputPassword} from "../forms/input-password";
 import { ButtonShopUi } from "../ui/button-shop-ui";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
 import { Input } from "../ui/input";
-import { MapPinHouse, User } from "lucide-react";
+import { Calendar, Mail, MapPinHouse, User } from "lucide-react";
 
 export function AuthSign() {
   return (
@@ -71,18 +69,22 @@ export function AuthSign() {
                 placeholder="Mixtaa bloc 6 Apprt..."
               />
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 w-full">
               <Label htmlFor="date">Date</Label>
-              <InputDate
+              <Input
                 id="date"
-                defaultValue="elanrif"
-                placeholder="Entrer votre prénom"
+                type="date"
+                icon={<Calendar />}
+                defaultValue="Mixtaa bloc 6 Apprt..."
+                placeholder="Mixtaa bloc 6 Apprt..."
               />
             </div>
             <div className="space-y-1">
               <Label htmlFor="email">Email</Label>
-              <InputEmail
+              <Input
                 id="email"
+                type="email"
+                icon={<Mail/>}
                 defaultValue="elanrif@gmail.com"
                 placeholder="Entrer votre prénom"
               />
@@ -126,7 +128,7 @@ export function AuthSign() {
           <CardContent className="space-y-2">
             <div className="space-y-1">
               <Label htmlFor="email">Email</Label>
-              <InputEmail
+              <Input
                 id="email"
                 defaultValue="elanrif@gmail.com"
                 placeholder="Entrer votre prénom"
