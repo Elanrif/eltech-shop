@@ -12,7 +12,7 @@ const inputVariants = cva(
   {
     variants: {
       variant: {
-        default: "w-full py-8 px-4",
+        default: "w-full py-6 px-4",
       },
     },
     defaultVariants: {

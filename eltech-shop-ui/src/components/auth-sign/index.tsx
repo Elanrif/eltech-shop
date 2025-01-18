@@ -40,71 +40,75 @@ export function AuthSign() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="flex mt-3 items-center gap-3">
-              <div className="space-y-1 w-full">
-                <Label htmlFor="lastName">Nom</Label>
+            <div className="flex flex-col gap-y-4">
+              <div className="flex mt-3 items-center gap-3">
+                <div className="space-y-1 w-full">
+                  <Label htmlFor="lastName">Nom</Label>
+                  <Input
+                    id="lastName"
+                    icon={<User />}
+                    defaultValue="saidbaco"
+                    placeholder="Entrer votre prénom"
+                  />
+                </div>
+                <div className="space-y-1 w-full">
+                  <Label htmlFor="firstName">Prénom</Label>
+                  <Input
+                    id="firstName"
+                    icon={<User />}
+                    defaultValue="elanrif"
+                    placeholder="Entrer votre prénom"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="space-y-1 w-full">
+                  <Label htmlFor="lastName">Addresse</Label>
+                  <Input
+                    id="addresse"
+                    icon={<MapPinHouse />}
+                    defaultValue="Mixtaa bloc 6 Apprt..."
+                    placeholder="Mixtaa bloc 6 Apprt..."
+                  />
+                </div>
+                <div className="w-full space-y-1">
+                  <Label htmlFor="date">Date</Label>
+                  <Input
+                    id="date"
+                    type="date"
+                    icon={<Calendar />}
+                    defaultValue="Mixtaa bloc 6 Apprt..."
+                    placeholder="Mixtaa bloc 6 Apprt..."
+                  />
+                </div>
+              </div>
+              <div className="w-full space-y-1">
+                <Label htmlFor="email">Email</Label>
                 <Input
-                  id="lastName"
-                  icon={<User />}
-                  defaultValue="saidbaco"
+                  id="email"
+                  type="email"
+                  icon={<Mail />}
+                  defaultValue="elanrif@gmail.com"
                   placeholder="Entrer votre prénom"
                 />
               </div>
               <div className="space-y-1 w-full">
-                <Label htmlFor="firstName">Prénom</Label>
-                <Input
-                  id="firstName"
-                  icon={<User />}
+                <Label htmlFor="password">Mot de passe</Label>
+                <InputPassword
+                  id="password"
                   defaultValue="elanrif"
-                  placeholder="Entrer votre prénom"
+                  placeholder="Entrer votre mote de passe"
                 />
               </div>
-            </div>
-            <div className="space-y-1 w-full">
-              <Label htmlFor="lastName">Addresse</Label>
-              <Input
-                id="addresse"
-                icon={<MapPinHouse />}
-                defaultValue="Mixtaa bloc 6 Apprt..."
-                placeholder="Mixtaa bloc 6 Apprt..."
-              />
-            </div>
-            <div className="space-y-1 w-full">
-              <Label htmlFor="date">Date</Label>
-              <Input
-                id="date"
-                type="date"
-                icon={<Calendar />}
-                defaultValue="Mixtaa bloc 6 Apprt..."
-                placeholder="Mixtaa bloc 6 Apprt..."
-              />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                icon={<Mail/>}
-                defaultValue="elanrif@gmail.com"
-                placeholder="Entrer votre prénom"
-              />
-            </div>
-            <div className="space-y-1 w-full">
-              <Label htmlFor="password">Mot de passe</Label>
-              <InputPassword
-                id="password"
-                defaultValue="elanrif"
-                placeholder="Entrer votre mote de passe"
-              />
-            </div>
-            <div className="space-y-1 w-full">
-              <Label htmlFor="password">Confirmer mot de passe</Label>
-              <InputPassword
-                id="password"
-                defaultValue="elanrif"
-                placeholder="confirmer votre mot de passe"
-                display={true}
-              />
+              <div className="space-y-1 w-full">
+                <Label htmlFor="password">Confirmer mot de passe</Label>
+                <InputPassword
+                  id="password"
+                  defaultValue="elanrif"
+                  placeholder="confirmer votre mot de passe"
+                  display={true}
+                />
+              </div>
             </div>
           </CardContent>
           <CardFooter>
