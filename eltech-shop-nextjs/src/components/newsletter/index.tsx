@@ -1,8 +1,9 @@
 import React from 'react'
-import InputEmail from '../forms/input-email';
 import { ButtonShopUi } from '../ui/button-shop-ui';
 import { TypographyShopUi } from '../ui/typograpy-shop-ui';
 import { TypographyHeading } from '../ui/typography-heading';
+import { Input } from '../ui/input';
+import { Mail } from 'lucide-react';
 
 export default function Newsletter() {
   return (
@@ -15,7 +16,13 @@ export default function Newsletter() {
         </TypographyShopUi>
 
         <div className="flex w-full items-center justify-center gap-3">
-          <InputEmail variant="md" placeholder="Entrez votre email" />
+          <Input
+            id="newsletter"
+            widthOption='w-1/2'
+            placeholder="Entrez votre email"
+            className='bg-white'
+            icon={<Mail />}
+          />
           <ButtonShopUi>valider</ButtonShopUi>
         </div>
         <TypographyShopUi>
