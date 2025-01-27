@@ -9,15 +9,19 @@ import { BasketsModule } from './baskets/baskets.module';
 import { OrdersModule } from './orders/orders.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from '../database/config/data-source';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({}),
     TypeOrmModule.forRoot(dataSourceOptions),
     UsersModule,
     ProductsModule,
     CategoriesModule,
     BasketsModule,
     OrdersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, UsersService],

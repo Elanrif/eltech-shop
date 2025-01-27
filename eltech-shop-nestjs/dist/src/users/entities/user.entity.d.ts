@@ -1,6 +1,6 @@
 import { Basket } from "src/baskets/entities/basket.entity";
 export declare class User {
-    id: string;
+    id: number;
     email: string;
     password: string;
     firstName: string;

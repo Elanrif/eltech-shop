@@ -18,18 +18,22 @@ const baskets_module_1 = require("./baskets/baskets.module");
 const orders_module_1 = require("./orders/orders.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const data_source_1 = require("../database/config/data-source");
+const auth_module_1 = require("./auth/auth.module");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot({}),
             typeorm_1.TypeOrmModule.forRoot(data_source_1.dataSourceOptions),
             users_module_1.UsersModule,
             products_module_1.ProductsModule,
             categories_module_1.CategoriesModule,
             baskets_module_1.BasketsModule,
             orders_module_1.OrdersModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, users_service_1.UsersService],
