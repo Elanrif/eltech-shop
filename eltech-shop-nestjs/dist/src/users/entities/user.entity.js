@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const basket_entity_1 = require("../../baskets/entities/basket.entity");
+const role_enum_1 = require("../../roles/role.enum");
 const typeorm_1 = require("typeorm");
 let User = class User {
 };
@@ -23,6 +24,10 @@ __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: role_enum_1.Role.USER }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

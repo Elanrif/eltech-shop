@@ -8,13 +8,14 @@ export declare class UsersService {
     create(createUserDto: CreateUserDto): Promise<{
         email: string;
         firstName: string;
+        role: import("../roles/role.enum").Role;
         lastName: string;
         baskets: import("../baskets/entities/basket.entity").Basket[];
         id: number;
     }>;
     findByEmail(email: string): Promise<User>;
     findById(id: number): Promise<User>;
-    findAll(): string;
+    findAll(): Promise<User[]>;
     update(id: number, updateUserDto: UpdateUserDto): string;
     remove(id: number): string;
 }

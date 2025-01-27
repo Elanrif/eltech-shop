@@ -26,7 +26,9 @@ let AuthService = class AuthService {
         const payload = {
             username: user.email,
             sub: {
-                name: user.lastName,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                role: user.role,
             },
         };
         return {

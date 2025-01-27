@@ -9,6 +9,7 @@ export declare class AuthService {
         user: {
             id: number;
             email: string;
+            role: import("../roles/role.enum").Role;
             firstName: string;
             lastName: string;
             baskets: import("../baskets/entities/basket.entity").Basket[];
@@ -22,6 +23,7 @@ export declare class AuthService {
     validateUser(dto: LoginDto): Promise<{
         id: number;
         email: string;
+        role: import("../roles/role.enum").Role;
         firstName: string;
         lastName: string;
         baskets: import("../baskets/entities/basket.entity").Basket[];

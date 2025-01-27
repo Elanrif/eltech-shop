@@ -9,6 +9,7 @@ export declare class AuthController {
     create(dto: CreateUserDto): Promise<{
         email: string;
         firstName: string;
+        role: import("../roles/role.enum").Role;
         lastName: string;
         baskets: import("../baskets/entities/basket.entity").Basket[];
         id: number;
@@ -17,6 +18,7 @@ export declare class AuthController {
         user: {
             id: number;
             email: string;
+            role: import("../roles/role.enum").Role;
             firstName: string;
             lastName: string;
             baskets: import("../baskets/entities/basket.entity").Basket[];
