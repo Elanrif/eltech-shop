@@ -27,7 +27,12 @@ let UsersController = class UsersController {
     findAll() {
         return this.usersService.findAll();
     }
-    findOne(id) {
+    findOne(id, req) {
+        const userId = req.user['sub'];
+        console.log('userId ', userId);
+        if (+id !== userId) {
+            throw new common_1.ForbiddenException('You do not have permission to access this route');
+        }
         return this.usersService.findById(+id);
     }
 };
@@ -44,8 +49,9 @@ __decorate([
     (0, common_1.UseGuards)(jwt_guard_1.JwtGuard),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findOne", null);
 exports.UsersController = UsersController = __decorate([
