@@ -11,13 +11,8 @@ export function ThemeProvider({
 
   React.useEffect(() => {
     setMounted(true);
-<<<<<<< HEAD
-  }, []);
-  if (!mounted) {
-=======
   },[])
   if(!mounted) {
->>>>>>> eltech-shop-ui
     return false;
   }
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
