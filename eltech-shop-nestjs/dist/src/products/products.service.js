@@ -37,10 +37,7 @@ let ProductsService = class ProductsService {
             createdAt: currentDate,
             updatedAt: currentDate,
         });
-        const savedProduct = await this.productRepository.save(product);
-        category.products.push(savedProduct);
-        await this.categoryRepository.save(category);
-        return savedProduct;
+        return await this.productRepository.save(product);
     }
     async update(id, dto) {
         const product = await this.findOne(id);

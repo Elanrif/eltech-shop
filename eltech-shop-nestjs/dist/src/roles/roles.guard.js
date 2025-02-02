@@ -18,15 +18,15 @@ let RolesGuard = class RolesGuard {
         this.reflector = reflector;
     }
     canActivate(context) {
-        const requiredRoles = this.reflector.getAllAndOverride(roles_decorator_1.ROLES_KEY, [
-            context.getHandler(),
-            context.getClass(),
-        ]);
+        const requiredRoles = this.reflector.get(roles_decorator_1.ROLES_KEY, context.getHandler);
         if (!requiredRoles) {
             return true;
         }
         const { user } = context.switchToHttp().getRequest();
-        return requiredRoles.some((role) => user.role?.includes(role));
+        if (!user || !requiredRoles.includes(user.role)) {
+            throw new common_1.ForbiddenException('You do not have permission to access this resource');
+        }
+        return true;
     }
 };
 exports.RolesGuard = RolesGuard;

@@ -5,6 +5,12 @@ import { LoginDto } from './dto/LoginDto.dto';
 import { compare } from 'bcrypt';
 import * as process from 'node:process';
 
+export interface Payload {
+  username: string;
+  sub: number;
+  role: string;
+}
+
 const EXPIRE_TIME = 30 * 60 * 1000;
 @Injectable()
 export class AuthService {
@@ -15,11 +21,10 @@ export class AuthService {
 
   async login(dto: LoginDto) {
     const user = await this.validateUser(dto);
-    const payload = {
+    const payload: Payload = {
       username: user.email,
-      sub: {
-        name: user.lastName,
-      },
+      sub: user.id,
+      role: user.role,
     };
 
     return {
@@ -38,16 +43,30 @@ export class AuthService {
     };
   }
 
+  /* Used to validate user during login (email && password) */
   async validateUser(dto: LoginDto) {
     const user = await this.userService.findByEmail(dto.username);
 
     if (user && (await compare(dto.password, user.password))) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
 
       return result;
     }
 
     throw new UnauthorizedException();
+  }
+
+  /* Used to validate a user's ID (extracted from the JWT payload) */
+  async validateUserById(userId: number): Promise<any> {
+    const user = await this.userService.findById(userId);
+    if (!user) {
+      return null;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, baskets, ...result } = user;
+    return result;
   }
 
   async refreshToken(user: any) {

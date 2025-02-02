@@ -25,9 +25,8 @@ let AuthService = class AuthService {
         const user = await this.validateUser(dto);
         const payload = {
             username: user.email,
-            sub: {
-                name: user.lastName,
-            },
+            sub: user.id,
+            role: user.role,
         };
         return {
             user,
@@ -51,6 +50,14 @@ let AuthService = class AuthService {
             return result;
         }
         throw new common_1.UnauthorizedException();
+    }
+    async validateUserById(userId) {
+        const user = await this.userService.findById(userId);
+        if (!user) {
+            return null;
+        }
+        const { password, baskets, ...result } = user;
+        return result;
     }
     async refreshToken(user) {
         const payload = {
