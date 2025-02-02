@@ -1,23 +1,30 @@
-import { Product } from "src/products/entities/product.entity";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Product } from 'src/products/entities/product.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Category {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column({ nullable: true})
-    description?: string;
+  @Column({ nullable: true })
+  description?: string;
 
-    @CreateDateColumn()
-    createdAt?: Date;
+  @CreateDateColumn()
+  createdAt?: Date;
 
-    @UpdateDateColumn()
-    updatedAt?: Date;
+  @UpdateDateColumn()
+  updatedAt?: Date;
 
-    @OneToMany(()=> Product, (product)=> product.category)
-    products: Product[];
+  @OneToMany(() => Product, (product) => product.category)
+  products: Product[];
 }

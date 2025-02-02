@@ -1,26 +1,70 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Repository } from 'typeorm';
+import { Product } from './entities/product.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Category } from '../categories/entities/category.entity';
 
 @Injectable()
 export class ProductsService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  constructor(
+    @InjectRepository(Product)
+    private productRepository: Repository<Product>,
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
+  ) {}
+  async create(dto: CreateProductDto) {
+    const currentDate = new Date();
+
+    const category = await this.categoryRepository.findOne({
+      where: { id: dto.category?.id },
+    });
+
+    if (!category) {
+      throw new NotFoundException('Category not found');
+    }
+
+    const product: Product = this.productRepository.create({
+      ...dto,
+      category, // we directly associate category with entity product
+      createdAt: currentDate,
+      updatedAt: currentDate,
+    });
+
+    return await this.productRepository.save(product);
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async update(id: number, dto: UpdateProductDto) {
+    const product = await this.findOne(id);
+    if (!product) {
+      return new Error(`Product with id ${id} not found`);
+    }
+    const category = await this.categoryRepository.findOne({
+      where: { id: dto.category?.id },
+    });
+
+    if (!category) {
+      throw new NotFoundException('Category was not found in database');
+    }
+
+    const currentDate = new Date();
+    const updateDto = { ...dto, category, updatedAt: currentDate };
+    await this.productRepository.update(id, updateDto);
+    return this.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findAll() {
+    return this.productRepository.find();
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async findOne(id: number) {
+    return this.productRepository.findOne({
+      where: { id },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number) {
+    return this.productRepository.delete(id);
   }
 }

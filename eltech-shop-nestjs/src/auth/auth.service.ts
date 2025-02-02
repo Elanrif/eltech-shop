@@ -5,13 +5,13 @@ import { LoginDto } from './dto/LoginDto.dto';
 import { compare } from 'bcrypt';
 import * as process from 'node:process';
 
-const EXPIRE_TIME = 2 * 60 * 1000;
+const EXPIRE_TIME = 30 * 60 * 1000;
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UsersService,
     private jwtService: JwtService,
-  ){}
+  ) {}
 
   async login(dto: LoginDto) {
     const user = await this.validateUser(dto);
@@ -26,7 +26,7 @@ export class AuthService {
       user,
       backendTokens: {
         accessToken: await this.jwtService.signAsync(payload, {
-          expiresIn: '2m',
+          expiresIn: '30m',
           secret: process.env.JWT_SECRET_KEY,
         }),
         refreshToken: await this.jwtService.signAsync(payload, {
@@ -35,14 +35,14 @@ export class AuthService {
         }),
         expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
       },
-    } ;
+    };
   }
 
   async validateUser(dto: LoginDto) {
     const user = await this.userService.findByEmail(dto.username);
 
-    if(user && (await compare(dto.password, user.password))){
-      const {password, ...result} = user;
+    if (user && (await compare(dto.password, user.password))) {
+      const { password, ...result } = user;
 
       return result;
     }
@@ -51,23 +51,21 @@ export class AuthService {
   }
 
   async refreshToken(user: any) {
-    const payload ={
+    const payload = {
       username: user.username,
       sub: user.sub,
     };
 
     return {
       accessToken: await this.jwtService.signAsync(payload, {
-        expiresIn: '2m',
+        expiresIn: '30m',
         secret: process.env.JWT_SECRET_KEY,
       }),
       refreshToken: await this.jwtService.signAsync(payload, {
         expiresIn: '3d',
         secret: process.env.JWT_REFRESH_TOKEN_KEY,
       }),
-     expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
+      expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
     };
-
   }
-  
 }

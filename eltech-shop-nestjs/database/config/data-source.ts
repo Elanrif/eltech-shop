@@ -1,6 +1,6 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 
-export const dataSourceOptions: DataSourceOptions ={
+export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
   host: 'localhost',
   port: 3306,

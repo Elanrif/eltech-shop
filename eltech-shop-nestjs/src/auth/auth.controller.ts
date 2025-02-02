@@ -9,7 +9,8 @@ import { RefreshJwtGuard } from './guards/refresh.guard';
 export class AuthController {
   constructor(
     private userService: UsersService,
-    private readonly authService: AuthService) {}
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('register')
   async create(@Body() dto: CreateUserDto) {

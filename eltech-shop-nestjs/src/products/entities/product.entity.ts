@@ -1,6 +1,14 @@
 import { Basket } from 'src/baskets/entities/basket.entity';
 import { Category } from 'src/categories/entities/category.entity';
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Product {
@@ -11,7 +19,7 @@ export class Product {
   name: string;
 
   @Column()
-  descriptoin: string;
+  description: string;
 
   @Column()
   detail: string;
@@ -37,12 +45,18 @@ export class Product {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
   @ManyToOne(() => Category, (category) => category.products, {
     nullable: true,
     eager: true,
   })
   category?: Category;
 
-   @ManyToMany(() => Basket, (basket)=> basket.products)
-      baskets: Basket[];
+  @ManyToMany(() => Basket, (basket) => basket.products)
+  baskets: Basket[];
 }

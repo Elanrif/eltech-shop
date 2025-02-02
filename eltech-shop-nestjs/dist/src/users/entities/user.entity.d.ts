@@ -1,5 +1,5 @@
-import { Basket } from "src/baskets/entities/basket.entity";
-import { Role } from "src/roles/role.enum";
+import { Basket } from 'src/baskets/entities/basket.entity';
+import { Role } from 'src/roles/role.enum';
 export declare class User {
     id: number;
     email: string;

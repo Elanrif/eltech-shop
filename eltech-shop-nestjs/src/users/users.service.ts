@@ -10,31 +10,35 @@ import { hash } from 'bcrypt';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User> ){}
+    private userRepository: Repository<User>,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.userRepository.findOne({where: {email: createUserDto.email}});
+    const user = await this.userRepository.findOne({
+      where: { email: createUserDto.email },
+    });
 
     if (user) throw new ConflictException('Email duplicated!');
 
     const newUser = await this.userRepository.save({
       ...createUserDto,
       password: await hash(createUserDto.password, 10),
-    })
-    const { password, ...result} = newUser;
+    });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...result } = newUser;
     return result;
   }
 
-  async findByEmail(email: string){
+  async findByEmail(email: string) {
     return this.userRepository.findOne({
-      where: {email},
-    })
-  };
+      where: { email },
+    });
+  }
 
   async findById(id: number) {
     return this.userRepository.findOne({
-      where: {id},
-    })
+      where: { id },
+    });
   }
 
   findAll() {

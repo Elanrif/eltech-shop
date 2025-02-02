@@ -1,7 +1,13 @@
-import { IsArray, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { Basket } from "src/baskets/entities/basket.entity";
-import { Role } from "src/roles/role.enum";
-
+import {
+  IsArray,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { Basket } from 'src/baskets/entities/basket.entity';
+import { Role } from 'src/roles/role.enum';
 
 export class CreateUserDto {
   @IsEmail()
@@ -16,7 +22,7 @@ export class CreateUserDto {
 
   @IsEnum(Role)
   @IsOptional()
-  role: Role ;
+  role: Role;
 
   @IsString()
   lastName: string;

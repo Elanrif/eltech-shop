@@ -23,7 +23,9 @@ let UsersService = class UsersService {
         this.userRepository = userRepository;
     }
     async create(createUserDto) {
-        const user = await this.userRepository.findOne({ where: { email: createUserDto.email } });
+        const user = await this.userRepository.findOne({
+            where: { email: createUserDto.email },
+        });
         if (user)
             throw new common_1.ConflictException('Email duplicated!');
         const newUser = await this.userRepository.save({
@@ -38,7 +40,6 @@ let UsersService = class UsersService {
             where: { email },
         });
     }
-    ;
     async findById(id) {
         return this.userRepository.findOne({
             where: { id },

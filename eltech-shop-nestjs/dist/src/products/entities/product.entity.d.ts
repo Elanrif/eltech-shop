@@ -3,7 +3,7 @@ import { Category } from 'src/categories/entities/category.entity';
 export declare class Product {
     id: number;
     name: string;
-    descriptoin: string;
+    description: string;
     detail: string;
     image?: string;
     is_new: boolean;
@@ -12,6 +12,8 @@ export declare class Product {
     color: string;
     quantity: number;
     price: number;
+    createdAt: Date;
+    updatedAt: Date;
     category?: Category;
     baskets: Basket[];
 }

@@ -15,7 +15,7 @@ const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
 const bcrypt_1 = require("bcrypt");
 const process = require("node:process");
-const EXPIRE_TIME = 2 * 60 * 1000;
+const EXPIRE_TIME = 30 * 60 * 1000;
 let AuthService = class AuthService {
     constructor(userService, jwtService) {
         this.userService = userService;
@@ -26,16 +26,14 @@ let AuthService = class AuthService {
         const payload = {
             username: user.email,
             sub: {
-                firstName: user.firstName,
-                lastName: user.lastName,
-                role: user.role,
+                name: user.lastName,
             },
         };
         return {
             user,
             backendTokens: {
                 accessToken: await this.jwtService.signAsync(payload, {
-                    expiresIn: '2m',
+                    expiresIn: '30m',
                     secret: process.env.JWT_SECRET_KEY,
                 }),
                 refreshToken: await this.jwtService.signAsync(payload, {
@@ -61,7 +59,7 @@ let AuthService = class AuthService {
         };
         return {
             accessToken: await this.jwtService.signAsync(payload, {
-                expiresIn: '2m',
+                expiresIn: '30m',
                 secret: process.env.JWT_SECRET_KEY,
             }),
             refreshToken: await this.jwtService.signAsync(payload, {
