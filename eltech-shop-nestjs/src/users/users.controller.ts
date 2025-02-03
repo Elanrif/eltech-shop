@@ -29,7 +29,6 @@ export class UsersController {
   @Get(':id')
   findOne(@Param('id') id: string, @Req() req: Request) {
     const userId = req.user['sub'];
-    console.log('userId ', userId);
     if (+id !== userId) {
       throw new ForbiddenException(
         'You do not have permission to access this route',

@@ -22,3 +22,6 @@
 
 # Get the process.env 
 1. `npm i @nestjs/config`
+
+# JwtGuard && AuthGuard('jwt')
+it's the same result, but I created the first one from scratch, and customized the second one from passport-jwt
