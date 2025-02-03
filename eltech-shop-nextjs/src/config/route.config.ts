@@ -7,17 +7,17 @@ export const routeEndpoints = {
         baseUrl,
         apiBaseUrl,
         apiProxyBase,
-        store: `/`,
-        login: `/login`,
-        register: `/register`,
+        home: `/`,
+        login: `/sign-in-up`,
+        register: `/sign-in-up`,
 
         /* Dashboard */
         dashboard: {
-            default: `/dashboard`,
-            orders: `/orders`,
-            users: `/users`,
-            categories: `/categories`,
-            products: `/products`,
+            base: `/dashboard`,
+            orders: `/dashboard/orders`,
+            users: `/dashboard/users`,
+            categories: `/dashboard/categories`,
+            products: `/dashboard/products`,
         }
 
     }

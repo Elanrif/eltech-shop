@@ -2,10 +2,8 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
   BookOpen,
   Bot,
-  Command,
   Frame,
   GalleryVerticalEnd,
   Map,
@@ -25,7 +23,22 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import {routeEndpoints} from "@/config/route.config";
 
+const {
+  endpoints: {
+    home,
+    dashboard: {
+      base,
+      orders,
+      users,
+      categories,
+      products,
+
+    }
+  }
+
+} = routeEndpoints
 // This is sample data.
 const data = {
   user: {
@@ -38,22 +51,13 @@ const data = {
       name: "Eltech-shop",
       logo: GalleryVerticalEnd,
       plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
+      href: home
     },
   ],
   navMain: [
     {
       title: "Accueil",
-      url: "#",
+      url: base,
       icon: SquareTerminal,
     },
     {
@@ -63,19 +67,19 @@ const data = {
       items: [
         {
           title: "Commandes",
-          url: "#",
+          url: orders,
         },
         {
           title: "Clients",
-          url: "#",
+          url: users,
         },
         {
           title: "Produits",
-          url: "#",
+          url: products,
         },
         {
           title: "Categories",
-          url: "#",
+          url: categories,
         },
       ],
     },

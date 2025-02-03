@@ -3,7 +3,7 @@ export default function PageProduct(){
 
     return (
         <div>
-            dashboard products
+            dashboard categories
         </div>
     )
 }
