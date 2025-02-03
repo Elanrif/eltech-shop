@@ -22,7 +22,7 @@ const typographyHeadingVariants = cva("text-shop-muted", {
       uppercase: "uppercase",
       lowercase: "lowercase",
       capitalize: "capitalize",
-      nomal: "normal-case"
+      normal: "normal-case"
     },
     fontWeight: {
       default: "font-medium",

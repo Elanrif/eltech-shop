@@ -7,7 +7,9 @@ import HeaderBase from "@/components/header";
 export default function AuthLayout({children}:{children:React.ReactNode}) {
   return (
     <div>
-        <HeaderBase /><PasswordProvider>{children}</PasswordProvider><Footer />
+        <HeaderBase />
+        <PasswordProvider>{children}</PasswordProvider>
+        <Footer />
     </div>
   );
 }

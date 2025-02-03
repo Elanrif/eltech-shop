@@ -29,13 +29,13 @@ import {
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "elanrif",
+    email: "saidbacoelanrif@gmail.com",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Eltech-shop",
       logo: GalleryVerticalEnd,
       plan: "Enterprise",
     },
@@ -52,66 +52,37 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Accueil",
       url: "#",
       icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
     },
     {
-      title: "Models",
+      title: "Ma boutique",
       url: "#",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
+          title: "Commandes",
           url: "#",
         },
         {
-          title: "Explorer",
+          title: "Clients",
           url: "#",
         },
         {
-          title: "Quantum",
+          title: "Produits",
+          url: "#",
+        },
+        {
+          title: "Categories",
           url: "#",
         },
       ],
     },
     {
-      title: "Documentation",
+      title: "Report Analytics",
       url: "#",
       icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
     },
     {
       title: "Settings",
