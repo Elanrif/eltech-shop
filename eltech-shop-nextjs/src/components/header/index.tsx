@@ -1,14 +1,21 @@
 "use client";
 import React from "react";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Search, Heart, X } from "lucide-react";
+import {Search, Heart, X, LayoutDashboard} from "lucide-react";
 import Logo from "@/components/logo";
 import { Input } from "../ui/input";
 import { MenuUser } from "./menu-user";
 import { CardBasketSheet } from "../card/card-basket-sheet";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
 import { TypographyHeading } from "../ui/typography-heading";
+import Link from "next/link";
 
+export type IconType = {
+  name: string;
+  component:  React.JSX.Element
+  click?: boolean;
+  href?: string;
+}
 export default function HeaderBase() {
   const [display, setDisplay] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
@@ -41,7 +48,12 @@ export default function HeaderBase() {
     },
   ];
 
-  const iconsData = [
+  const iconsData: IconType[] = [
+    {
+      name: 'Dashboard',
+      component: <LayoutDashboard/>,
+      href: '/dashboard',
+    },
     {
       name: "CircleUser",
       component: <MenuUser />,
@@ -58,17 +70,24 @@ export default function HeaderBase() {
         className="text-sm font-thin text-shop-muted"
         >SOLDES | -10% supplémentaires dès 2 articles</TypographyShopUi>
         <div className="flex gap-3 items-center">
-          {iconsData.map((icon, index) => (
-            <div key={index}>
-              {icon.click === true
-                ? React.cloneElement(icon.component, {
+          {iconsData.map((data, index) => (
+            data.href === undefined ? (<div key={index}>
+              {data.click === true
+                  ? React.cloneElement(data.component, {
                     onClick: handleDisplay,
                     className: "size-5 hover:cursor-pointer",
                   })
-                : React.cloneElement(icon.component, {
+                  : React.cloneElement(data.component, {
                     className: "size-5 hover:cursor-pointer",
                   })}
-            </div>
+            </div>)
+              :
+            (  <Link href={data.href} key={index}>
+                  {React.cloneElement(data.component, {
+                    className: "size-5 hover:cursor-pointer",
+                  })}
+                </Link>
+            )
           ))}
           <ModeToggle />
         </div>
