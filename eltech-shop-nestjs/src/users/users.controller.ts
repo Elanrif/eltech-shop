@@ -13,8 +13,12 @@ import { Role } from 'src/roles/role.enum';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
+import { API_PATH_USERS, API_VERSION_1 } from '../config/api.constant';
 
-@Controller('users')
+@Controller({
+  version: API_VERSION_1,
+  path: API_PATH_USERS,
+})
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

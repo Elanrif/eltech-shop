@@ -10,8 +10,12 @@ import {
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { API_PATH_ORDERS, API_VERSION_1 } from '../config/api.constant';
 
-@Controller('orders')
+@Controller({
+  version: API_VERSION_1,
+  path: API_PATH_ORDERS,
+})
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 

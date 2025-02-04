@@ -19,6 +19,7 @@ const users_service_1 = require("../users/users.service");
 const LoginDto_dto_1 = require("./dto/LoginDto.dto");
 const create_user_dto_1 = require("../users/dto/create-user.dto");
 const refresh_guard_1 = require("./guards/refresh.guard");
+const api_constant_1 = require("../config/api.constant");
 let AuthController = class AuthController {
     constructor(userService, authService) {
         this.userService = userService;
@@ -58,7 +59,10 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "refreshToken", null);
 exports.AuthController = AuthController = __decorate([
-    (0, common_1.Controller)('auth'),
+    (0, common_1.Controller)({
+        version: api_constant_1.API_VERSION_1,
+        path: api_constant_1.API_PATH_AUTH,
+    }),
     __metadata("design:paramtypes", [users_service_1.UsersService,
         auth_service_1.AuthService])
 ], AuthController);

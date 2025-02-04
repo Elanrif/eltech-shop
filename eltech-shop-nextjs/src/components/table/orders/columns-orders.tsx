@@ -11,6 +11,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Checkbox } from "@/components/ui/checkbox"
+import {OrdersDataTableColumnHeader} from "@/components/table/data-table-column-header";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -20,7 +21,7 @@ export type Order = {
     customerName: string;
     orderId: number;
     amount: number
-    status: "pending" | "processing" | "success" | "failed"
+    status: "pending" | "processing" |  "failed" | "completed"
     action: string;
 }
 
@@ -49,7 +50,9 @@ export const ordersColumns: ColumnDef<Order>[] = [
     },
     {
         accessorKey: "productName",
-        header: "Product Name",
+        header: ({ column }) => (
+            <OrdersDataTableColumnHeader column={column} title="Product Name" />
+        ),
     },
     {
         accessorKey: "customerName",
@@ -71,7 +74,17 @@ export const ordersColumns: ColumnDef<Order>[] = [
     },
     {
         accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Amount
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("amount"))
             const formatted = new Intl.NumberFormat("fr-FR", {
@@ -79,7 +92,7 @@ export const ordersColumns: ColumnDef<Order>[] = [
                 currency: "EUR",
             }).format(amount)
 
-            return <div className="text-right font-medium">{formatted}</div>
+            return <div className="center font-medium">{formatted}</div>
         },
     },
     {

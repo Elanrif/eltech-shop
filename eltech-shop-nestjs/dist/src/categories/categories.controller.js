@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const categories_service_1 = require("./categories.service");
 const create_category_dto_1 = require("./dto/create-category.dto");
 const update_category_dto_1 = require("./dto/update-category.dto");
+const api_constant_1 = require("../config/api.constant");
 let CategoriesController = class CategoriesController {
     constructor(categoriesService) {
         this.categoriesService = categoriesService;
@@ -74,7 +75,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CategoriesController.prototype, "remove", null);
 exports.CategoriesController = CategoriesController = __decorate([
-    (0, common_1.Controller)('categories'),
+    (0, common_1.Controller)({
+        version: api_constant_1.API_VERSION_1,
+        path: api_constant_1.API_PATH_CATEGORIES,
+    }),
     __metadata("design:paramtypes", [categories_service_1.CategoriesService])
 ], CategoriesController);
 //# sourceMappingURL=categories.controller.js.map

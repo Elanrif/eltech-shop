@@ -10,8 +10,12 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { API_PATH_PRODUCTS, API_VERSION_1 } from '../config/api.constant';
 
-@Controller('products')
+@Controller({
+  version: API_VERSION_1,
+  path: API_PATH_PRODUCTS,
+})
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 

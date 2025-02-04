@@ -1,10 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
   /* apply the class-transformer and class-validator */
   app.useGlobalPipes(
     new ValidationPipe({

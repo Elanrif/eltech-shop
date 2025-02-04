@@ -4,8 +4,12 @@ import { UsersService } from 'src/users/users.service';
 import { LoginDto } from './dto/LoginDto.dto';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { RefreshJwtGuard } from './guards/refresh.guard';
+import { API_PATH_AUTH, API_VERSION_1 } from '../config/api.constant';
 
-@Controller('auth')
+@Controller({
+  version: API_VERSION_1,
+  path: API_PATH_AUTH,
+})
 export class AuthController {
   constructor(
     private userService: UsersService,

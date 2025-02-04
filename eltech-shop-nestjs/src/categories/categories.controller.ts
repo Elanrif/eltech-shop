@@ -10,8 +10,12 @@ import {
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { API_PATH_CATEGORIES, API_VERSION_1 } from '../config/api.constant';
 
-@Controller('categories')
+@Controller({
+  version: API_VERSION_1,
+  path: API_PATH_CATEGORIES,
+})
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 

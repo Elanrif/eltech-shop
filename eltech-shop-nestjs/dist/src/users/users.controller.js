@@ -20,6 +20,7 @@ const roles_decorator_1 = require("../roles/roles.decorator");
 const role_enum_1 = require("../roles/role.enum");
 const roles_guard_1 = require("../roles/roles.guard");
 const passport_1 = require("@nestjs/passport");
+const api_constant_1 = require("../config/api.constant");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -29,7 +30,6 @@ let UsersController = class UsersController {
     }
     findOne(id, req) {
         const userId = req.user['sub'];
-        console.log('userId ', userId);
         if (+id !== userId) {
             throw new common_1.ForbiddenException('You do not have permission to access this route');
         }
@@ -55,7 +55,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findOne", null);
 exports.UsersController = UsersController = __decorate([
-    (0, common_1.Controller)('users'),
+    (0, common_1.Controller)({
+        version: api_constant_1.API_VERSION_1,
+        path: api_constant_1.API_PATH_USERS,
+    }),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
 //# sourceMappingURL=users.controller.js.map

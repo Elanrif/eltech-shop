@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const baskets_service_1 = require("./baskets.service");
 const create_basket_dto_1 = require("./dto/create-basket.dto");
 const update_basket_dto_1 = require("./dto/update-basket.dto");
+const api_constant_1 = require("../config/api.constant");
 let BasketsController = class BasketsController {
     constructor(basketsService) {
         this.basketsService = basketsService;
@@ -74,7 +75,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BasketsController.prototype, "remove", null);
 exports.BasketsController = BasketsController = __decorate([
-    (0, common_1.Controller)('baskets'),
+    (0, common_1.Controller)({
+        version: api_constant_1.API_VERSION_1,
+        path: api_constant_1.API_PATH_BASKETS,
+    }),
     __metadata("design:paramtypes", [baskets_service_1.BasketsService])
 ], BasketsController);
 //# sourceMappingURL=baskets.controller.js.map

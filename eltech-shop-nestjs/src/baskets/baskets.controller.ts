@@ -10,8 +10,12 @@ import {
 import { BasketsService } from './baskets.service';
 import { CreateBasketDto } from './dto/create-basket.dto';
 import { UpdateBasketDto } from './dto/update-basket.dto';
+import { API_PATH_BASKETS, API_VERSION_1 } from '../config/api.constant';
 
-@Controller('baskets')
+@Controller({
+  version: API_VERSION_1,
+  path: API_PATH_BASKETS,
+})
 export class BasketsController {
   constructor(private readonly basketsService: BasketsService) {}
 
