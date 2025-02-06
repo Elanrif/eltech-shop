@@ -9,6 +9,7 @@ import {
   BreadcrumbList, BreadcrumbPage,
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
+import {Bounce, ToastContainer} from "react-toastify";
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "Boutique eltech-shop en ligne",
@@ -50,6 +51,19 @@ export default function RootLayout({
               </div>
               <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />*/}
               {children}
+              <ToastContainer
+                  position="bottom-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick={false}
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="colored"
+                  transition={Bounce}
+              />
             </div>
           </SidebarInset>
         </SidebarProvider>

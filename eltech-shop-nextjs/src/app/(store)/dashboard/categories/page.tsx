@@ -5,10 +5,11 @@ import {Metadata} from "next";
 import {fetchAllCategories} from "@/lib/category/services/category.service";
 import {TypographyHeading} from "@/components/ui/typography-heading";
 import React from "react";
+import {DialogFormCategory} from "@/components/dialog/forms/category/dialog-form-category";
 
 export async function generateMetadata(): Promise<Metadata>{
     return {
-        title: 'Categories',
+        title: 'Categories EL-techShop',
         description: 'Page description for SEO and social sharing',
     }
 }
@@ -19,7 +20,10 @@ export default async function CategoryPage(){
 
     return (
         <div>
-            <TypographyHeading fontWeight={"semibold"} size={"lg"}> Categories</TypographyHeading>
+            <div className={'flex items-center justify-between'}>
+                <TypographyHeading fontWeight={"semibold"} size={"lg"}> Categories</TypographyHeading>
+                <DialogFormCategory/>
+            </div>
             <CategoriesDataTable columns={categoriesColumns} data={categories}/>
         </div>
     )

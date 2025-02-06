@@ -1,8 +1,8 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-
 import { cn } from "@/lib/utils"
+import {Loader} from "lucide-react";
 
 const buttonVariants = cva(
   "inline-flex rounded-xl rounded items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none",
@@ -30,10 +30,16 @@ const buttonVariants = cva(
         lg: "px-24 py-4 text-lg",
         icon: "h-9 w-9",
       },
+      directionIcon: {
+          default: 'right',
+          right: 'right',
+          left: 'right',
+      }
     },
     defaultVariants: {
       variant: "default",
       size: "default",
+      directionIcon: "default",
     },
   }
 );
@@ -42,11 +48,12 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean,
-  icon?: React.ReactNode
+  icon?: React.ReactNode,
+  loading?: boolean,
 }
 
 const ButtonShopUi = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className,children, variant, size, icon, asChild = false, ...props }, ref) => {
+  ({ className,children,loading=false, variant, size,directionIcon, icon, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
@@ -54,7 +61,11 @@ const ButtonShopUi = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-      {children}  {icon && icon}
+          {directionIcon === "right" ?
+              (<> {children} {icon && icon}</>)
+              :
+              (<> {icon && icon} {children}</>)}
+          {loading && <Loader className="w-5 h-5 animate-spin -mr-1 ml-3" />}
       </Comp>
     )
   }

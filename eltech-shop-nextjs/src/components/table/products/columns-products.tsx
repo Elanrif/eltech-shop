@@ -13,6 +13,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox"
 import {OrdersDataTableColumnHeader} from "@/components/table/data-table-column-header";
 import {Product} from "@/lib/product/models/product.model";
+import {Switch} from "@/components/ui/switch";
+import {SwitchProduct} from "@/components/ui/switch-product";
+import dayjs from "dayjs";
+import 'dayjs/locale/fr'
 
 export const productsColumns: ColumnDef<Product>[] = [
     {
@@ -70,14 +74,36 @@ export const productsColumns: ColumnDef<Product>[] = [
     {
         accessorKey: "is_new",
         header: "Nouveau",
+        cell: ({ row }) => {
+            const isNew = row.getValue("is_new")
+            return (
+                <div className="flex items-center gap-x-2 max-w-[200px]">
+                    <SwitchProduct defaultChecked={!!isNew} className={'bg-shop-secondary'}/>
+                    {isNew? <span className={'text-shop-secondary'}> nouveau </span>: <span className={'text-shop-muted line-through'}> nouveau</span>}
+                </div>
+            )
+        },
     },
     {
         accessorKey: "in_stock",
         header: "Stock",
+        cell: ({ row }) => {
+            const inStock = row.getValue("in_stock")
+            return (
+                <div className="flex items-center gap-x-2 max-w-[200px]">
+                    <Switch defaultChecked={!!inStock}/>
+                    {inStock? <span className={'text-shop-secondary'}> en stock </span>: <span className={'text-shop-danger line-through'}> en rupture de stock</span>}
+                </div>
+            )
+        },
     },
     {
         accessorKey: "color",
         header: "Couleur",
+        cell: ({ row }) => {
+            const color = row.getValue("color") as string
+            return <div className={`center font-medium text-${color}-700`}> {color} </div>
+        },
     },
     {
         accessorKey: "quantity",
@@ -101,12 +127,22 @@ export const productsColumns: ColumnDef<Product>[] = [
         header: ({ column }) => (
             <OrdersDataTableColumnHeader column={column} title="Date création" />
         ),
+        cell: ({ row }) => {
+            const date = row.getValue("createdAt") as Date
+            const formattedDate = dayjs(date).locale("fr").format("DD MMMM YYYY HH:mm");
+            return <div className="center font-medium">{formattedDate}</div>
+        },
     },
     {
         accessorKey: "updatedAt",
         header: ({ column }) => (
             <OrdersDataTableColumnHeader column={column} title="Date modification" />
         ),
+        cell: ({ row }) => {
+            const date = row.getValue("updatedAt") as Date
+            const formattedDate = dayjs(date).locale("fr").format("DD MMMM YYYY HH:mm");
+            return <div className="center font-medium">{formattedDate}</div>
+        },
     },
     {
         id: "actions",
@@ -127,11 +163,11 @@ export const productsColumns: ColumnDef<Product>[] = [
                         <DropdownMenuItem
                             onClick={() => navigator.clipboard.writeText(product.id.toString())}
                         >
-                            Copy product ID
+                            consulter
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View product details</DropdownMenuItem>
+                        <DropdownMenuItem>modifier</DropdownMenuItem>
+                        <DropdownMenuItem>supprimer</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )

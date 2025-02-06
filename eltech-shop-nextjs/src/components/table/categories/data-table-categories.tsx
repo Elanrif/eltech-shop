@@ -22,7 +22,6 @@ import {
 } from "@/components/ui/table"
 import React from "react";
 import {Input} from "@/components/ui/input";
-import {TypographyHeading} from "@/components/ui/typography-heading";
 import {DataTablePagination} from "@/components/table/data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
@@ -35,7 +34,7 @@ export function CategoriesDataTable<TData, TValue>({
                                              data,
                                          }: DataTableProps<TData, TValue>) {
 
-    const [sorting, setSorting] = React.useState<SortingState>([])
+    const [sorting, setSorting] = React.useState<SortingState>([ { id: "id", desc: true }])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
     )
