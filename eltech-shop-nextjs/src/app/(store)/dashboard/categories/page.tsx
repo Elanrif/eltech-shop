@@ -22,7 +22,7 @@ export default async function CategoryPage(){
         <div>
             <div className={'flex items-center justify-between'}>
                 <TypographyHeading fontWeight={"semibold"} size={"lg"}> Categories</TypographyHeading>
-                <DialogFormCategory/>
+                <DialogFormCategory isCreate={true}/>
             </div>
             <CategoriesDataTable columns={categoriesColumns} data={categories}/>
         </div>

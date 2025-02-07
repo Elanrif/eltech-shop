@@ -16,34 +16,31 @@ import {Category} from "@/lib/category/models/category.model";
 
 export const DialogFormCategory = ({isCreate,category}: {isCreate?: boolean; category?: Category}) => {
     const [open, setOpen] = React.useState(false);
-    return <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-            <ButtonShopUi icon={<PlusIcon size={18}/>} directionIcon={"left"}> {isCreate? 'Ajouter': 'Modifier'}</ButtonShopUi>
-        </DialogTrigger>
-        <DialogContent className="sm:min-w-[425px]">
-            <DialogHeader>
-                <DialogTitle>{isCreate ? 'Ajouter une catégorie': 'Modifier la catégorie'}</DialogTitle>
-                <DialogDescription>
-                    Veuillez remplir les champs ci-dessous pour créer la catégorie
-                </DialogDescription>
-            </DialogHeader>
-            {(isCreate || !category) ?
-                <FormCategory
-                    dialogClose={true}
-                    setOpen={setOpen}/>
-                :
-                <FormUpdateCategory
-                    dialogClose={true}
-                    setOpen={setOpen}
-                    category={category}/>
-            }
-            {/*<DialogFooter>
-                <DialogClose asChild>
-                    <ButtonShopUi type="button" variant="destructive">
-                        Annuler
-                    </ButtonShopUi>
-                </DialogClose>
-            </DialogFooter>*/}
-        </DialogContent>
-    </Dialog>
+    return (
+        <>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                    <ButtonShopUi icon={<PlusIcon size={18}/>} directionIcon={"left"}> {isCreate? 'Ajouter': 'Modifier'}</ButtonShopUi>
+                </DialogTrigger>
+                <DialogContent className="sm:min-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>{isCreate ? 'Ajouter une catégorie': 'Modifier la catégorie'}</DialogTitle>
+                        <DialogDescription>
+                            Veuillez remplir les champs ci-dessous pour créer la catégorie
+                        </DialogDescription>
+                    </DialogHeader>
+                    {(isCreate || !category) ?
+                        <FormCategory
+                            dialogClose={true}
+                            setOpen={setOpen}/>
+                        :
+                        <FormUpdateCategory
+                            dialogClose={true}
+                            setOpen={setOpen}
+                            category={category}/>
+                    }
+                </DialogContent>
+            </Dialog>
+        </>
+    )
 }
