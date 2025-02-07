@@ -4,7 +4,7 @@ import {Input} from "@/components/ui/input";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {TypographyShopUi} from "@/components/ui/typograpy-shop-ui";
 import {useForm} from "react-hook-form";
-import {Category} from "@/lib/category/models/category.model";
+import {Product} from "@/lib/category/models/category.model";
 import {ButtonShopUi} from "@/components/ui/button-shop-ui";
 import {DialogClose} from "@/components/ui/dialog";
 import React, {useState} from "react";
@@ -19,10 +19,10 @@ type DialogProps = {
 
 export const  FormCategory= ({dialogClose, setOpen}: DialogProps) => {
     const router = useRouter();
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<Category>();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>();
     const [ submitting, setSubmitting ] = useState<boolean>(false);
 
-    const onSubmit = (data: Category) => {
+    const onSubmit = (data: Product) => {
         console.log(data);
         setSubmitting(true);
         const data_ = {
@@ -33,7 +33,7 @@ export const  FormCategory= ({dialogClose, setOpen}: DialogProps) => {
         router.refresh();
         setTimeout(() => {
             toast.success('successfully created!', {
-                position: 'top-right',
+                position: 'bottom-right',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,

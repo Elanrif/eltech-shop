@@ -1,34 +1,64 @@
 import {proxyEnvironment} from "@/config/proxy-api.config";
 import {frontendHttp} from "@/config/axios.config";
-import {AxiosResponse} from "axios";
-import {Category} from "@/lib/category/models/category.model";
+import {AxiosError, AxiosResponse} from "axios";
+import {Product} from "@/lib/product/models/product.model";
 
 const {
     api : {
         endpoints: {
-            categories
+            products: productUrl
         }
     },
 } = proxyEnvironment;
 
-export async function getCategories() {
+export async function getProducts() {
     return await frontendHttp()
-        .get<any, AxiosResponse<Category[]>>(categories)
+        .get<any, AxiosResponse<Product[]>>(productUrl)
         .then((response) => response.data);
 }
 
-export async function getCategoryById(categoryId: number): Promise<Category> {
+export async function getProductById(productId: number): Promise<Product> {
     return await frontendHttp()
-        .get(`${categories}/${categoryId}`)
+        .get(`${productUrl}/${productId}`)
         .then((response) => response.data);
 }
 
-export async function searchCategories(
+export async function searchProducts(
     query: string,
     params: URLSearchParams,
-): Promise<Category[]> {
-    const url = `${categories}/${query}${params.toString() ? `?${params.toString()}` : ''}`;
+): Promise<Product[]> {
+    const url = `${productUrl}/${query}${params.toString() ? `?${params.toString()}` : ''}`;
     return await frontendHttp()
-        .get<any, AxiosResponse<Category[]>>(url)
+        .get<any, AxiosResponse<Product[]>>(url)
         .then((response) => response.data);
+}
+
+export async function createProduct(product: Product) {
+    return await frontendHttp()
+        .post<any, AxiosResponse<Product                                                   >>(productUrl, product)
+        .then((response) => response.data)
+        .catch((error) => {
+            const err = error as AxiosError<{message: string}>
+            return err.response?.data;
+        })
+}
+
+export async function updateProduct(product: Product) {
+    return await frontendHttp()
+        .put<any, AxiosResponse<Product>>(`${productUrl}/${product.id}`, product)
+        .then((response) => response.data)
+        .catch((error) => {
+            const err = error as AxiosError<{message: string}>
+            return err.response?.data;
+        })
+}
+
+export async function deleteProduct(id: number) {
+    return await frontendHttp()
+        .delete<any, AxiosResponse<any>>(`${productUrl}/${id}`)
+        .then((response) => response.data)
+        .catch((error) => {
+            const err = error as AxiosError<{message: string}>
+            return err.response?.data;
+        })
 }

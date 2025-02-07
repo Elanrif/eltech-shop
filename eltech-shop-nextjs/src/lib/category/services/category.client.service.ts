@@ -1,7 +1,7 @@
 import {proxyEnvironment} from "@/config/proxy-api.config";
 import {frontendHttp} from "@/config/axios.config";
 import {AxiosError, AxiosResponse} from "axios";
-import {Category} from "@/lib/category/models/category.model";
+import {Product} from "@/lib/category/models/category.model";
 
 const {
     api : {
@@ -13,11 +13,11 @@ const {
 
 export async function getCategories() {
     return await frontendHttp()
-        .get<any, AxiosResponse<Category[]>>(categoryUrl)
+        .get<any, AxiosResponse<Product[]>>(categoryUrl)
         .then((response) => response.data);
 }
 
-export async function getCategoryById(categoryId: number): Promise<Category> {
+export async function getCategoryById(categoryId: number): Promise<Product> {
     return await frontendHttp()
         .get(`${categoryUrl}/${categoryId}`)
         .then((response) => response.data);
@@ -26,16 +26,16 @@ export async function getCategoryById(categoryId: number): Promise<Category> {
 export async function searchCategories(
     query: string,
     params: URLSearchParams,
-): Promise<Category[]> {
+): Promise<Product[]> {
     const url = `${categoryUrl}/${query}${params.toString() ? `?${params.toString()}` : ''}`;
     return await frontendHttp()
-        .get<any, AxiosResponse<Category[]>>(url)
+        .get<any, AxiosResponse<Product[]>>(url)
         .then((response) => response.data);
 }
 
-export async function createCategory(category: Category) {
+export async function createCategory(category: Product) {
     return await frontendHttp()
-        .post<any, AxiosResponse<Category                                                   >>(categoryUrl, category)
+        .post<any, AxiosResponse<Product                                                   >>(categoryUrl, category)
         .then((response) => response.data)
         .catch((error) => {
             const err = error as AxiosError<{message: string}>
@@ -43,9 +43,9 @@ export async function createCategory(category: Category) {
         })
 }
 
-export async function updateCategory(category: Category) {
+export async function updateCategory(category: Product) {
     return await frontendHttp()
-        .put<any, AxiosResponse<Category>>(`${categoryUrl}/${category.id}`, category)
+        .put<any, AxiosResponse<Product>>(`${categoryUrl}/${category.id}`, category)
         .then((response) => response.data)
         .catch((error) => {
             const err = error as AxiosError<{message: string}>

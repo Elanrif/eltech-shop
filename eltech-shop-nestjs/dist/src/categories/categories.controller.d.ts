@@ -8,5 +8,8 @@ export declare class CategoriesController {
     findAll(): Promise<import("./entities/category.entity").Category[]>;
     findOne(id: string): Promise<import("./entities/category.entity").Category>;
     update(id: string, updateCategoryDto: UpdateCategoryDto): Promise<import("./entities/category.entity").Category | Error>;
-    remove(id: string): Promise<import("typeorm").DeleteResult>;
+    remove(id: string): Promise<import("typeorm").DeleteResult | {
+        statusCode: number;
+        message: string;
+    }>;
 }

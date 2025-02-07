@@ -4,42 +4,43 @@ import {Input} from "@/components/ui/input";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {TypographyShopUi} from "@/components/ui/typograpy-shop-ui";
 import {useForm} from "react-hook-form";
-import {Product} from "@/lib/category/models/category.model";
 import {ButtonShopUi} from "@/components/ui/button-shop-ui";
 import {DialogClose} from "@/components/ui/dialog";
 import React, {useEffect, useState} from "react";
 import {updateCategory} from "@/lib/category/services/category.client.service";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
+import {Product} from "@/lib/product/models/product.model";
+import {updateProduct} from "@/lib/product/services/product.client.service";
 type DialogProps = {
     dialogClose: boolean;
     setOpen: (open: boolean) => void;
-    category: Product;
+    product: Product;
 }
 
-export const  FormUpdateCategory= ({dialogClose, setOpen, category}: DialogProps) => {
+export const  FormUpdateProduct= ({dialogClose, setOpen, product}: DialogProps) => {
     const router = useRouter();
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>();
     const [ submitting, setSubmitting ] = useState<boolean>(false);
 
     useEffect(() => {
-        if(category) {
+        if(product) {
             reset({
-                name: category.name,
-                description: category.description,
+                name: product.name,
+                description: product.description,
             })
         }
-    },[category, reset])
+    },[product, reset])
 
     const onSubmit = (data: Product) => {
 
         setSubmitting(true);
         const data__ = {
             ...data,
-            id: category.id
+            id: product.id
         }
         console.log(data__);
-        const response = updateCategory(data__);
+        const response = updateProduct(data__);
         router.refresh();
         setTimeout(() => {
             toast.success('successfully created!', {

@@ -1,6 +1,7 @@
 import {Category} from "@/lib/basket/models/basket.model";
 
 export type Order = {
+  id?: number;
   name: string;
   description: string;
   detail: string;

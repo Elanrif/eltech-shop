@@ -2,7 +2,7 @@ import {getLogger} from "@/config/logger.config";
 import {NextRequest, NextResponse} from "next/server";
 import {RequestLogger} from "@/config/loggers/request.logger";
 import {deleteCategory, fetchCategoryById, updateCategory} from "@/lib/category/services/category.service";
-import {Category} from "@/lib/category/models/category.model";
+import {Product} from "@/lib/category/models/category.model";
 
 const logger = getLogger('server');
 
@@ -60,7 +60,7 @@ export async function PUT(request: NextRequest, { params }: { params: { category
         );
         return NextResponse.json({ message }, { status });
     }
-    const body = (await request.json()) as Category
+    const body = (await request.json()) as Product
     if (!body) {
         const status = 400;
         const message = 'Fields name are required';

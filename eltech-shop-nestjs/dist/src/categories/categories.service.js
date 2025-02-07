@@ -54,8 +54,12 @@ let CategoriesService = class CategoriesService {
     }
     async remove(id) {
         const category = await this.categoryRepository.findOne({ where: { id } });
-        if (!category)
-            return null;
+        if (!category) {
+            return {
+                statusCode: 400,
+                message: 'Not Found Category with id ' + id,
+            };
+        }
         return this.categoryRepository.delete(category);
     }
 };

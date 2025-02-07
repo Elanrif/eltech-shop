@@ -1,4 +1,4 @@
-import {Category} from "@/lib/category/models/category.model";
+import {Product} from "@/lib/category/models/category.model";
 
 export interface Product {
     id: number;
@@ -14,5 +14,5 @@ export interface Product {
     price: number;
     createdAt: Date;
     updatedAt: Date;
-    category?: Category;
+    category?: Product;
 }

@@ -7,43 +7,33 @@ import {useForm} from "react-hook-form";
 import {Product} from "@/lib/category/models/category.model";
 import {ButtonShopUi} from "@/components/ui/button-shop-ui";
 import {DialogClose} from "@/components/ui/dialog";
-import React, {useEffect, useState} from "react";
-import {updateCategory} from "@/lib/category/services/category.client.service";
+import React, {useState} from "react";
+import {createCategory} from "@/lib/category/services/category.client.service";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
+
 type DialogProps = {
     dialogClose: boolean;
     setOpen: (open: boolean) => void;
-    category: Product;
 }
 
-export const  FormUpdateCategory= ({dialogClose, setOpen, category}: DialogProps) => {
+export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
     const router = useRouter();
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>();
     const [ submitting, setSubmitting ] = useState<boolean>(false);
 
-    useEffect(() => {
-        if(category) {
-            reset({
-                name: category.name,
-                description: category.description,
-            })
-        }
-    },[category, reset])
-
     const onSubmit = (data: Product) => {
-
+        console.log(data);
         setSubmitting(true);
-        const data__ = {
-            ...data,
-            id: category.id
+        const data_ = {
+            name: data.name,
+            description: data.description,
         }
-        console.log(data__);
-        const response = updateCategory(data__);
+        const response = createCategory(data_);
         router.refresh();
         setTimeout(() => {
             toast.success('successfully created!', {
-                position: 'top-right',
+                position: 'bottom-right',
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -67,7 +57,7 @@ export const  FormUpdateCategory= ({dialogClose, setOpen, category}: DialogProps
                     </CardTitle>
                     <CardDescription>
                         <TypographyShopUi size={'xs'}>
-                            Modifé la catégorie associé aux produits
+                            Créer une catégorie associé aux produits
                         </TypographyShopUi>
                     </CardDescription>
                 </CardHeader>
@@ -94,7 +84,7 @@ export const  FormUpdateCategory= ({dialogClose, setOpen, category}: DialogProps
                     <ButtonShopUi
                         type={"submit"}
                         loading={submitting}
-                    >Modifier</ButtonShopUi>
+                    >Ajouter</ButtonShopUi>
                     {dialogClose && (
                         <DialogClose asChild>
                         <ButtonShopUi type="button" variant="destructive">

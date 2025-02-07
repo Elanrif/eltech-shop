@@ -2,7 +2,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {createCategory, fetchAllCategories, updateCategory} from "@/lib/category/services/category.service";
 import {getLogger} from "@/config/logger.config";
 import {RequestLogger} from "@/config/loggers/request.logger";
-import {Category} from "@/lib/category/models/category.model";
+import {Product} from "@/lib/category/models/category.model";
 
 const logger = getLogger('server')
 export const dynamic = 'force-dynamic'
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
     const reqLogger = new RequestLogger(logger, request);
-    const body = (await request.json()) as Category
+    const body = (await request.json()) as Product
     if (!body) {
         const status = 400;
         const message = 'Fields name are required';

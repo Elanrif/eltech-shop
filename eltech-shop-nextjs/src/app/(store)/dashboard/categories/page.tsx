@@ -5,7 +5,7 @@ import {Metadata} from "next";
 import {fetchAllCategories} from "@/lib/category/services/category.service";
 import {TypographyHeading} from "@/components/ui/typography-heading";
 import React from "react";
-import {DialogFormCategory} from "@/components/dialog/forms/category/dialog-form-category";
+import {DialogFormCategory} from "@/components/dialog/forms/dialog-form-category";
 
 export async function generateMetadata(): Promise<Metadata>{
     return {
@@ -22,7 +22,7 @@ export default async function CategoryPage(){
         <div>
             <div className={'flex items-center justify-between'}>
                 <TypographyHeading fontWeight={"semibold"} size={"lg"}> Categories</TypographyHeading>
-                <DialogFormCategory isCreate={true}/>
+                <DialogFormCategory/>
             </div>
             <CategoriesDataTable columns={categoriesColumns} data={categories}/>
         </div>
