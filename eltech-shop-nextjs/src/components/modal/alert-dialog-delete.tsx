@@ -16,10 +16,11 @@ import {deleteCategory} from "@/lib/category/services/category.client.service";
 import {Order} from "@/lib/order/models/order.model";
 import {Product} from "@/lib/product/models/product.model";
 import {User} from "@/lib/user/models/user.model";
-import {Product} from "@/lib/category/models/category.model";
+import {Category} from "@/lib/category/models/category.model";
+import {deleteProduct} from "@/lib/product/services/product.client.service";
 
  type DataProps = {
-    data: Order | Product | Product | User
+    data: Order | Product | Category | User
     type: "order" | "category" | "product" | "user"
 }
 
@@ -33,7 +34,7 @@ export function AlertDialogDelete({type, data}: DataProps) {
                 response = await deleteCategory(data.id as number);
                 break;
             case "product":
-                //response = await deleteProduct(data.id)
+                response = await deleteProduct(data.id as number);
                 break;
             case "category":
                 response = await deleteCategory(data.id as number);

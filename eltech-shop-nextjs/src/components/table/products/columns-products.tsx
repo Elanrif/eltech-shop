@@ -2,10 +2,13 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 import {OrdersDataTableColumnHeader} from "@/components/table/data-table-column-header";
-import {Product} from "@/lib/product/models/product.model";
+import {Product, productColors} from "@/lib/product/models/product.model";
 import dayjs from "dayjs";
 import 'dayjs/locale/fr'
 import {DialogFormProduct} from "@/components/dialog/forms/dialog-form-product";
+import {Button} from "@/components/ui/button";
+import {ArrowUpDown} from "lucide-react";
+import React from "react";
 
 export const productsColumns: ColumnDef<Product>[] = [
     {
@@ -29,6 +32,29 @@ export const productsColumns: ColumnDef<Product>[] = [
         ),
         enableSorting: false,
         enableHiding: false,
+    },
+    {
+        accessorKey: 'id',
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    ID
+                    <ArrowUpDown className="h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => {
+
+            return (
+                <div className={'text-shop-muted ml-3'}>
+                    {row.getValue("id")}
+                </div>
+            )
+        },
+        enableSorting: true,
     },
     {
         accessorKey: "name",
@@ -92,7 +118,12 @@ export const productsColumns: ColumnDef<Product>[] = [
         header: "Couleur",
         cell: ({ row }) => {
             const color = row.getValue("color") as string
-            return <div className={`center font-medium text-${color}-700`}> {color} </div>
+            return <div className={`center font-medium text-${color}-700`}> <div className={`flex gap-1 items-center`}>
+                <div> {color}</div>
+                <div
+                    className={`py-2 border px-3 rounded-lg ${productColors.find(val => val.name === color)?.color}`}
+                ></div>
+            </div> </div>
         },
     },
     {

@@ -4,13 +4,23 @@ import {Input} from "@/components/ui/input";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {TypographyShopUi} from "@/components/ui/typograpy-shop-ui";
 import {useForm} from "react-hook-form";
-import {Product} from "@/lib/category/models/category.model";
 import {ButtonShopUi} from "@/components/ui/button-shop-ui";
 import {DialogClose} from "@/components/ui/dialog";
 import React, {useState} from "react";
-import {createCategory} from "@/lib/category/services/category.client.service";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
+import {Product, productColors} from "@/lib/product/models/product.model";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import {useCategoryContext} from "@/contexts/category-context";
+import {createProduct} from "@/lib/product/services/product.client.service";
 
 type DialogProps = {
     dialogClose: boolean;
@@ -19,31 +29,59 @@ type DialogProps = {
 
 export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
     const router = useRouter();
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<Product>();
-    const [ submitting, setSubmitting ] = useState<boolean>(false);
-
-    const onSubmit = (data: Product) => {
-        console.log(data);
-        setSubmitting(true);
-        const data_ = {
-            name: data.name,
-            description: data.description,
+    const { register, handleSubmit , setValue, reset, formState: { errors } } = useForm<Product>({
+        defaultValues: {
+            name: 'T-shirt basique',
+            description: 'T-shirt en coton 100% bio, confortable et léger.',
+            detail: 'Disponible en plusieurs tailles et couleurs.',
+            quantity: 10,
+            price: 25.99,
+            image: 'https://example.com/image-tshirt.jpg',
+            color: 'blanc',
         }
-        const response = createCategory(data_);
+    });
+    const [ submitting, setSubmitting ] = useState<boolean>(false);
+    const category = useCategoryContext()
+
+
+    const onSubmit = async(data: Product) => {
+        setSubmitting(true);
+        console.log(data);
+        const payload = {
+            ...data,
+            price: Number(data.price),
+            quantity: Number(data.quantity),
+        };
+        const response = await createProduct(payload);
         router.refresh();
         setTimeout(() => {
-            toast.success('successfully created!', {
-                position: 'bottom-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
-            setSubmitting(false);
-            reset()
-            setOpen(false)
-        console.log("received data", response);
+            if("message" in response!) {
+                toast.error('Internal server error!', {
+                    position: 'bottom-right',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+                setSubmitting(false);
+                reset()
+                setOpen(false)
+                console.log("received data", response);
+            } else {
+                toast.success('successfully created!', {
+                    position: 'bottom-right',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+                setSubmitting(false);
+                reset()
+                setOpen(false)
+                console.log("received data", response);
+            }
         },3000)
 
     }
@@ -53,31 +91,119 @@ export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
             <Card className={'flex flex-col gap-3'}>
                 <CardHeader>
                     <CardTitle>
-                        <TypographyShopUi>Categorie</TypographyShopUi>
+                        <TypographyShopUi>Produit</TypographyShopUi>
                     </CardTitle>
                     <CardDescription>
                         <TypographyShopUi size={'xs'}>
-                            Créer une catégorie associé aux produits
+                            Créer un produit
                         </TypographyShopUi>
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
+                   <div className={'flex items-center gap-4 justify-between'}>
+                       <div className="space-y-1 w-full">
+                           <Label htmlFor="name" className="after:content-['*'] after:text-shop-danger">Nom</Label>
+                           <Input
+                               id="name"
+                               placeholder="Saisir le nom du produit..."
+                               {...register('name', { required:true})}
+                           />
+                           {errors.name && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                       </div>
+                       <div className="space-y-1 w-full">
+                           <Label htmlFor="description" className="after:content-['*'] after:text-shop-danger">Description</Label>
+                           <Input
+                               id="description"
+                               placeholder="Ajouter une description..."
+                               {...register('description',{ required: true})}
+                           />
+                           {errors.description && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                       </div>
+                   </div>
                     <div className="space-y-1">
-                        <Label htmlFor="name" className="after:content-['*'] after:text-shop-danger">Nom</Label>
+                        <Label htmlFor="detail" className="after:content-['*'] after:text-shop-danger">Detail</Label>
                         <Input
-                            id="text"
-                            placeholder="Saisir le nom de la catégorie..."
-                            {...register('name', { required: true})}
+                            id="detail"
+                            placeholder="Ajouter une detail..."
+                            {...register('detail', { required: true})}
                         />
-                        {errors.name && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                        {errors.detail && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
                     </div>
-                    <div className="space-y-1">
-                        <Label htmlFor="description">Description</Label>
-                        <Input
-                            id="text"
-                            placeholder="Description..."
-                            {...register('description')}
-                        />
+                    <div className={'flex items-center gap-3 justify-between'}>
+                        <div className="space-y-1 w-full">
+                            <Label htmlFor="quantity" className="after:content-['*'] after:text-shop-danger">Quantité</Label>
+                            <Input
+                                id="quantity"
+                                type={"number"}
+                                placeholder="Saisir la quantité"
+                                {...register('quantity',{ required: true})}
+                            />
+                            {errors.quantity && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                        </div>
+                        <div className="space-y-1 w-full">
+                            <Label htmlFor="price" className="after:content-['*'] after:text-shop-danger">Prix</Label>
+                            <Input
+                                id="price"
+                                type={"integer"}
+                                placeholder="Saisir le prix"
+                                {...register('price',{ required: true})}
+                            />
+                            {errors.price && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                        </div>
+                    </div>
+                    <div className="flex items-start justify-between gap-4">
+                        <div className="space-y-1 w-full">
+                            <Label htmlFor="color" className="after:content-['*'] after:text-shop-danger">Couleur</Label>
+                            <Select
+                                onValueChange={(value) => setValue('color', value)}
+                            >
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Selectionner une couleur" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup className={'w-full'}>
+                                        <SelectLabel>Couleur</SelectLabel>
+                                        {productColors.map((data,index) => (
+                                            <SelectItem
+                                                key ={index}
+                                                value={data.name}
+                                                className={`flex w-full flex-col items-start gap-4`}
+                                            >
+                                               <div className={`flex gap-5 justify-between items-center`}>
+                                                   <div> {data.name}</div>
+                                                   <div
+                                                       className={`py-2 border px-5 rounded-lg ${data.color}`}
+                                                   ></div>
+                                               </div>
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="space-y-1 w-full">
+                            <Label htmlFor="category">Catégorie</Label>
+                            <Select
+                                onValueChange={(value) => setValue('category',JSON.parse(value))}
+                            >
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select une catégorie" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectGroup>
+                                            <SelectLabel>Catégories</SelectLabel>
+                                            {category.map((data,index) => (
+                                                <SelectItem
+                                                    key ={index}
+                                                    value={JSON.stringify(data)}
+                                                >{data.name}</SelectItem>
+                                            ))}
+                                        </SelectGroup>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
                     </div>
                 </CardContent>
                 <CardFooter className={'flex gap-3 items-center'}>

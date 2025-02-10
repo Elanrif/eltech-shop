@@ -15,8 +15,10 @@ import {Product} from "@/lib/product/models/product.model";
 import {FormUpdateProduct} from "@/components/forms/product/form-update-product";
 import {FormProduct} from "@/components/forms/product/form-product";
 
+
 export const DialogFormProduct = ({product}: {product?: Product}) => {
     const [open, setOpen] = React.useState(false);
+
 
     return (
         <>
@@ -34,8 +36,8 @@ export const DialogFormProduct = ({product}: {product?: Product}) => {
                         <ButtonShopUi icon={<PlusIcon size={18}/>} directionIcon={"left"}> Ajouter </ButtonShopUi>
                     </DialogTrigger>
                 }
-                <DialogContent className="sm:min-w-[425px]">
-                    <DialogHeader>
+                <DialogContent className="sm:min-w-[925px] overflow-y-auto max-h-[90vh]">
+                    <DialogHeader className={'hidden'}>
                         <DialogTitle>{!product ? 'Modifier le produit' : 'Ajouter un produit'}</DialogTitle>
                         <DialogDescription>
                             Veuillez remplir les champs ci-dessous pour créer le produit
