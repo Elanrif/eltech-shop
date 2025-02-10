@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/select"
 import {useCategoryContext} from "@/contexts/category-context";
 import {createProduct} from "@/lib/product/services/product.client.service";
+import CldImageUpload, {UploadedImage} from "@/components/next-cloudinary/cld-image-upload";
+import CldImageUploadWidget from "@/components/next-cloudinary/cld-image-upload-widget";
 
 type DialogProps = {
     dialogClose: boolean;
@@ -40,6 +42,7 @@ export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
             color: 'blanc',
         }
     });
+    const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null);
     const [ submitting, setSubmitting ] = useState<boolean>(false);
     const category = useCategoryContext()
 
@@ -51,6 +54,7 @@ export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
             ...data,
             price: Number(data.price),
             quantity: Number(data.quantity),
+            image: uploadedImage?.url || "",
         };
         const response = await createProduct(payload);
         router.refresh();
@@ -87,138 +91,140 @@ export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
     }
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <Card className={'flex flex-col gap-3'}>
-                <CardHeader>
-                    <CardTitle>
-                        <TypographyShopUi>Produit</TypographyShopUi>
-                    </CardTitle>
-                    <CardDescription>
-                        <TypographyShopUi size={'xs'}>
-                            Créer un produit
-                        </TypographyShopUi>
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                   <div className={'flex items-center gap-4 justify-between'}>
-                       <div className="space-y-1 w-full">
-                           <Label htmlFor="name" className="after:content-['*'] after:text-shop-danger">Nom</Label>
-                           <Input
-                               id="name"
-                               placeholder="Saisir le nom du produit..."
-                               {...register('name', { required:true})}
-                           />
-                           {errors.name && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
-                       </div>
-                       <div className="space-y-1 w-full">
-                           <Label htmlFor="description" className="after:content-['*'] after:text-shop-danger">Description</Label>
-                           <Input
-                               id="description"
-                               placeholder="Ajouter une description..."
-                               {...register('description',{ required: true})}
-                           />
-                           {errors.description && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
-                       </div>
-                   </div>
-                    <div className="space-y-1">
-                        <Label htmlFor="detail" className="after:content-['*'] after:text-shop-danger">Detail</Label>
-                        <Input
-                            id="detail"
-                            placeholder="Ajouter une detail..."
-                            {...register('detail', { required: true})}
-                        />
-                        {errors.detail && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
-                    </div>
-                    <div className={'flex items-center gap-3 justify-between'}>
-                        <div className="space-y-1 w-full">
-                            <Label htmlFor="quantity" className="after:content-['*'] after:text-shop-danger">Quantité</Label>
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Card className={'flex flex-col gap-3'}>
+                    <CardHeader>
+                        <CardTitle>
+                            <TypographyShopUi>Produit</TypographyShopUi>
+                        </CardTitle>
+                        <CardDescription>
+                            <TypographyShopUi size={'xs'}>
+                                Créer un produit
+                            </TypographyShopUi>
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                        <div className={'flex items-center gap-4 justify-between'}>
+                            <div className="space-y-1 w-full">
+                                <Label htmlFor="name" className="after:content-['*'] after:text-shop-danger">Nom</Label>
+                                <Input
+                                    id="name"
+                                    placeholder="Saisir le nom du produit..."
+                                    {...register('name', { required:true})}
+                                />
+                                {errors.name && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                            </div>
+                            <div className="space-y-1 w-full">
+                                <Label htmlFor="description" className="after:content-['*'] after:text-shop-danger">Description</Label>
+                                <Input
+                                    id="description"
+                                    placeholder="Ajouter une description..."
+                                    {...register('description',{ required: true})}
+                                />
+                                {errors.description && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                            </div>
+                        </div>
+                        <div className="space-y-1">
+                            <Label htmlFor="detail" className="after:content-['*'] after:text-shop-danger">Detail</Label>
                             <Input
-                                id="quantity"
-                                type={"number"}
-                                placeholder="Saisir la quantité"
-                                {...register('quantity',{ required: true})}
+                                id="detail"
+                                placeholder="Ajouter une detail..."
+                                {...register('detail', { required: true})}
                             />
-                            {errors.quantity && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                            {errors.detail && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
                         </div>
-                        <div className="space-y-1 w-full">
-                            <Label htmlFor="price" className="after:content-['*'] after:text-shop-danger">Prix</Label>
-                            <Input
-                                id="price"
-                                type={"integer"}
-                                placeholder="Saisir le prix"
-                                {...register('price',{ required: true})}
-                            />
-                            {errors.price && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                        <div className={'flex items-center gap-3 justify-between'}>
+                            <div className="space-y-1 w-full">
+                                <Label htmlFor="quantity" className="after:content-['*'] after:text-shop-danger">Quantité</Label>
+                                <Input
+                                    id="quantity"
+                                    type={"number"}
+                                    placeholder="Saisir la quantité"
+                                    {...register('quantity',{ required: true})}
+                                />
+                                {errors.quantity && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                            </div>
+                            <div className="space-y-1 w-full">
+                                <Label htmlFor="price" className="after:content-['*'] after:text-shop-danger">Prix</Label>
+                                <Input
+                                    id="price"
+                                    type={"integer"}
+                                    placeholder="Saisir le prix"
+                                    {...register('price',{ required: true})}
+                                />
+                                {errors.price && <span className={'text-shop-danger text-xs'}> Ce champ est requis.</span>}
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex items-start justify-between gap-4">
-                        <div className="space-y-1 w-full">
-                            <Label htmlFor="color" className="after:content-['*'] after:text-shop-danger">Couleur</Label>
-                            <Select
-                                onValueChange={(value) => setValue('color', value)}
-                            >
-                                <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Selectionner une couleur" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup className={'w-full'}>
-                                        <SelectLabel>Couleur</SelectLabel>
-                                        {productColors.map((data,index) => (
-                                            <SelectItem
-                                                key ={index}
-                                                value={data.name}
-                                                className={`flex w-full flex-col items-start gap-4`}
-                                            >
-                                               <div className={`flex gap-5 justify-between items-center`}>
-                                                   <div> {data.name}</div>
-                                                   <div
-                                                       className={`py-2 border px-5 rounded-lg ${data.color}`}
-                                                   ></div>
-                                               </div>
-                                            </SelectItem>
-                                        ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        <div className="space-y-1 w-full">
-                            <Label htmlFor="category">Catégorie</Label>
-                            <Select
-                                onValueChange={(value) => setValue('category',JSON.parse(value))}
-                            >
-                                <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Select une catégorie" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        <SelectGroup>
-                                            <SelectLabel>Catégories</SelectLabel>
-                                            {category.map((data,index) => (
+                        <div className="flex items-start justify-between gap-4">
+                            <div className="space-y-1 w-full">
+                                <Label htmlFor="color" className="after:content-['*'] after:text-shop-danger">Couleur</Label>
+                                <Select
+                                    onValueChange={(value) => setValue('color', value)}
+                                >
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Selectionner une couleur" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup className={'w-full'}>
+                                            <SelectLabel>Couleur</SelectLabel>
+                                            {productColors.map((data,index) => (
                                                 <SelectItem
                                                     key ={index}
-                                                    value={JSON.stringify(data)}
-                                                >{data.name}</SelectItem>
+                                                    value={data.name}
+                                                    className={`flex w-full flex-col items-start gap-4`}
+                                                >
+                                                    <div className={`flex gap-5 justify-between items-center`}>
+                                                        <div> {data.name}</div>
+                                                        <div
+                                                            className={`py-2 border px-5 rounded-lg ${data.color}`}
+                                                        ></div>
+                                                    </div>
+                                                </SelectItem>
                                             ))}
                                         </SelectGroup>
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            <div className="space-y-1 w-full">
+                                <Label htmlFor="category">Catégorie</Label>
+                                <Select
+                                    onValueChange={(value) => setValue('category',JSON.parse(value))}
+                                >
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select une catégorie" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectGroup>
+                                                <SelectLabel>Catégories</SelectLabel>
+                                                {category.map((data,index) => (
+                                                    <SelectItem
+                                                        key ={index}
+                                                        value={JSON.stringify(data)}
+                                                    >{data.name}</SelectItem>
+                                                ))}
+                                            </SelectGroup>
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
-                    </div>
-                </CardContent>
-                <CardFooter className={'flex gap-3 items-center'}>
-                    <ButtonShopUi
-                        type={"submit"}
-                        loading={submitting}
-                    >Ajouter</ButtonShopUi>
-                    {dialogClose && (
-                        <DialogClose asChild>
-                        <ButtonShopUi type="button" variant="destructive">
-                            Annuler
-                        </ButtonShopUi>
-                    </DialogClose>)}
-                </CardFooter>
-            </Card>
-        </form>
+                    </CardContent>
+                    <CardFooter className={'flex gap-3 items-center'}>
+                        <ButtonShopUi
+                            type={"submit"}
+                            loading={submitting}
+                        >Ajouter</ButtonShopUi>
+                        {dialogClose && (
+                            <DialogClose asChild>
+                                <ButtonShopUi type="button" variant="destructive">
+                                    Annuler
+                                </ButtonShopUi>
+                            </DialogClose>)}
+                    </CardFooter>
+                </Card>
+            </form>
+        </div>
     )
 }

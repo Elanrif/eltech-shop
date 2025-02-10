@@ -14,6 +14,7 @@ import {AlertDialogDelete} from "@/components/modal/alert-dialog-delete";
 import {Product} from "@/lib/product/models/product.model";
 import {FormUpdateProduct} from "@/components/forms/product/form-update-product";
 import {FormProduct} from "@/components/forms/product/form-product";
+import CldImageUpload from "@/components/next-cloudinary/cld-image-upload";
 
 
 export const DialogFormProduct = ({product}: {product?: Product}) => {
@@ -21,7 +22,8 @@ export const DialogFormProduct = ({product}: {product?: Product}) => {
 
 
     return (
-        <>
+        <div className={'flex gap-3 items-center'}>
+            {product && (<CldImageUpload/>)}
             <Dialog open={open} onOpenChange={setOpen}>
                 {product ?
                     <div className={'flex items-center gap-1.5'}>
@@ -55,6 +57,6 @@ export const DialogFormProduct = ({product}: {product?: Product}) => {
                     }
                 </DialogContent>
             </Dialog>
-        </>
+        </div>
     )
 }

@@ -18,6 +18,7 @@ export const routeEndpoints = {
             users: `/dashboard/users`,
             categories: `/dashboard/categories`,
             products: `/dashboard/products`,
+            next_cloudinary: `/dashboard/next-cloudinary`,
         }
 
     }

@@ -34,6 +34,7 @@ const {
       users,
       categories,
       products,
+      next_cloudinary,
 
     }
   }
@@ -80,6 +81,10 @@ const data = {
         {
           title: "Categories",
           url: categories,
+        },
+        {
+          title: "Next-cloudinary",
+          url: next_cloudinary,
         },
       ],
     },
