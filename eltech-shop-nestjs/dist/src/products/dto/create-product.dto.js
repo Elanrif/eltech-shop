@@ -30,7 +30,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], CreateProductDto.prototype, "image", void 0);
+], CreateProductDto.prototype, "imageUrl", void 0);
 __decorate([
     (0, class_validator_1.IsBoolean)(),
     (0, class_validator_1.IsOptional)(),

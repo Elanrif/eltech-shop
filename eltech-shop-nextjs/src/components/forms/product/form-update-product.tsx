@@ -59,7 +59,7 @@ export const  FormUpdateProduct= ({dialogClose, setOpen, product}: DialogProps) 
             detail: product.detail,
             quantity: product.quantity,
             price: product.price,
-            image: product.image,
+            imageUrl: product.imageUrl,
             color: product.color,
         }
     });
@@ -89,7 +89,6 @@ export const  FormUpdateProduct= ({dialogClose, setOpen, product}: DialogProps) 
                 setSubmitting(false);
                 reset()
                 setOpen(false)
-                console.log("received data", response);
             } else {
                 toast.success('successfully updated!', {
                     position: 'bottom-right',
@@ -102,7 +101,6 @@ export const  FormUpdateProduct= ({dialogClose, setOpen, product}: DialogProps) 
                 setSubmitting(false);
                 reset()
                 setOpen(false)
-                console.log("received data", response);
             }
         },3000)
 

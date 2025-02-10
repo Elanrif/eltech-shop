@@ -1,7 +1,7 @@
 import environment from "@/config/environment.config";
 import apiClient, { Config } from "@/config/api.config";
 import {AxiosError, AxiosResponse} from "axios";
-import {Product} from "@/lib/product/models/product.model";
+import {Product, ProductUploadImage} from "@/lib/product/models/product.model";
 import {CrudApiError} from "@/lib/shared/helpers/ApiError";
 import {getLogger} from "@/config/logger.config";
 
@@ -9,7 +9,8 @@ const {
     api: {
         rest: {
             endpoints: {
-                products: productUrl
+                products: productUrl,
+                productsUploadImage: productUploadImageUrl,
             }
         }
     }
@@ -46,6 +47,27 @@ export async function createProduct(
     } catch (error) {
         const err = error as AxiosError;
         logger.error('Error creating product', {
+            status: err.response?.status,
+            message: err.response?.data,
+        });
+        return {
+            statusCode: (error as AxiosError).response?.status || 500,
+            message: "Server Error",
+        };
+    }
+}
+
+export async function uploadProductImage(
+    config: Config,
+    product: ProductUploadImage
+): Promise<Product | CrudApiError> {
+    try {
+        const res = await apiClient(false,config)
+            .patch(`${productUploadImageUrl}`, product);
+        return res.data;
+    } catch (error) {
+        const err = error as AxiosError;
+        logger.error('Error adding product image', {
             status: err.response?.status,
             message: err.response?.data,
         });

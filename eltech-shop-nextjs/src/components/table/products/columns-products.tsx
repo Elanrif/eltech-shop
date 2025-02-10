@@ -9,6 +9,7 @@ import {DialogFormProduct} from "@/components/dialog/forms/dialog-form-product";
 import {Button} from "@/components/ui/button";
 import {ArrowUpDown} from "lucide-react";
 import React from "react";
+import CldImage from "@/components/next-cloudinary/cld-image";
 
 export const productsColumns: ColumnDef<Product>[] = [
     {
@@ -51,6 +52,27 @@ export const productsColumns: ColumnDef<Product>[] = [
             return (
                 <div className={'text-shop-muted ml-3'}>
                     {row.getValue("id")}
+                </div>
+            )
+        },
+        enableSorting: true,
+    },
+    {
+        accessorKey: 'imageUrl',
+        header: 'Image',
+        cell: ({ row }) => {
+            return (
+                <div className={'text-shop-muted ml-3'}>
+                    <CldImage
+                        src={row.getValue("imageUrl") ? row.getValue("imageUrl") : process.env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_IMG_URL as string}
+                        alt=""
+                        width="100"
+                        height="50"
+                        crop={{
+                            type: 'auto',
+                            source: true,
+                        }}
+                    />
                 </div>
             )
         },

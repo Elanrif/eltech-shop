@@ -5,7 +5,7 @@ export interface Product {
     name: string;
     description: string;
     detail: string;
-    image?: string;
+    imageUrl?: string;
     is_new?: boolean;
     in_stock?: boolean;
     brand?: string;
@@ -15,6 +15,11 @@ export interface Product {
     createdAt?: Date;
     updatedAt?: Date;
     category?: Category;
+}
+
+export interface ProductUploadImage {
+    id: number;
+    imageUrl: string;
 }
 
 type ColorsProps = {

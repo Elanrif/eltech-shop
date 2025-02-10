@@ -21,8 +21,6 @@ import {
 } from "@/components/ui/select"
 import {useCategoryContext} from "@/contexts/category-context";
 import {createProduct} from "@/lib/product/services/product.client.service";
-import CldImageUpload, {UploadedImage} from "@/components/next-cloudinary/cld-image-upload";
-import CldImageUploadWidget from "@/components/next-cloudinary/cld-image-upload-widget";
 
 type DialogProps = {
     dialogClose: boolean;
@@ -38,11 +36,10 @@ export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
             detail: 'Disponible en plusieurs tailles et couleurs.',
             quantity: 10,
             price: 25.99,
-            image: 'https://example.com/image-tshirt.jpg',
+            imageUrl: 'https://example.com/image-tshirt.jpg',
             color: 'blanc',
         }
     });
-    const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null);
     const [ submitting, setSubmitting ] = useState<boolean>(false);
     const category = useCategoryContext()
 
@@ -54,7 +51,6 @@ export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
             ...data,
             price: Number(data.price),
             quantity: Number(data.quantity),
-            image: uploadedImage?.url || "",
         };
         const response = await createProduct(payload);
         router.refresh();

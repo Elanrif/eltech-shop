@@ -23,7 +23,7 @@ export const DialogFormProduct = ({product}: {product?: Product}) => {
 
     return (
         <div className={'flex gap-3 items-center'}>
-            {product && (<CldImageUpload/>)}
+            {product && (<CldImageUpload data={product}/>)}
             <Dialog open={open} onOpenChange={setOpen}>
                 {product ?
                     <div className={'flex items-center gap-1.5'}>

@@ -3,6 +3,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 import { Category } from '../categories/entities/category.entity';
+import { UploadImgProductDto } from './dto/upload-img-product.dto';
 export declare class ProductsService {
     private productRepository;
     private categoryRepository;
@@ -12,4 +13,5 @@ export declare class ProductsService {
     findAll(): Promise<Product[]>;
     findOne(id: number): Promise<Product>;
     remove(id: number): Promise<import("typeorm").DeleteResult>;
+    uploadProductImage(dto: UploadImgProductDto): Promise<Product | Error>;
 }
