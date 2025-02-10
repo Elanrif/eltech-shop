@@ -25,7 +25,7 @@ export class Product {
   detail: string;
 
   @Column({ nullable: true })
-  image?: string;
+  imageUrl?: string;
 
   @Column({ default: true })
   is_new: boolean;

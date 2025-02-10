@@ -66,6 +66,21 @@ let ProductsService = class ProductsService {
     async remove(id) {
         return this.productRepository.delete(id);
     }
+    async uploadProductImage(dto) {
+        const product = await this.findOne(dto.id);
+        if (!product) {
+            return new Error(`Product with id ${dto.id} not found`);
+        }
+        const currentDate = new Date();
+        const updateDtoImg = {
+            ...product,
+            imageUrl: dto.imageUrl,
+            updatedAt: currentDate,
+        };
+        console.log('imageUrl', updateDtoImg);
+        await this.productRepository.update(product.id, updateDtoImg);
+        return this.findOne(product.id);
+    }
 };
 exports.ProductsService = ProductsService;
 exports.ProductsService = ProductsService = __decorate([

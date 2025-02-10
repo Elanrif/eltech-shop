@@ -25,8 +25,8 @@ export const proxyEnvironment = {
             ...protectedPaths,
             categories: `/categories`,
             contacts: `/contacts`,
-
             products: `/products`,
+            productsUploadImage: `/products/upload-imageUrl`,
             productById: `/products/id`,
             productByCategoryId: `/products/by-category`,
             register: `/register`,

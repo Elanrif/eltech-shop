@@ -12,10 +12,10 @@ import {Eye, Pencil, PlusIcon} from "lucide-react";
 import {FormCategory} from "@/components/forms/category/form-category";
 import React from "react";
 import {FormUpdateCategory} from "@/components/forms/category/form-update-category";
-import {Product} from "@/lib/category/models/category.model";
+import {Category} from "@/lib/category/models/category.model";
 import {AlertDialogDelete} from "@/components/modal/alert-dialog-delete";
 
-export const DialogFormCategory = ({category}: {category?: Product}) => {
+export const DialogFormCategory = ({category}: {category?: Category}) => {
     const [open, setOpen] = React.useState(false);
 
     return (

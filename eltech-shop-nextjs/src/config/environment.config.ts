@@ -24,6 +24,7 @@ const environment = {
                 orders: `${ELTECH_BASE_URL}/v1/orders`,
                 checkout: `${ELTECH_BASE_URL}/v1/checkout`,
                 products: `${ELTECH_BASE_URL}/v1/products`,
+                productsUploadImage: `${ELTECH_BASE_URL}/v1/products/upload-imageUrl`,
                 categories: `${ELTECH_BASE_URL}/v1/categories`,
                 users: `${ELTECH_BASE_URL}/v1/users`,
             }

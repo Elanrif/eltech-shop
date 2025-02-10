@@ -14,12 +14,16 @@ import {AlertDialogDelete} from "@/components/modal/alert-dialog-delete";
 import {Product} from "@/lib/product/models/product.model";
 import {FormUpdateProduct} from "@/components/forms/product/form-update-product";
 import {FormProduct} from "@/components/forms/product/form-product";
+import CldImageUpload from "@/components/next-cloudinary/cld-image-upload";
+
 
 export const DialogFormProduct = ({product}: {product?: Product}) => {
     const [open, setOpen] = React.useState(false);
 
+
     return (
-        <>
+        <div className={'flex gap-3 items-center'}>
+            {product && (<CldImageUpload data={product}/>)}
             <Dialog open={open} onOpenChange={setOpen}>
                 {product ?
                     <div className={'flex items-center gap-1.5'}>
@@ -34,8 +38,8 @@ export const DialogFormProduct = ({product}: {product?: Product}) => {
                         <ButtonShopUi icon={<PlusIcon size={18}/>} directionIcon={"left"}> Ajouter </ButtonShopUi>
                     </DialogTrigger>
                 }
-                <DialogContent className="sm:min-w-[425px]">
-                    <DialogHeader>
+                <DialogContent className="sm:min-w-[925px] overflow-y-auto max-h-[90vh]">
+                    <DialogHeader className={'hidden'}>
                         <DialogTitle>{!product ? 'Modifier le produit' : 'Ajouter un produit'}</DialogTitle>
                         <DialogDescription>
                             Veuillez remplir les champs ci-dessous pour créer le produit
@@ -53,6 +57,6 @@ export const DialogFormProduct = ({product}: {product?: Product}) => {
                     }
                 </DialogContent>
             </Dialog>
-        </>
+        </div>
     )
 }

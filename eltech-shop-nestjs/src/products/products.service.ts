@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from '../categories/entities/category.entity';
+import { UploadImgProductDto } from './dto/upload-img-product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -66,5 +67,22 @@ export class ProductsService {
 
   async remove(id: number) {
     return this.productRepository.delete(id);
+  }
+
+  async uploadProductImage(dto: UploadImgProductDto) {
+    const product = await this.findOne(dto.id);
+    if (!product) {
+      return new Error(`Product with id ${dto.id} not found`);
+    }
+
+    const currentDate = new Date();
+    const updateDtoImg = {
+      ...product,
+      imageUrl: dto.imageUrl,
+      updatedAt: currentDate,
+    };
+    console.log('imageUrl', updateDtoImg);
+    await this.productRepository.update(product.id, updateDtoImg);
+    return this.findOne(product.id);
   }
 }

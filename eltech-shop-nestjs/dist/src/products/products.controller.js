@@ -18,12 +18,18 @@ const products_service_1 = require("./products.service");
 const create_product_dto_1 = require("./dto/create-product.dto");
 const update_product_dto_1 = require("./dto/update-product.dto");
 const api_constant_1 = require("../config/api.constant");
+const route_config_1 = require("../config/route.config");
+const upload_img_product_dto_1 = require("./dto/upload-img-product.dto");
+const { endpoints: { products: { productsUploadImage }, }, } = route_config_1.routeEndpoints;
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
     }
     create(createProductDto) {
         return this.productsService.create(createProductDto);
+    }
+    addProductImage(dto) {
+        return this.productsService.uploadProductImage(dto);
     }
     findAll() {
         return this.productsService.findAll();
@@ -46,6 +52,13 @@ __decorate([
     __metadata("design:paramtypes", [create_product_dto_1.CreateProductDto]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(productsUploadImage),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [upload_img_product_dto_1.UploadImgProductDto]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "addProductImage", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),

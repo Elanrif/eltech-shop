@@ -8,6 +8,11 @@
 | `typeorm:migration:run`       | Exécute toutes les migrations en attente |
 | `typeorm:migration:show`      | Affiche la liste des migrations appliquées et celles en attente |
 
+# RUN migrations
+1. ` npm run  migration:generate -- [Src Folder]/[Name of migration]`
+2. ` npm run migration:run`
+
+
 # INSTALL PACKAGES
 1. `npm install bcrypt`
 2. `npm install --save-dev @types/bcrypt`

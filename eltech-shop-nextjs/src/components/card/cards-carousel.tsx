@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { CardProduct } from "./card-product";
-import { useProductContext } from "@/contexts/product/product.context";
+import { useProductContext } from "@/contexts/product.context";
 
 export function CardsCarousel() {
   const products = useProductContext();

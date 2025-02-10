@@ -1,6 +1,6 @@
 import environment from "@/config/environment.config";
 import apiClient, { Config } from "@/config/api.config";
-import {Product} from "@/lib/category/models/category.model";
+import {Category} from "@/lib/category/models/category.model";
 import {AxiosError, AxiosResponse} from "axios";
 import {CrudApiError} from "@/lib/shared/helpers/ApiError";
 import {getLogger} from "@/config/logger.config";
@@ -27,14 +27,14 @@ export async function fetchAllCategories(config: Config, query: URLSearchParams)
 
 export async function fetchAllCategories(config: Config) {
     return await apiClient(false, config)
-        .get<any, AxiosResponse<Product[]>>(categoryUrl)
+        .get<any, AxiosResponse<Category[]>>(categoryUrl)
         .then((response) => response.data)
 }
 
 export const fetchCategoryById = (
     config: Config,
     id: number,
-): Promise<Product | {message: string}> =>
+): Promise<Category | {message: string}> =>
     apiClient(false, config)
         .get(`${categoryUrl}/${id}`)
         .then((response) => response.data)
@@ -46,8 +46,8 @@ export const fetchCategoryById = (
 
 export async function createCategory(
     config: Config,
-    category: Product
-): Promise<Product | CrudApiError> {
+    category: Category
+): Promise<Category | CrudApiError> {
     try {
         const res = await apiClient(false,config)
             .post(`${categoryUrl}`, category);
@@ -67,8 +67,8 @@ export async function createCategory(
 
 export async function updateCategory(
     config: Config,
-    category: Product,
-): Promise<Product | CrudApiError> {
+    category: Category,
+): Promise<Category | CrudApiError> {
     try {
         const res = await apiClient(false,config)
             .patch(`${categoryUrl}/${category.id}`, category);
@@ -89,7 +89,7 @@ export async function updateCategory(
 export async function deleteCategory(
     config: Config,
     id: number,
-): Promise<Product | CrudApiError> {
+): Promise<Category | CrudApiError> {
     try {
         const res = await apiClient(false,config)
             .delete(`${categoryUrl}/${id}`);
