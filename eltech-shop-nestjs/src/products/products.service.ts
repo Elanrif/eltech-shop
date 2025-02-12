@@ -38,15 +38,19 @@ export class ProductsService {
 
   async update(id: number, dto: UpdateProductDto) {
     const product = await this.findOne(id);
+    let category = null;
     if (!product) {
       return new Error(`Product with id ${id} not found`);
     }
-    const category = await this.categoryRepository.findOne({
-      where: { id: dto.category?.id },
-    });
 
-    if (!category) {
-      throw new NotFoundException('Category was not found in database');
+    if (dto.category) {
+      category = await this.categoryRepository.findOne({
+        where: { id: dto.category.id },
+      });
+
+      if (!category) {
+        throw new NotFoundException('Category was not found in database');
+      }
     }
 
     const currentDate = new Date();

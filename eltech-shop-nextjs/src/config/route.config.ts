@@ -8,6 +8,7 @@ export const routeEndpoints = {
         apiBaseUrl,
         apiProxyBase,
         home: `/`,
+        products: `/products`,
         login: `/sign-in-up`,
         register: `/sign-in-up`,
 
@@ -22,4 +23,4 @@ export const routeEndpoints = {
         }
 
     }
-}
+} as const

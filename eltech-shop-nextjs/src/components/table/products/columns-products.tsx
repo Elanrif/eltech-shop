@@ -10,6 +10,7 @@ import {Button} from "@/components/ui/button";
 import {ArrowUpDown} from "lucide-react";
 import React from "react";
 import CldImage from "@/components/next-cloudinary/cld-image";
+import {Category} from "@/lib/category/models/category.model";
 
 export const productsColumns: ColumnDef<Product>[] = [
     {
@@ -62,9 +63,13 @@ export const productsColumns: ColumnDef<Product>[] = [
         header: 'Image',
         cell: ({ row }) => {
             return (
-                <div className={'text-shop-muted ml-3'}>
+                <div className={'text-shop-muted'}>
                     <CldImage
-                        src={row.getValue("imageUrl") ? row.getValue("imageUrl") : process.env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_IMG_URL as string}
+                        src={row.getValue("imageUrl") ?
+                            row.getValue("imageUrl")
+                            :
+                            process.env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_IMG_URL as string
+                    }
                         alt=""
                         width="100"
                         height="50"
@@ -85,25 +90,25 @@ export const productsColumns: ColumnDef<Product>[] = [
         ),
     },
     {
+        accessorKey: "category",
+        header: "Category",
+        cell: ({ row }) => {
+            const category:Category = row.getValue("category") || "Aucune catégorie";
+            return (
+                <div className="truncate">
+                    {category.name}
+                </div>
+            );
+        },
+    },
+    {
         accessorKey: "description",
         header: "Description",
         cell: ({ row }) => {
             const description = row.getValue("description")?.toString() || "Aucune description";
             return (
                 <div className="truncate" title={description}>
-                    {description.length > 30 ? `${description.substring(0, 30)}...` : description}
-                </div>
-            );
-        },
-    },
-    {
-        accessorKey: "detail",
-        header: "Detail",
-        cell: ({ row }) => {
-            const detail = row.getValue("detail")?.toString() || "Aucune detail";
-            return (
-                <div className="truncate" title={detail}>
-                    {detail.length > 30 ? `${detail.substring(0, 30)}...` : detail}
+                    {description.length > 10 ? `${description.substring(0, 10)}...` : description}
                 </div>
             );
         },
@@ -115,7 +120,10 @@ export const productsColumns: ColumnDef<Product>[] = [
             const isNew = row.getValue("is_new")
             return (
                 <div className="flex items-center gap-x-2 max-w-[200px]">
-                    {isNew? <span className={'text-shop-secondary'}> nouveau </span>: <span className={'text-shop-muted line-through'}> nouveau</span>}
+                    {isNew?
+                        <span className={'text-shop-secondary'}> nouveau </span>
+                        :
+                        <span className={'text-shop-muted line-through'}> nouveau</span>}
                 </div>
             )
         },
@@ -143,7 +151,8 @@ export const productsColumns: ColumnDef<Product>[] = [
             return <div className={`center font-medium text-${color}-700`}> <div className={`flex gap-1 items-center`}>
                 <div> {color}</div>
                 <div
-                    className={`py-2 border px-3 rounded-lg ${productColors.find(val => val.name === color)?.color}`}
+                    className={`py-2 border px-3 rounded-lg 
+                    ${productColors.find(val => val.name === color)?.color}`}
                 ></div>
             </div> </div>
         },

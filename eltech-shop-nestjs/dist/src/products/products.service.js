@@ -41,14 +41,17 @@ let ProductsService = class ProductsService {
     }
     async update(id, dto) {
         const product = await this.findOne(id);
+        let category = null;
         if (!product) {
             return new Error(`Product with id ${id} not found`);
         }
-        const category = await this.categoryRepository.findOne({
-            where: { id: dto.category?.id },
-        });
-        if (!category) {
-            throw new common_1.NotFoundException('Category was not found in database');
+        if (dto.category) {
+            category = await this.categoryRepository.findOne({
+                where: { id: dto.category.id },
+            });
+            if (!category) {
+                throw new common_1.NotFoundException('Category was not found in database');
+            }
         }
         const currentDate = new Date();
         const updateDto = { ...dto, category, updatedAt: currentDate };

@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react';
-import {CldUploadButton, CldImage, CloudinaryUploadWidgetResults} from 'next-cloudinary';
+import {CldUploadButton, CloudinaryUploadWidgetResults} from 'next-cloudinary';
 import {ImageIcon} from "lucide-react";
 import {Product, ProductUploadImage} from "@/lib/product/models/product.model";
 import {uploadProductImage} from "@/lib/product/services/product.client.service";

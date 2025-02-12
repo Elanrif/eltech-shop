@@ -9,13 +9,15 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import Image from "next/image";
-import { Product } from "@/lib/basket/models/basket.model";
 import { SwitchProduct } from "../ui/switch-product";
 import { ButtonAdd } from "../buttons/button-add";
 import { ButtonIncrement } from "../buttons/button-increment";
 import useCardLogic from "@/lib/hooks/useCardLogic";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
+import {Product} from "@/lib/product/models/product.model";
+import CldImage from "@/components/next-cloudinary/cld-image";
+import { routeEndpoints } from "@/config/route.config";
+import Link from "next/link";
 
 type CardProps = React.ComponentProps<typeof Card> & { product: Product };
 
@@ -31,7 +33,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
     counter,
     increment,
     decrement,
-  } = useCardLogic(product.in_stock);
+  } = useCardLogic(product.in_stock as boolean);
 
    const button = (isStock: boolean) =>{
      if(isActive_ && isStock){
@@ -49,6 +51,12 @@ export function CardProduct({ product, className, ...props }: CardProps) {
               />
    }
 
+  const {
+    endpoints: {
+      products: productsUrl
+    }
+  } = routeEndpoints
+
   return (
     <Card
       className={cn("group/card w-[300px] h-[530px] relative", className)}
@@ -57,14 +65,22 @@ export function CardProduct({ product, className, ...props }: CardProps) {
       {...props}
     >
       <CardHeader>
-        <div className="relative w-full h-[150px]">
-          <Image
-            src={`/assets/products/${product.imageUrl}`}
-            alt={`image product ${product.imageUrl}`}
-            layout="fill"
-            objectFit="cover"
+        <Link href={`${productsUrl}/${product.id}`} className="hover:cursor-pointer hover:duration-400 relative w-full">
+          <CldImage
+              src={product.imageUrl ?
+                  product.imageUrl
+                  :
+                  process.env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_IMG_URL as string
+              }
+              alt=""
+              width="500"
+              height="240"
+              crop={{
+                type: 'auto',
+                source: true,
+              }}
           />
-        </div>
+        </Link>
         {product.is_new && (
           <TypographyShopUi
             variant={"foreground"}
@@ -123,7 +139,7 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           isDisplay ? "block" : "hidden"
         } p-0 absolute bottom-0 w-full`}
       >
-        {button(product.in_stock)}
+        {button(product.in_stock as boolean)}
       </CardFooter>
     </Card>
   );

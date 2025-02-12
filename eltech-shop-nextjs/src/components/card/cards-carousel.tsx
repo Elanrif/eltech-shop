@@ -9,10 +9,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { CardProduct } from "./card-product";
-import { useProductContext } from "@/contexts/product.context";
+import {useCurrentProduct} from "@/contexts/product.context";
 
 export function CardsCarousel() {
-  const products = useProductContext();
+  const products = useCurrentProduct()
+
   return (
     <Carousel
       opts={{

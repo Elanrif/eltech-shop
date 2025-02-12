@@ -6,7 +6,7 @@ import {TypographyShopUi} from "@/components/ui/typograpy-shop-ui";
 import {useForm} from "react-hook-form";
 import {ButtonShopUi} from "@/components/ui/button-shop-ui";
 import {DialogClose} from "@/components/ui/dialog";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 import {Product} from "@/lib/product/models/product.model";
@@ -61,6 +61,7 @@ export const  FormUpdateProduct= ({dialogClose, setOpen, product}: DialogProps) 
             price: product.price,
             imageUrl: product.imageUrl,
             color: product.color,
+            category: product.category,
         }
     });
     const [ submitting, setSubmitting ] = useState<boolean>(false);
@@ -233,7 +234,7 @@ export const  FormUpdateProduct= ({dialogClose, setOpen, product}: DialogProps) 
                     <ButtonShopUi
                         type={"submit"}
                         loading={submitting}
-                    >Ajouter</ButtonShopUi>
+                    >Modifier</ButtonShopUi>
                     {dialogClose && (
                         <DialogClose asChild>
                             <ButtonShopUi type="button" variant="destructive">

@@ -10,6 +10,7 @@ export interface Product {
     in_stock?: boolean;
     brand?: string;
     color: string;
+    variant?: VariantType;
     quantity: number;
     price: number;
     createdAt?: Date;
@@ -21,6 +22,10 @@ export interface ProductUploadImage {
     id: number;
     imageUrl: string;
 }
+
+export type VariantType = {
+  variant: "xs" | "s" | "m" | "l" | "xl";
+};
 
 type ColorsProps = {
     name: "blanc" | "noire" | "orange" | "vert";

@@ -29,16 +29,24 @@ type DialogProps = {
 
 export const  FormProduct= ({dialogClose, setOpen}: DialogProps) => {
     const router = useRouter();
-    const { register, handleSubmit , setValue, reset, formState: { errors } } = useForm<Product>({
-        defaultValues: {
-            name: 'T-shirt basique',
-            description: 'T-shirt en coton 100% bio, confortable et léger.',
-            detail: 'Disponible en plusieurs tailles et couleurs.',
-            quantity: 10,
-            price: 25.99,
-            imageUrl: 'https://example.com/image-tshirt.jpg',
-            color: 'blanc',
-        }
+    const {
+      register,
+      handleSubmit,
+      setValue,
+      reset,
+      formState: { errors },
+    } = useForm<Product>({
+      defaultValues: {
+        name: "T-shirt basique",
+        description:
+          "Ce T-shirt basique est l'essence même de la simplicité et du style intemporel. Conçu pour s'adapter à toutes les occasions, il est à la fois polyvalent et confortable, ce qui en fait un incontournable de votre garde-robe.",
+        detail:
+          "Fabriqué à partir d'un mélange de coton 100% biologique et de polyester recyclé, ce T-shirt offre une douceur incomparable tout en étant respectueux de l'environnement. Le tissu est respirant, léger et résistant aux lavages répétés, garantissant une durabilité optimale.",
+        quantity: 10,
+        price: 25.99,
+        imageUrl: process.env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_IMG_URL,
+        color: "blanc",
+      },
     });
     const [ submitting, setSubmitting ] = useState<boolean>(false);
     const category = useCategoryContext()
