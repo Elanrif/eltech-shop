@@ -5,7 +5,7 @@ export declare class Product {
     name: string;
     description: string;
     detail: string;
-    image?: string;
+    imageUrl?: string;
     is_new: boolean;
     in_stock: boolean;
     brand?: string;

@@ -4,11 +4,11 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {OrdersDataTableColumnHeader} from "@/components/table/data-table-column-header";
-import {Product} from "@/lib/category/models/category.model";
+import {Category} from "@/lib/category/models/category.model";
 import dayjs from "dayjs";
 import {DialogFormCategory} from "@/components/dialog/forms/dialog-form-category";
 
-export const categoriesColumns: ColumnDef<Product>[] = [
+export const categoriesColumns: ColumnDef<Category>[] = [
     {
         id: "select",
         header: ({ table }) => (

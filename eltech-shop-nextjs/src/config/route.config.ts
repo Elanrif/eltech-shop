@@ -8,6 +8,7 @@ export const routeEndpoints = {
         apiBaseUrl,
         apiProxyBase,
         home: `/`,
+        products: `/products`,
         login: `/sign-in-up`,
         register: `/sign-in-up`,
 
@@ -18,7 +19,8 @@ export const routeEndpoints = {
             users: `/dashboard/users`,
             categories: `/dashboard/categories`,
             products: `/dashboard/products`,
+            next_cloudinary: `/dashboard/next-cloudinary`,
         }
 
     }
-}
+} as const

@@ -30,13 +30,15 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], CreateProductDto.prototype, "image", void 0);
+], CreateProductDto.prototype, "imageUrl", void 0);
 __decorate([
     (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], CreateProductDto.prototype, "is_new", void 0);
 __decorate([
     (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], CreateProductDto.prototype, "in_stock", void 0);
 __decorate([
@@ -50,11 +52,10 @@ __decorate([
 ], CreateProductDto.prototype, "color", void 0);
 __decorate([
     (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.Min)(0),
     __metadata("design:type", Number)
 ], CreateProductDto.prototype, "quantity", void 0);
 __decorate([
-    (0, class_validator_1.Min)(0),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateProductDto.prototype, "price", void 0);
 __decorate([

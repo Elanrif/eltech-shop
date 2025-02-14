@@ -16,7 +16,7 @@ export async function GET(
 
     if (Number.isNaN(Number(params.productId))) {
         const status = 400;
-        const message = 'Invalid order id';
+        const message = 'Invalid product id';
         reqLogger.error(
             `[session.user.id] - Invalid product id '${params.productId}' `,
             {

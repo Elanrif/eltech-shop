@@ -41,14 +41,17 @@ let ProductsService = class ProductsService {
     }
     async update(id, dto) {
         const product = await this.findOne(id);
+        let category = null;
         if (!product) {
             return new Error(`Product with id ${id} not found`);
         }
-        const category = await this.categoryRepository.findOne({
-            where: { id: dto.category?.id },
-        });
-        if (!category) {
-            throw new common_1.NotFoundException('Category was not found in database');
+        if (dto.category) {
+            category = await this.categoryRepository.findOne({
+                where: { id: dto.category.id },
+            });
+            if (!category) {
+                throw new common_1.NotFoundException('Category was not found in database');
+            }
         }
         const currentDate = new Date();
         const updateDto = { ...dto, category, updatedAt: currentDate };
@@ -65,6 +68,21 @@ let ProductsService = class ProductsService {
     }
     async remove(id) {
         return this.productRepository.delete(id);
+    }
+    async uploadProductImage(dto) {
+        const product = await this.findOne(dto.id);
+        if (!product) {
+            return new Error(`Product with id ${dto.id} not found`);
+        }
+        const currentDate = new Date();
+        const updateDtoImg = {
+            ...product,
+            imageUrl: dto.imageUrl,
+            updatedAt: currentDate,
+        };
+        console.log('imageUrl', updateDtoImg);
+        await this.productRepository.update(product.id, updateDtoImg);
+        return this.findOne(product.id);
     }
 };
 exports.ProductsService = ProductsService;

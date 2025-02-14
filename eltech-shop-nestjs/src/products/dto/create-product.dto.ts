@@ -1,4 +1,10 @@
-import { IsBoolean, IsInt, IsOptional, IsString, Min } from 'class-validator';
+import {
+  IsBoolean,
+  IsInt,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { Category } from '../../categories/entities/category.entity';
 
 export class CreateProductDto {
@@ -12,12 +18,14 @@ export class CreateProductDto {
   detail: string;
 
   @IsOptional()
-  image?: string;
+  imageUrl?: string;
 
   @IsBoolean()
+  @IsOptional()
   is_new: boolean;
 
   @IsBoolean()
+  @IsOptional()
   in_stock: boolean;
 
   @IsOptional()
@@ -28,10 +36,9 @@ export class CreateProductDto {
   color: string;
 
   @IsInt()
-  @Min(0)
   quantity: number;
 
-  @Min(0)
+  @IsNumber()
   price: number;
 
   @IsOptional()
