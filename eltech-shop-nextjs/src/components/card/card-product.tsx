@@ -12,7 +12,7 @@ import {
 import { SwitchProduct } from "../ui/switch-product";
 import { ButtonAdd } from "../buttons/button-add";
 import { ButtonIncrement } from "../buttons/button-increment";
-import useCardLogic from "@/lib/hooks/useCardLogic";
+import useCardLogic from "@/hooks/use-card-logic";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
 import {Product} from "@/lib/product/models/product.model";
 import CldImage from "@/components/next-cloudinary/cld-image";
@@ -22,18 +22,20 @@ import Link from "next/link";
 type CardProps = React.ComponentProps<typeof Card> & { product: Product };
 
 export function CardProduct({ product, className, ...props }: CardProps) {
+  const productId__  = product.id as number
+  const isStock__ = product.in_stock as boolean
   const {
     isDisplay,
     isActive_,
     isChecked,
+    counter,
     handleIsChecked,
     handleClick,
     handleOnMouseEnter,
     handleOnMouseLeave,
-    counter,
     increment,
     decrement,
-  } = useCardLogic(product.in_stock as boolean);
+  } = useCardLogic({ productId__, isStock__ });
 
    const button = (isStock: boolean) =>{
      if(isActive_ && isStock){

@@ -13,12 +13,12 @@ export async function GET(
     { params }: { params: { productId: number } },
 ) {
     const reqLogger = new RequestLogger(logger, request);
-
-    if (Number.isNaN(Number(params.productId))) {
+    const {productId} = await params;
+    if (Number.isNaN(Number(productId))) {
         const status = 400;
         const message = 'Invalid product id';
         reqLogger.error(
-            `[session.user.id] - Invalid product id '${params.productId}' `,
+            `[session.user.id] - Invalid product id '${productId}' `,
             {
                 status,
                 message,
@@ -29,12 +29,12 @@ export async function GET(
 
     const headers = new Headers(request.headers);
     const config = { headers};
-    const product = await fetchProductById(config, params.productId);
+    const product = await fetchProductById(config, productId);
     if (!product || 'message' in product) {
         const status = 400;
         const message = 'product not found';
         reqLogger.error(
-            `[session.user.id] - product with id '${params.productId}' not found `,
+            `[session.user.id] - product with id '${productId}' not found `,
             {
                 status,
                 message,
@@ -47,12 +47,13 @@ export async function GET(
 
 export async function PUT(request: NextRequest, { params }: { params: { productId: number } },) {
     const reqLogger = new RequestLogger(logger, request);
+    const {productId} = await params;
 
-    if (Number.isNaN(Number(params.productId))) {
+    if (Number.isNaN(Number(productId))) {
         const status = 400;
         const message = 'Invalid order id';
         reqLogger.error(
-            `[session.user.id] - Invalid product id '${params.productId}' `,
+            `[session.user.id] - Invalid product id '${productId}' `,
             {
                 status,
                 message,
@@ -88,12 +89,13 @@ export async function PUT(request: NextRequest, { params }: { params: { productI
 
 export async function DELETE(request: NextRequest, { params }: { params: { productId: number } },) {
     const reqLogger = new RequestLogger(logger, request);
+    const {productId} = await params;
 
-    if (Number.isNaN(Number(params.productId))) {
+    if (Number.isNaN(Number(productId))) {
         const status = 400;
         const message = 'Invalid order id';
         reqLogger.error(
-            `[session.user.id] - Invalid product id '${params.productId}' `,
+            `[session.user.id] - Invalid product id '${productId}' `,
             {
                 status,
                 message,
@@ -104,7 +106,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { produ
     const headers = new Headers(request.headers);
     const config = {headers};
     try{
-        const product = await deleteProduct(config,params.productId)
+        const product = await deleteProduct(config,productId)
         return NextResponse.json(product, { status: 200});
     } catch {
         const status = 500;

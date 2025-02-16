@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import { BasketItem } from "@/lib/basket/models/basket.model";
 import { ButtonIncrement } from "../buttons/button-increment";
-import { useCounter } from "@/lib/hooks/useIncrement";
+import { useCounter } from "@/hooks/use-increment";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
 
 

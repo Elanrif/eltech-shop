@@ -4,7 +4,7 @@ import { ButtonShopUi } from "../ui/button-shop-ui";
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Minus, Plus } from 'lucide-react';
-import { PayloadProps } from '@/lib/hooks/useIncrement';
+import { PayloadProps } from '@/hooks/use-increment';
 const ButtonIncrementVariants = cva(
   "w-full h-full inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
@@ -72,7 +72,7 @@ const ButtonIncrement = React.forwardRef<
         ref={ref}
         {...props}
       >
-        {counter?.count}
+        {counter.count}
       </ButtonShopUi>
       <ButtonShopUi
         className={cn(

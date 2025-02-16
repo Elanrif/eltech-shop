@@ -21,7 +21,7 @@ export function useProductById(productId: number) {
           setProduct(product);
           setAmount(amount_);
         }
-      }, 3000);
+      }, 1000);
     })();
   }, [productId]);
 

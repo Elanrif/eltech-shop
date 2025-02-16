@@ -5,19 +5,44 @@ import CldImage from '@/components/next-cloudinary/cld-image';
 import Pending from '@/components/pending';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useProductById } from '@/hooks/use-product'
-import useCardLogic from '@/lib/hooks/useCardLogic';
+import useCardLogic from '@/hooks/use-card-logic';
 import { Separator } from '@radix-ui/react-separator';
+import {useState} from "react";
+import { VariantType } from '@/lib/product/models/product.model';
+
+type variantsType = {
+  variant: VariantType['variant'];
+  bgColor: string;
+  textColor: string;
+}
 
 export default function GetProductById({ productId }: { productId: number }) {
+  const [variants, setVariants] = useState<variantsType[]>([
+    {variant: "xs", bgColor: "bg-shop-secondary",textColor: "text-shop-accent"},
+    {variant: "s", bgColor: "", textColor: ""},
+    {variant: "m", bgColor: "", textColor: ""},
+    {variant: "l", bgColor: "", textColor: ""},
+    {variant: "xl", bgColor: "", textColor: ""},
+  ]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedVariant, setSelectedVariant] = useState<variantsType | null>(null);
   const {product,amount} = useProductById(productId);
-  const {
-    handleClick,
-    counter,
-    increment,
-    decrement,
-  } = useCardLogic(product?.in_stock as boolean);
-    
 
+  const productId__ = product?.id as number;
+  const isStock__ = product?.in_stock as boolean;
+  const { handleClick, counter, increment, decrement } = useCardLogic({
+    productId__,
+    isStock__,
+  });
+    
+ const handleSelectedVariant = (data: variantsType)=> {
+  setSelectedVariant(data);
+  setVariants((prevVariants) =>
+  prevVariants.map((item) =>
+   item.variant === data.variant ? {...item, bgColor: "bg-shop-secondary", textColor: "text-shop-accent" }
+  :
+       {...item, bgColor: "", textColor: ""}))
+ }
   return (
     <>
       {product ? (
@@ -45,17 +70,20 @@ export default function GetProductById({ productId }: { productId: number }) {
             <CardContent className="flex flex-col gap-3">
               <div>
                 <span className="mr-3">Detaille:</span>{" "}
-                <span className='text-shop-muted'>{product.detail}</span>
+                <span className='text-shop-muted text-sm'>{product.detail}</span>
               </div>
               <div className="flex gap-3 items-center">
                 <span>Taille:</span>
                 <div className='flex gap-3 items-center'>
-                  <div>xs</div>
-                  <div>sm</div>
-                  <div>md</div>
-                  <div>lg</div>
-                  <div>xl</div>
-                  <div>xxl</div>
+                  {variants.map((data, index) => (
+                      <div
+                          key={index}
+                           className={`px-3 py-2 text-sm border hover:cursor-pointer hover:text-shop-background border-shop-secondary hover:bg-shop-secondary duration-300 ${data.bgColor} ${data.textColor}`}
+                          onClick={() => handleSelectedVariant(data)}
+                      >
+                        {data.variant.toUpperCase()}
+                      </div>
+                  ))}
                 </div>
               </div>
 
