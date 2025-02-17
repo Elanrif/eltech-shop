@@ -36,7 +36,7 @@ const useCardLogic = ({ productId__, isStock__ }: UseCardLogicProps) => {
   );
 
   const initialCounter = getStoreVAlue<PayloadProps>("counter", {
-    count: 1,
+    count: 0,
     isActive: false,
   });
 
@@ -68,7 +68,7 @@ const useCardLogic = ({ productId__, isStock__ }: UseCardLogicProps) => {
   const handleClick = () => {
     setIsActive_(true);
     setStoredValue("isActive_", true);
-    increment(0);
+    increment(1);
   };
 
   const handleOnMouseEnter = () => {

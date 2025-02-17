@@ -8,7 +8,7 @@ export declare class CategoriesService {
     create(dto: CreateCategoryDto): Promise<Category>;
     findAll(): Promise<Category[]>;
     findOne(id: number): Promise<Category>;
-    update(id: number, dto: UpdateCategoryDto): Promise<Error | Category>;
+    update(id: number, dto: UpdateCategoryDto): Promise<Category | Error>;
     remove(id: number): Promise<import("typeorm").DeleteResult | {
         statusCode: number;
         message: string;

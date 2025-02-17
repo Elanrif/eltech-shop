@@ -15,10 +15,10 @@ function reducer(counter: PayloadProps, action: Action): PayloadProps {
       return {
         ...counter,
         count: counter.count + action.payload,
-        isActive: false,
+        isActive: true,
       };
     case "decrement":
-      if (counter.count < 2) {
+      if (counter.count < 1) {
         return {
           ...counter,
           isActive: true,
@@ -34,7 +34,7 @@ function reducer(counter: PayloadProps, action: Action): PayloadProps {
   }
 }
 
-export function useCounter(initialValue: number = 1) {
+export function useCounter(initialValue: number = 0) {
   const [counter, dispatch] = React.useReducer(reducer, {
     count: initialValue,
     isActive: false,

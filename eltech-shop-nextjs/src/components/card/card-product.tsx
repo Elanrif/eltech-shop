@@ -10,20 +10,20 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { SwitchProduct } from "../ui/switch-product";
-import { ButtonAdd } from "../buttons/button-add";
 import { ButtonIncrement } from "../buttons/button-increment";
 import useCardLogic from "@/hooks/use-card-logic";
 import { TypographyShopUi } from "../ui/typograpy-shop-ui";
-import {Product} from "@/lib/product/models/product.model";
+import { Product } from "@/lib/product/models/product.model";
 import CldImage from "@/components/next-cloudinary/cld-image";
 import { routeEndpoints } from "@/config/route.config";
 import Link from "next/link";
+import { ButtonAddBasket } from "../buttons/button-add-basket";
 
 type CardProps = React.ComponentProps<typeof Card> & { product: Product };
 
 export function CardProduct({ product, className, ...props }: CardProps) {
-  const productId__  = product.id as number
-  const isStock__ = product.in_stock as boolean
+  const productId__ = product.id as number;
+  const isStock__ = product.in_stock as boolean;
   const {
     isDisplay,
     isActive_,
@@ -37,27 +37,29 @@ export function CardProduct({ product, className, ...props }: CardProps) {
     decrement,
   } = useCardLogic({ productId__, isStock__ });
 
-   const button = (isStock: boolean) =>{
-     if(isActive_ && isStock){
-      return(
-       <ButtonIncrement
-         counter={counter}
-         increment={increment}
-         decrement={decrement}
-       />)
-     }
-     return <ButtonAdd 
-              onClick={handleClick} 
-              className={`${!isStock && 
-                    "hover:cursor-not-allowed hover:bg-shop-muted"}`} 
-              />
-   }
+  const button = (isStock: boolean) => {
+    if ((isActive_ && counter.count > 0 && isStock)) {
+      return (
+        <ButtonIncrement
+          counter={counter}
+          increment={increment}
+          decrement={decrement}
+        />
+      );
+    }
+    return (
+      <ButtonAddBasket
+        onClick={handleClick}
+        className={`${
+          !isStock && "hover:cursor-not-allowed hover:bg-shop-muted"
+        }`}
+      />
+    );
+  };
 
   const {
-    endpoints: {
-      products: productsUrl
-    }
-  } = routeEndpoints
+    endpoints: { products: productsUrl },
+  } = routeEndpoints;
 
   return (
     <Card
@@ -67,20 +69,23 @@ export function CardProduct({ product, className, ...props }: CardProps) {
       {...props}
     >
       <CardHeader>
-        <Link href={`${productsUrl}/${product.id}`} className="hover:cursor-pointer hover:duration-400 relative w-full">
+        <Link
+          href={`${productsUrl}/${product.id}`}
+          className="hover:cursor-pointer hover:duration-400 relative w-full"
+        >
           <CldImage
-              src={product.imageUrl ?
-                  product.imageUrl
-                  :
-                  process.env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_IMG_URL as string
-              }
-              alt=""
-              width="500"
-              height="240"
-              crop={{
-                type: 'auto',
-                source: true,
-              }}
+            src={
+              product.imageUrl
+                ? product.imageUrl
+                : (process.env.NEXT_PUBLIC_CLOUDINARY_DEFAULT_IMG_URL as string)
+            }
+            alt=""
+            width="500"
+            height="240"
+            crop={{
+              type: "auto",
+              source: true,
+            }}
           />
         </Link>
         {product.is_new && (
@@ -92,7 +97,10 @@ export function CardProduct({ product, className, ...props }: CardProps) {
           </TypographyShopUi>
         )}
         <TypographyShopUi
-          className={cn(`w-full text-end pr-4 pb-2`, product.in_stock ? "text-shop-muted" : "text-shop-danger")}
+          className={cn(
+            `w-full text-end pr-4 pb-2`,
+            product.in_stock ? "text-shop-muted" : "text-shop-danger"
+          )}
         >
           {product.in_stock ? "En stock" : "Rupture de stock"}
         </TypographyShopUi>
