@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PayloadProps, useCounter } from "./use-increment";
+import {PayloadProps, useCounter} from "@/hooks/use-counter";
 
 type UseCardLogicProps = {
   productId__: number;
@@ -7,10 +7,10 @@ type UseCardLogicProps = {
 };
 
 const useCardLogic = ({ productId__, isStock__ }: UseCardLogicProps) => {
-  const storagekey = `product_${productId__}`;
+  const storageKey = `product_${productId__}`;
   console.log(Object.entries(localStorage));
-  const getStoreVAlue = <T>(key: string, defaultValue: T): T => {
-    const stored = localStorage.getItem(`${storagekey}_${key}`);
+  const getStoreValue = <T>(key: string, defaultValue: T): T => {
+    const stored = localStorage.getItem(`${storageKey}_${key}`);
     try {
       return stored !== null ? JSON.parse(stored) : defaultValue;
     } catch (error) {
@@ -21,26 +21,26 @@ const useCardLogic = ({ productId__, isStock__ }: UseCardLogicProps) => {
 
   const setStoredValue = React.useCallback(
     <E>(key: string, value: E) => {
-      localStorage.setItem(`${storagekey}_${key}`, JSON.stringify(value));
+      localStorage.setItem(`${storageKey}_${key}`, JSON.stringify(value));
     },
-    [storagekey]
+    [storageKey]
   );
 
 
   const [isDisplay, setIsDisplay] = React.useState(false);
   const [isActive_, setIsActive_] = React.useState(
-    getStoreVAlue("isActive_", false)
+    getStoreValue("isActive_", false)
   );
-  const [isChecked, setIschecked] = React.useState(
-    getStoreVAlue("isChecked", false)
+  const [isChecked, setIsChecked] = React.useState(
+    getStoreValue("isChecked", false)
   );
 
-  const initialCounter = getStoreVAlue<PayloadProps>("counter", {
+  const initialCounter = getStoreValue<PayloadProps>("counter", {
     count: 0,
     isActive: false,
   });
 
-  const { counter, increment, decrement } = useCounter(initialCounter.count);
+  const { counter, increment, decrement } = useCounter(initialCounter);
 
 
   React.useEffect(() => {
@@ -58,7 +58,7 @@ const useCardLogic = ({ productId__, isStock__ }: UseCardLogicProps) => {
   }, [isChecked, setStoredValue]);
 
   const handleIsChecked = () => {
-    setIschecked((prev) => {
+    setIsChecked((prev) => {
       const newState = !prev;
       setStoredValue("isChecked", newState);
       return newState;

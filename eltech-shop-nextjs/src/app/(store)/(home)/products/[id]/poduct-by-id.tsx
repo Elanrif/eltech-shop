@@ -1,5 +1,4 @@
 "use client"
-import { ButtonAdd } from '@/components/buttons/button-add';
 import { ButtonIncrement } from '@/components/buttons/button-increment';
 import CldImage from '@/components/next-cloudinary/cld-image';
 import Pending from '@/components/pending';
@@ -9,6 +8,7 @@ import useCardLogic from '@/hooks/use-card-logic';
 import { Separator } from '@radix-ui/react-separator';
 import {useState} from "react";
 import { VariantType } from '@/lib/product/models/product.model';
+import { ButtonAddBasket } from '@/components/buttons/button-add-basket';
 
 type variantsType = {
   variant: VariantType['variant'];
@@ -27,14 +27,16 @@ export default function GetProductById({ productId }: { productId: number }) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedVariant, setSelectedVariant] = useState<variantsType | null>(null);
   const {product,amount} = useProductById(productId);
-
-  const productId__ = product?.id as number;
+  const productId__ = productId
   const isStock__ = product?.in_stock as boolean;
   const { handleClick, counter, increment, decrement } = useCardLogic({
     productId__,
     isStock__,
   });
-    
+
+if(!product){
+    return <Pending />;
+}
  const handleSelectedVariant = (data: variantsType)=> {
   setSelectedVariant(data);
   setVariants((prevVariants) =>
@@ -45,7 +47,6 @@ export default function GetProductById({ productId }: { productId: number }) {
  }
   return (
     <>
-      {product ? (
         <div className="flex px-[10rem] my-7 items-start gap-4">
           <CldImage
             src={
@@ -109,7 +110,7 @@ export default function GetProductById({ productId }: { productId: number }) {
                 decrement={decrement}
               />
               {
-                <ButtonAdd
+                <ButtonAddBasket
                   onClick={handleClick}
                   className={`${
                     !product.in_stock &&
@@ -120,9 +121,6 @@ export default function GetProductById({ productId }: { productId: number }) {
             </CardFooter>
           </Card>
         </div>
-      ) : (
-        <Pending />
-      )}
     </>
   );
 }

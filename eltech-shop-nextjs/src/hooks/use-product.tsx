@@ -5,8 +5,8 @@ import { getProductById } from "@/lib/product/services/product.client.service";
 import { useEffect, useState } from "react";
 
 export function useProductById(productId: number) {
-  const [product, setProduct] = useState<Product>();
-  const [amount, setAmount] = useState<string | undefined>();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [amount, setAmount] = useState<string>("");
 
   useEffect(() => {
     (async () => {

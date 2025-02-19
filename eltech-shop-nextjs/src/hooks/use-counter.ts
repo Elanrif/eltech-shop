@@ -34,11 +34,8 @@ function reducer(counter: PayloadProps, action: Action): PayloadProps {
   }
 }
 
-export function useCounter(initialValue: number = 0) {
-  const [counter, dispatch] = React.useReducer(reducer, {
-    count: initialValue,
-    isActive: false,
-  });
+export function useCounter(initialValue: PayloadProps = {count: 0, isActive: false}) {
+  const [counter, dispatch] = React.useReducer(reducer, initialValue);
 
   const increment = (step: number = 1) =>
     dispatch({ type: "increment", payload: step });
