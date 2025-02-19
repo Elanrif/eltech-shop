@@ -18,7 +18,7 @@ let Basket = class Basket {
 exports.Basket = Basket;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Basket.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
@@ -26,6 +26,7 @@ __decorate([
 ], Basket.prototype, "userId", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => product_entity_1.Product, (product) => product.baskets),
+    (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], Basket.prototype, "products", void 0);
 __decorate([

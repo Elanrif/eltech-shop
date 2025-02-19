@@ -1,7 +1,7 @@
 import { Product } from 'src/products/entities/product.entity';
 import { User } from 'src/users/entities/user.entity';
 export declare class Basket {
-    id: string;
+    id: number;
     userId?: string;
     products: Product[];
     user: User;

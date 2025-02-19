@@ -27,6 +27,7 @@ export default function GetProductById({ productId }: { productId: number }) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedVariant, setSelectedVariant] = useState<variantsType | null>(null);
   const {product,amount} = useProductById(productId);
+  /*fix: the problem was here, productId__ from product?.id return a undefined value.*/
   const productId__ = productId
   const isStock__ = product?.in_stock as boolean;
   const { handleClick, counter, increment, decrement } = useCardLogic({

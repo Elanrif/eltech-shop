@@ -9,7 +9,7 @@
 | `typeorm:migration:show`      | Affiche la liste des migrations appliquées et celles en attente |
 
 # RUN migrations
-1. ` npm run  migration:generate -- [Src Folder]/[Name of migration]`
+1. ` npm run  migration:generate -- database/migrations/[Name of migration]`
 2. ` npm run migration:run`
 
 

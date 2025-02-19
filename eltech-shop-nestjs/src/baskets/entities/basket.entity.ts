@@ -3,10 +3,9 @@ import { User } from 'src/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, JoinTable,
   ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -14,12 +13,13 @@ import {
 @Entity()
 export class Basket {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({ nullable: true })
   userId?: string;
 
   @ManyToMany(() => Product, (product) => product.baskets)
+  @JoinTable()
   products: Product[];
 
   @ManyToOne(() => User, (user) => user.baskets)
