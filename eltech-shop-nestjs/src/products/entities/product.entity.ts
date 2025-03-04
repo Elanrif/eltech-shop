@@ -1,14 +1,14 @@
-import { Basket } from 'src/baskets/entities/basket.entity';
 import { Category } from 'src/categories/entities/category.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { BasketLine } from '../../basket-lines/entities/basket-line.entity';
 
 @Entity()
 export class Product {
@@ -55,8 +55,8 @@ export class Product {
     nullable: true,
     eager: true,
   })
-  category?: Category;
+  category: Category;
 
-  @ManyToMany(() => Basket, (basket) => basket.products)
-  baskets: Basket[];
+  @OneToMany(() => BasketLine, (basketLine) => basketLine.product)
+  basketLines: BasketLine[];
 }

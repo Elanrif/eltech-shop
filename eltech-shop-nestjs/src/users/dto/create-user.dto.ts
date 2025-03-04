@@ -7,7 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 import { Basket } from 'src/baskets/entities/basket.entity';
-import { Role } from 'src/roles/role.enum';
+import { Role } from 'src/users/roles/role.enum';
 
 export class CreateUserDto {
   @IsEmail()

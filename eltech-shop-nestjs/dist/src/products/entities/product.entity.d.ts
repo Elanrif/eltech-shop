@@ -1,5 +1,5 @@
-import { Basket } from 'src/baskets/entities/basket.entity';
 import { Category } from 'src/categories/entities/category.entity';
+import { BasketProduct } from '../../basket-products/entities/basket-product.entity';
 export declare class Product {
     id: number;
     name: string;
@@ -14,6 +14,6 @@ export declare class Product {
     price: number;
     createdAt: Date;
     updatedAt: Date;
-    category?: Category;
-    baskets: Basket[];
+    category: Category;
+    basketProducts: BasketProduct[];
 }

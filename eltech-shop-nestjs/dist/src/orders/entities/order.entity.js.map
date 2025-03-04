@@ -1,1 +1,1 @@
-{"version":3,"file":"order.entity.js","sourceRoot":"","sources":["../../../../src/orders/entities/order.entity.ts"],"names":[],"mappings":";;;AAAA,MAAa,KAAK;CAAG;AAArB,sBAAqB"}
+{"version":3,"file":"order.entity.js","sourceRoot":"","sources":["../../../../src/orders/entities/order.entity.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qCAAyD;AAGlD,IAAM,KAAK,GAAX,MAAM,KAAK;CAGjB,CAAA;AAHY,sBAAK;AAEhB;IADC,IAAA,gCAAsB,GAAE;;iCACd;gBAFA,KAAK;IADjB,IAAA,gBAAM,GAAE;GACI,KAAK,CAGjB"}

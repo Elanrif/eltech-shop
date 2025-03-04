@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Basket = void 0;
-const product_entity_1 = require("../../products/entities/product.entity");
 const user_entity_1 = require("../../users/entities/user.entity");
 const typeorm_1 = require("typeorm");
+const basket_product_entity_1 = require("../../basket-products/entities/basket-product.entity");
 let Basket = class Basket {
 };
 exports.Basket = Basket;
@@ -21,18 +21,21 @@ __decorate([
     __metadata("design:type", Number)
 ], Basket.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Basket.prototype, "userId", void 0);
-__decorate([
-    (0, typeorm_1.ManyToMany)(() => product_entity_1.Product, (product) => product.baskets),
-    (0, typeorm_1.JoinTable)(),
-    __metadata("design:type", Array)
-], Basket.prototype, "products", void 0);
-__decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.baskets),
     __metadata("design:type", user_entity_1.User)
 ], Basket.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => basket_product_entity_1.BasketProduct, (basketProduct) => basketProduct.basket),
+    __metadata("design:type", Array)
+], Basket.prototype, "basketProducts", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Basket.prototype, "quantity", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Basket.prototype, "totalPrice", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

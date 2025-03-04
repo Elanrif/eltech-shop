@@ -1,10 +1,9 @@
-import { Product } from 'src/products/entities/product.entity';
 import { User } from 'src/users/entities/user.entity';
+import { BasketProduct } from '../../basket-products/entities/basket-product.entity';
 export declare class Basket {
     id: number;
-    userId?: string;
-    products: Product[];
     user: User;
+    basketProducts: BasketProduct[];
     quantity: number;
     totalPrice: number;
     createdAt?: Date;

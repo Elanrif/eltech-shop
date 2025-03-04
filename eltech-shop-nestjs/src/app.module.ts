@@ -11,6 +11,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from '../database/config/data-source';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { BasketLinesModule } from './basket-lines/basket-lines.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
     BasketsModule,
     OrdersModule,
     AuthModule,
+    BasketLinesModule,
   ],
   controllers: [AppController],
   providers: [AppService, UsersService],

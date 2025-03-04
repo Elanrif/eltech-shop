@@ -1,7 +1,12 @@
-import { IsEnum } from 'class-validator';
 import { Basket } from 'src/baskets/entities/basket.entity';
-import { Role } from 'src/roles/role.enum';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Role } from 'src/users/roles/role.enum';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -23,6 +28,7 @@ export class User {
   @Column()
   lastName: string;
 
-  @OneToMany(() => Basket, (basket) => basket.user)
-  baskets: Basket[];
+  @OneToOne(() => Basket, { cascade: true, eager: true })
+  @JoinColumn()
+  basket: Basket;
 }

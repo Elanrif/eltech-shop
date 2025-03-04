@@ -1,32 +1,30 @@
-import { Product } from 'src/products/entities/product.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
-  Entity, JoinTable,
-  ManyToMany,
-  ManyToOne,
+  Entity,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { BasketLine } from '../../basket-lines/entities/basket-line.entity';
 
 @Entity()
 export class Basket {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  userId?: string;
-
-  @ManyToMany(() => Product, (product) => product.baskets)
-  @JoinTable()
-  products: Product[];
-
-  @ManyToOne(() => User, (user) => user.baskets)
+  @OneToOne(() => User, (user) => user.basket)
   user: User;
 
-  quantity: number;
+  @OneToMany(() => BasketLine, (basketLine) => basketLine.basket)
+  basketLines: BasketLine[];
 
+  @Column({ type: 'int', default: 1 })
+  totalQty: number;
+
+  @Column()
   totalPrice: number;
 
   @CreateDateColumn()
