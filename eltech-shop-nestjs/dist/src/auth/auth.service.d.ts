@@ -14,10 +14,10 @@ export declare class AuthService {
         user: {
             id: number;
             email: string;
-            role: import("../roles/role.enum").Role;
+            role: import("../users/roles/role.enum").Role;
             firstName: string;
             lastName: string;
-            baskets: import("../baskets/entities/basket.entity").Basket[];
+            basket: import("../baskets/entities/basket.entity").Basket;
         };
         backendTokens: {
             accessToken: string;
@@ -28,10 +28,10 @@ export declare class AuthService {
     validateUser(dto: LoginDto): Promise<{
         id: number;
         email: string;
-        role: import("../roles/role.enum").Role;
+        role: import("../users/roles/role.enum").Role;
         firstName: string;
         lastName: string;
-        baskets: import("../baskets/entities/basket.entity").Basket[];
+        basket: import("../baskets/entities/basket.entity").Basket;
     }>;
     validateUserById(userId: number): Promise<any>;
     refreshToken(user: any): Promise<{

@@ -4,6 +4,7 @@ export declare const routeEndpoints: {
             products: string;
             productsUploadImage: string;
         };
+        baskets: string;
         orders: string;
         users: string;
         categories: string;

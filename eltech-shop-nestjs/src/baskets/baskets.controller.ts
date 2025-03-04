@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { BasketsService } from './baskets.service';
 import { CreateBasketDto } from './dto/create-basket.dto';
 import { UpdateBasketDto } from './dto/update-basket.dto';
 import { API_PATH_BASKETS, API_VERSION_1 } from '../config/api.constant';
+import { VariantType } from '../basket-lines/dto/variant.enum';
 
 @Controller({
   version: API_VERSION_1,
@@ -18,6 +20,26 @@ import { API_PATH_BASKETS, API_VERSION_1 } from '../config/api.constant';
 })
 export class BasketsController {
   constructor(private readonly basketsService: BasketsService) {}
+
+  @Post('users/:userId/add-product/:productId')
+  async addProductToBasket(
+    @Param('userId') userId: number,
+    @Param('productId') productId: number,
+    @Body('variant') variant: VariantType,
+    @Body('clientQty') clientQty: number = 1,
+  ) {
+    try {
+      const basketLine = await this.basketsService.addProductToBasket(
+        userId,
+        productId,
+        variant,
+        clientQty,
+      );
+      return { message: 'Product added to basket', basketLine };
+    } catch (error) {
+      throw new NotFoundException(error.message);
+    }
+  }
 
   @Post()
   create(@Body() createBasketDto: CreateBasketDto) {

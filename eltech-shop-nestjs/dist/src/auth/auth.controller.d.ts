@@ -9,19 +9,20 @@ export declare class AuthController {
     create(dto: CreateUserDto): Promise<{
         email: string;
         firstName: string;
-        role: import("../roles/role.enum").Role;
+        role: import("../users/roles/role.enum").Role;
         lastName: string;
         baskets: import("../baskets/entities/basket.entity").Basket[];
         id: number;
+        basket: import("../baskets/entities/basket.entity").Basket;
     }>;
     login(dto: LoginDto): Promise<{
         user: {
             id: number;
             email: string;
-            role: import("../roles/role.enum").Role;
+            role: import("../users/roles/role.enum").Role;
             firstName: string;
             lastName: string;
-            baskets: import("../baskets/entities/basket.entity").Basket[];
+            basket: import("../baskets/entities/basket.entity").Basket;
         };
         backendTokens: {
             accessToken: string;

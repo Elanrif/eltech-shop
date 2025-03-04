@@ -10,12 +10,18 @@ exports.BasketsModule = void 0;
 const common_1 = require("@nestjs/common");
 const baskets_service_1 = require("./baskets.service");
 const baskets_controller_1 = require("./baskets.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const basket_entity_1 = require("./entities/basket.entity");
+const basket_line_entity_1 = require("../basket-lines/entities/basket-line.entity");
+const product_entity_1 = require("../products/entities/product.entity");
+const user_entity_1 = require("../users/entities/user.entity");
 let BasketsModule = class BasketsModule {
 };
 exports.BasketsModule = BasketsModule;
 exports.BasketsModule = BasketsModule = __decorate([
     (0, common_1.Module)({
         controllers: [baskets_controller_1.BasketsController],
+        imports: [typeorm_1.TypeOrmModule.forFeature([basket_entity_1.Basket, basket_line_entity_1.BasketLine, product_entity_1.Product, user_entity_1.User])],
         providers: [baskets_service_1.BasketsService],
     })
 ], BasketsModule);

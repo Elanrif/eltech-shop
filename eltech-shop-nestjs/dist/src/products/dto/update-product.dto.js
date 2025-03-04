@@ -17,7 +17,7 @@ class UpdateProductDto extends (0, mapped_types_1.PartialType)(create_product_dt
 }
 exports.UpdateProductDto = UpdateProductDto;
 __decorate([
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
 ], UpdateProductDto.prototype, "id", void 0);
 //# sourceMappingURL=update-product.dto.js.map

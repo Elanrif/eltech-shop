@@ -8,8 +8,8 @@ export class CreateBasketDto {
   basketLines: BasketLine[];
 
   @IsInt()
-  totalQty: number;
+  amount: number;
 
   @IsNumber()
-  totalPrice: number;
+  count: number;
 }

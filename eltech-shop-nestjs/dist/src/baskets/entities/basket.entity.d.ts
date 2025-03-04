@@ -1,11 +1,12 @@
 import { User } from 'src/users/entities/user.entity';
-import { BasketProduct } from '../../basket-products/entities/basket-product.entity';
+import { BasketLine } from '../../basket-lines/entities/basket-line.entity';
 export declare class Basket {
     id: number;
     user: User;
-    basketProducts: BasketProduct[];
-    quantity: number;
-    totalPrice: number;
+    basketLines: BasketLine[];
+    totalCount: number;
+    subTotalAmount: number;
+    totalAmount: number;
     createdAt?: Date;
     updatedAt: Date;
 }

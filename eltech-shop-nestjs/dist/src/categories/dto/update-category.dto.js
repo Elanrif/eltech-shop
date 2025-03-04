@@ -17,7 +17,7 @@ class UpdateCategoryDto extends (0, mapped_types_1.PartialType)(create_category_
 }
 exports.UpdateCategoryDto = UpdateCategoryDto;
 __decorate([
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
 ], UpdateCategoryDto.prototype, "id", void 0);
 //# sourceMappingURL=update-category.dto.js.map

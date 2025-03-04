@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const category_entity_1 = require("../../categories/entities/category.entity");
 const typeorm_1 = require("typeorm");
-const basket_product_entity_1 = require("../../basket-products/entities/basket-product.entity");
+const basket_line_entity_1 = require("../../basket-lines/entities/basket-line.entity");
 let Product = class Product {
 };
 exports.Product = Product;
@@ -76,9 +76,9 @@ __decorate([
     __metadata("design:type", category_entity_1.Category)
 ], Product.prototype, "category", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => basket_product_entity_1.BasketProduct, (basketProduct) => basketProduct.product),
+    (0, typeorm_1.OneToMany)(() => basket_line_entity_1.BasketLine, (basketLine) => basketLine.product),
     __metadata("design:type", Array)
-], Product.prototype, "basketProducts", void 0);
+], Product.prototype, "basketLines", void 0);
 exports.Product = Product = __decorate([
     (0, typeorm_1.Entity)()
 ], Product);

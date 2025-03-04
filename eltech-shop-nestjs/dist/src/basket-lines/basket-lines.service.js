@@ -6,27 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BasketProductsService = void 0;
+exports.BasketLinesService = void 0;
 const common_1 = require("@nestjs/common");
-let BasketProductsService = class BasketProductsService {
-    create(createBasketProductDto) {
-        return 'This action adds a new basketProduct';
+let BasketLinesService = class BasketLinesService {
+    create(createBasketLineDto) {
+        return 'This action adds a new basketLine';
     }
     findAll() {
-        return `This action returns all basketProducts`;
+        return `This action returns all basketLines`;
     }
     findOne(id) {
-        return `This action returns a #${id} basketProduct`;
+        return `This action returns a #${id} basketLine`;
     }
-    update(id, updateBasketProductDto) {
-        return `This action updates a #${id} basketProduct`;
+    update(id, updateBasketLineDto) {
+        return `This action updates a #${id} basketLine`;
     }
     remove(id) {
-        return `This action removes a #${id} basketProduct`;
+        return `This action removes a #${id} basketLine`;
     }
 };
-exports.BasketProductsService = BasketProductsService;
-exports.BasketProductsService = BasketProductsService = __decorate([
+exports.BasketLinesService = BasketLinesService;
+exports.BasketLinesService = BasketLinesService = __decorate([
     (0, common_1.Injectable)()
-], BasketProductsService);
-//# sourceMappingURL=basket-products.service.js.map
+], BasketLinesService);
+//# sourceMappingURL=basket-lines.service.js.map

@@ -17,7 +17,7 @@ class UpdateUserDto extends (0, mapped_types_1.PartialType)(create_user_dto_1.Cr
 }
 exports.UpdateUserDto = UpdateUserDto;
 __decorate([
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
 ], UpdateUserDto.prototype, "id", void 0);
 //# sourceMappingURL=update-user.dto.js.map

@@ -12,69 +12,69 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BasketProductsController = void 0;
+exports.BasketLinesController = void 0;
 const common_1 = require("@nestjs/common");
-const basket_products_service_1 = require("./basket-products.service");
-const create_basket_product_dto_1 = require("./dto/create-basket-product.dto");
-const update_basket_product_dto_1 = require("./dto/update-basket-product.dto");
-let BasketProductsController = class BasketProductsController {
-    constructor(basketProductsService) {
-        this.basketProductsService = basketProductsService;
+const basket_lines_service_1 = require("./basket-lines.service");
+const create_basket_line_dto_1 = require("./dto/create-basket-line.dto");
+const update_basket_line_dto_1 = require("./dto/update-basket-line.dto");
+let BasketLinesController = class BasketLinesController {
+    constructor(basketLinesService) {
+        this.basketLinesService = basketLinesService;
     }
-    create(createBasketProductDto) {
-        return this.basketProductsService.create(createBasketProductDto);
+    create(createBasketLineDto) {
+        return this.basketLinesService.create(createBasketLineDto);
     }
     findAll() {
-        return this.basketProductsService.findAll();
+        return this.basketLinesService.findAll();
     }
     findOne(id) {
-        return this.basketProductsService.findOne(+id);
+        return this.basketLinesService.findOne(+id);
     }
-    update(id, updateBasketProductDto) {
-        return this.basketProductsService.update(+id, updateBasketProductDto);
+    update(id, updateBasketLineDto) {
+        return this.basketLinesService.update(+id, updateBasketLineDto);
     }
     remove(id) {
-        return this.basketProductsService.remove(+id);
+        return this.basketLinesService.remove(+id);
     }
 };
-exports.BasketProductsController = BasketProductsController;
+exports.BasketLinesController = BasketLinesController;
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_basket_product_dto_1.CreateBasketProductDto]),
+    __metadata("design:paramtypes", [create_basket_line_dto_1.CreateBasketLineDto]),
     __metadata("design:returntype", void 0)
-], BasketProductsController.prototype, "create", null);
+], BasketLinesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], BasketProductsController.prototype, "findAll", null);
+], BasketLinesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], BasketProductsController.prototype, "findOne", null);
+], BasketLinesController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_basket_product_dto_1.UpdateBasketProductDto]),
+    __metadata("design:paramtypes", [String, update_basket_line_dto_1.UpdateBasketLineDto]),
     __metadata("design:returntype", void 0)
-], BasketProductsController.prototype, "update", null);
+], BasketLinesController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], BasketProductsController.prototype, "remove", null);
-exports.BasketProductsController = BasketProductsController = __decorate([
-    (0, common_1.Controller)('basket-products'),
-    __metadata("design:paramtypes", [basket_products_service_1.BasketProductsService])
-], BasketProductsController);
-//# sourceMappingURL=basket-products.controller.js.map
+], BasketLinesController.prototype, "remove", null);
+exports.BasketLinesController = BasketLinesController = __decorate([
+    (0, common_1.Controller)('basket-lines'),
+    __metadata("design:paramtypes", [basket_lines_service_1.BasketLinesService])
+], BasketLinesController);
+//# sourceMappingURL=basket-lines.controller.js.map

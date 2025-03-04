@@ -22,10 +22,13 @@ export class Basket {
   basketLines: BasketLine[];
 
   @Column({ type: 'int', default: 1 })
-  totalQty: number;
+  totalCount: number;
 
-  @Column()
-  totalPrice: number;
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  subTotalAmount: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  totalAmount: number;
 
   @CreateDateColumn()
   createdAt?: Date;

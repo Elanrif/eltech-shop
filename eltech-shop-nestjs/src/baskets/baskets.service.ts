@@ -25,7 +25,7 @@ export class BasketsService {
     userId: number,
     productId: number,
     variant: VariantType,
-    clientQty: number = 1,
+    count: number = 1,
   ) {
     const user = await this.userRepository.findOne({
       where: { id: userId },
@@ -59,18 +59,31 @@ export class BasketsService {
       where: { basket: { id: basket.id }, product: { id: productId }, variant },
     });
     if (basketLine) {
-      basketLine.clientQty += clientQty;
+      console.log('[basketService] update a basket line');
+      // BasketLine exist, so update it
+      basketLine.count = count;
+      basketLine.unitPrice = product.price;
+      basketLine.amount = product.price * count;
     } else {
+      console.log('[basketService] create a basket line');
+      // Create a new basketLine
       basketLine = this.basketLineRepository.create({
         basket,
         product,
         variant,
-        clientQty,
-        totalPrice: product.price * clientQty,
+        count,
+        unitPrice: product.price,
+        amount: product.price * count,
       });
     }
+    const saved = await this.basketLineRepository.save(basketLine);
+    // Update basket data
+    await this.updateBasketTotalQtyAndPrice(basket.id);
 
-    return this.basketLineRepository.save(basketLine);
+    return this.basketLineRepository.findOne({
+      where: { id: saved.id },
+      relations: ['product'],
+    });
   }
 
   create(createBasketDto: CreateBasketDto) {
@@ -82,7 +95,14 @@ export class BasketsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} basket`;
+    const basket = this.basketRepository.findOne({
+      where: { id },
+      relations: ['basketLines', 'basketLines.product'],
+    });
+    if (!basket) {
+      throw new NotFoundException('Basket not found');
+    }
+    return basket;
   }
 
   update(id: number, updateBasketDto: UpdateBasketDto) {
@@ -91,5 +111,30 @@ export class BasketsService {
 
   remove(id: number) {
     return `This action removes a #${id} basket`;
+  }
+
+  async updateBasketTotalQtyAndPrice(id: number) {
+    const basket = await this.basketRepository?.findOne({
+      where: { id },
+      relations: ['basketLines'],
+    });
+    if (!basket) {
+      throw new NotFoundException('Basket not found');
+    }
+    const totalCount = basket.basketLines?.reduce(
+      (sum, basketLine) => sum + basketLine.count,
+      0,
+    );
+    const subTotalAmount = basket.basketLines?.reduce(
+      (sum, basketLine) => sum + basketLine.amount,
+      0,
+    );
+
+    basket.totalCount = totalCount;
+    basket.subTotalAmount = subTotalAmount;
+    basket.totalAmount = totalCount * subTotalAmount;
+
+    const basket_ = await this.basketRepository.save(basket);
+    console.log('[updateBasketTotalQtyAndPrice] : ', basket_);
   }
 }

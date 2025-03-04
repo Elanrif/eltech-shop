@@ -26,10 +26,13 @@ export class BasketLine {
   product: Product;
 
   @Column({ type: 'int', default: 1 })
-  clientQty: number;
+  count: number;
 
-  @Column()
-  totalPrice: number;
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  amount: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  unitPrice: number;
 
   @Column()
   variant: VariantType;

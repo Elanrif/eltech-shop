@@ -38,6 +38,7 @@ export class UsersService {
   async findById(id: number) {
     return this.userRepository.findOne({
       where: { id },
+      relations: ['basket', 'basket.basketLines', 'basket.basketLines.product'],
     });
   }
 

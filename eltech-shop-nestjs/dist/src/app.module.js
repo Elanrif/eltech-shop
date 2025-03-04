@@ -20,7 +20,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const data_source_1 = require("../database/config/data-source");
 const auth_module_1 = require("./auth/auth.module");
 const config_1 = require("@nestjs/config");
-const basket_products_module_1 = require("./basket-products/basket-products.module");
+const basket_lines_module_1 = require("./basket-lines/basket-lines.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,7 +35,7 @@ exports.AppModule = AppModule = __decorate([
             baskets_module_1.BasketsModule,
             orders_module_1.OrdersModule,
             auth_module_1.AuthModule,
-            basket_products_module_1.BasketProductsModule,
+            basket_lines_module_1.BasketLinesModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, users_service_1.UsersService],

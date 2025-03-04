@@ -9,6 +9,7 @@
 | `typeorm:migration:show`      | Affiche la liste des migrations appliquées et celles en attente |
 
 # RUN migrations
+`` You have to do first delete all migrations files``
 1. ` npm run  migration:generate -- database/migrations/[Name of migration]`
 2. ` npm run migration:run`
 

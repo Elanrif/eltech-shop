@@ -65,7 +65,7 @@ export class AuthService {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, baskets, ...result } = user;
+    const { password, basket, ...result } = user;
     return result;
   }
 

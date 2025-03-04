@@ -18,9 +18,19 @@ const baskets_service_1 = require("./baskets.service");
 const create_basket_dto_1 = require("./dto/create-basket.dto");
 const update_basket_dto_1 = require("./dto/update-basket.dto");
 const api_constant_1 = require("../config/api.constant");
+const variant_enum_1 = require("../basket-lines/dto/variant.enum");
 let BasketsController = class BasketsController {
     constructor(basketsService) {
         this.basketsService = basketsService;
+    }
+    async addProductToBasket(userId, productId, variant, clientQty = 1) {
+        try {
+            const basketLine = await this.basketsService.addProductToBasket(userId, productId, variant, clientQty);
+            return { message: 'Product added to basket', basketLine };
+        }
+        catch (error) {
+            throw new common_1.NotFoundException(error.message);
+        }
     }
     create(createBasketDto) {
         return this.basketsService.create(createBasketDto);
@@ -39,6 +49,16 @@ let BasketsController = class BasketsController {
     }
 };
 exports.BasketsController = BasketsController;
+__decorate([
+    (0, common_1.Post)('users/:userId/add-product/:productId'),
+    __param(0, (0, common_1.Param)('userId')),
+    __param(1, (0, common_1.Param)('productId')),
+    __param(2, (0, common_1.Body)('variant')),
+    __param(3, (0, common_1.Body)('clientQty')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number, String, Number]),
+    __metadata("design:returntype", Promise)
+], BasketsController.prototype, "addProductToBasket", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),

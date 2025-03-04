@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Basket = void 0;
 const user_entity_1 = require("../../users/entities/user.entity");
 const typeorm_1 = require("typeorm");
-const basket_product_entity_1 = require("../../basket-products/entities/basket-product.entity");
+const basket_line_entity_1 = require("../../basket-lines/entities/basket-line.entity");
 let Basket = class Basket {
 };
 exports.Basket = Basket;
@@ -21,21 +21,25 @@ __decorate([
     __metadata("design:type", Number)
 ], Basket.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.baskets),
+    (0, typeorm_1.OneToOne)(() => user_entity_1.User, (user) => user.basket),
     __metadata("design:type", user_entity_1.User)
 ], Basket.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => basket_product_entity_1.BasketProduct, (basketProduct) => basketProduct.basket),
+    (0, typeorm_1.OneToMany)(() => basket_line_entity_1.BasketLine, (basketLine) => basketLine.basket),
     __metadata("design:type", Array)
-], Basket.prototype, "basketProducts", void 0);
+], Basket.prototype, "basketLines", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: 'int', default: 1 }),
     __metadata("design:type", Number)
-], Basket.prototype, "quantity", void 0);
+], Basket.prototype, "totalCount", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: 'decimal', precision: 10, scale: 2 }),
     __metadata("design:type", Number)
-], Basket.prototype, "totalPrice", void 0);
+], Basket.prototype, "subTotalAmount", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'decimal', precision: 10, scale: 2 }),
+    __metadata("design:type", Number)
+], Basket.prototype, "totalAmount", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

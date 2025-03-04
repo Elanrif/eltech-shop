@@ -6,17 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BasketProductsModule = void 0;
+exports.BasketLinesModule = void 0;
 const common_1 = require("@nestjs/common");
-const basket_products_service_1 = require("./basket-products.service");
-const basket_products_controller_1 = require("./basket-products.controller");
-let BasketProductsModule = class BasketProductsModule {
+const basket_lines_service_1 = require("./basket-lines.service");
+const basket_lines_controller_1 = require("./basket-lines.controller");
+let BasketLinesModule = class BasketLinesModule {
 };
-exports.BasketProductsModule = BasketProductsModule;
-exports.BasketProductsModule = BasketProductsModule = __decorate([
+exports.BasketLinesModule = BasketLinesModule;
+exports.BasketLinesModule = BasketLinesModule = __decorate([
     (0, common_1.Module)({
-        controllers: [basket_products_controller_1.BasketProductsController],
-        providers: [basket_products_service_1.BasketProductsService],
+        controllers: [basket_lines_controller_1.BasketLinesController],
+        providers: [basket_lines_service_1.BasketLinesService],
     })
-], BasketProductsModule);
-//# sourceMappingURL=basket-products.module.js.map
+], BasketLinesModule);
+//# sourceMappingURL=basket-lines.module.js.map

@@ -1,0 +1,34 @@
+import { MigrationInterface, QueryRunner } from "typeorm";
+
+export class Migrations11741105076283 implements MigrationInterface {
+    name = 'Migrations11741105076283'
+
+    public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE TABLE \`category\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`description\` varchar(255) NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`product\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`description\` varchar(255) NOT NULL, \`detail\` varchar(255) NOT NULL, \`imageUrl\` varchar(255) NULL, \`is_new\` tinyint NOT NULL DEFAULT 1, \`in_stock\` tinyint NOT NULL DEFAULT 1, \`brand\` varchar(255) NULL, \`color\` varchar(255) NOT NULL, \`quantity\` int NOT NULL, \`price\` decimal(10,2) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`categoryId\` int NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`basket_line\` (\`id\` int NOT NULL AUTO_INCREMENT, \`count\` int NOT NULL DEFAULT '1', \`amount\` decimal(10,2) NOT NULL, \`unitPrice\` decimal(10,2) NOT NULL, \`variant\` varchar(255) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`basketId\` int NULL, \`productId\` int NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`basket\` (\`id\` int NOT NULL AUTO_INCREMENT, \`totalCount\` int NOT NULL DEFAULT '1', \`subTotalAmount\` decimal(10,2) NOT NULL, \`totalAmount\` decimal(10,2) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`user\` (\`id\` int NOT NULL AUTO_INCREMENT, \`email\` varchar(255) NOT NULL, \`role\` varchar(255) NOT NULL DEFAULT 'USER', \`password\` varchar(255) NOT NULL, \`firstName\` varchar(255) NOT NULL, \`lastName\` varchar(255) NOT NULL, \`basketId\` int NULL, UNIQUE INDEX \`IDX_e12875dfb3b1d92d7d7c5377e2\` (\`email\`), UNIQUE INDEX \`REL_d316da86bd6304cf8105ed8952\` (\`basketId\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`order\` (\`id\` int NOT NULL AUTO_INCREMENT, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`ALTER TABLE \`product\` ADD CONSTRAINT \`FK_ff0c0301a95e517153df97f6812\` FOREIGN KEY (\`categoryId\`) REFERENCES \`category\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE \`basket_line\` ADD CONSTRAINT \`FK_2f5b3896239573bbdd6ff135aa8\` FOREIGN KEY (\`basketId\`) REFERENCES \`basket\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE \`basket_line\` ADD CONSTRAINT \`FK_991d7f296d99a3481c98be1d0a0\` FOREIGN KEY (\`productId\`) REFERENCES \`product\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE \`user\` ADD CONSTRAINT \`FK_d316da86bd6304cf8105ed89523\` FOREIGN KEY (\`basketId\`) REFERENCES \`basket\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
+    }
+
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE \`user\` DROP FOREIGN KEY \`FK_d316da86bd6304cf8105ed89523\``);
+        await queryRunner.query(`ALTER TABLE \`basket_line\` DROP FOREIGN KEY \`FK_991d7f296d99a3481c98be1d0a0\``);
+        await queryRunner.query(`ALTER TABLE \`basket_line\` DROP FOREIGN KEY \`FK_2f5b3896239573bbdd6ff135aa8\``);
+        await queryRunner.query(`ALTER TABLE \`product\` DROP FOREIGN KEY \`FK_ff0c0301a95e517153df97f6812\``);
+        await queryRunner.query(`DROP TABLE \`order\``);
+        await queryRunner.query(`DROP INDEX \`REL_d316da86bd6304cf8105ed8952\` ON \`user\``);
+        await queryRunner.query(`DROP INDEX \`IDX_e12875dfb3b1d92d7d7c5377e2\` ON \`user\``);
+        await queryRunner.query(`DROP TABLE \`user\``);
+        await queryRunner.query(`DROP TABLE \`basket\``);
+        await queryRunner.query(`DROP TABLE \`basket_line\``);
+        await queryRunner.query(`DROP TABLE \`product\``);
+        await queryRunner.query(`DROP TABLE \`category\``);
+    }
+
+}

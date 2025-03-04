@@ -56,7 +56,7 @@ let AuthService = class AuthService {
         if (!user) {
             return null;
         }
-        const { password, baskets, ...result } = user;
+        const { password, basket, ...result } = user;
         return result;
     }
     async refreshToken(user) {
