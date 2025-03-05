@@ -106,7 +106,7 @@ let BasketsService = class BasketsService {
         }
         const totalCount = (basket.basketLines || []).reduce((sum, basketLine) => sum + (basketLine.count || 0), 0);
         const subTotalAmount = (basket.basketLines || []).reduce((sum, basketLine) => {
-            const amount = basketLine.amount;
+            const amount = Number(basketLine.amount);
             if (isNaN(amount)) {
                 console.warn('Invalid amount found in basketLine:', basketLine);
                 return sum;

@@ -126,7 +126,7 @@ export class BasketsService {
     const subTotalAmount = (basket.basketLines || []).reduce(
       (sum, basketLine) => {
         // MySql sometimes return DECIMAL columns as string instead of number
-        const amount = basketLine.amount;
+        const amount = Number(basketLine.amount);
 
         if (isNaN(amount)) {
           console.warn('Invalid amount found in basketLine:', basketLine);
