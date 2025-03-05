@@ -59,13 +59,12 @@ export class BasketsService {
       where: { basket: { id: basket.id }, product: { id: productId }, variant },
     });
     if (basketLine) {
-      console.log('[basketService] update a basket line');
       // BasketLine exist, so update it
       basketLine.count = count;
       basketLine.unitPrice = product.price;
       basketLine.amount = product.price * count;
+      console.log('[basketService] update a basket line');
     } else {
-      console.log('[basketService] create a basket line');
       // Create a new basketLine
       basketLine = this.basketLineRepository.create({
         basket,
@@ -75,6 +74,7 @@ export class BasketsService {
         unitPrice: product.price,
         amount: product.price * count,
       });
+      console.log('[basketService] create a basket line');
     }
     const saved = await this.basketLineRepository.save(basketLine);
     // Update basket data
