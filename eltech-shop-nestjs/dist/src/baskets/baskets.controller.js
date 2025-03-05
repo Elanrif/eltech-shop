@@ -32,6 +32,9 @@ let BasketsController = class BasketsController {
             throw new common_1.NotFoundException(error.message);
         }
     }
+    async removeBasket(userId, basketId) {
+        await this.basketsService.removeBasket(basketId, userId);
+    }
     create(createBasketDto) {
         return this.basketsService.create(createBasketDto);
     }
@@ -59,6 +62,14 @@ __decorate([
     __metadata("design:paramtypes", [Number, Number, String, Number]),
     __metadata("design:returntype", Promise)
 ], BasketsController.prototype, "addProductToBasket", null);
+__decorate([
+    (0, common_1.Delete)(':basketId/users/:userId/delete'),
+    __param(0, (0, common_1.Param)('userId')),
+    __param(1, (0, common_1.Param)('basketId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", Promise)
+], BasketsController.prototype, "removeBasket", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),

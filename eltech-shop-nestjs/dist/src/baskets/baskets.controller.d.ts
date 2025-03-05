@@ -9,6 +9,7 @@ export declare class BasketsController {
         message: string;
         basketLine: import("../basket-lines/entities/basket-line.entity").BasketLine;
     }>;
+    removeBasket(userId: number, basketId: number): Promise<void>;
     create(createBasketDto: CreateBasketDto): string;
     findAll(): string;
     findOne(id: string): Promise<import("./entities/basket.entity").Basket>;

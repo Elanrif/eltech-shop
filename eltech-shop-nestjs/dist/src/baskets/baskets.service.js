@@ -68,11 +68,38 @@ let BasketsService = class BasketsService {
         }
         const saved = await this.basketLineRepository.save(basketLine);
         await this.updateBasketTotalQtyAndPrice(basket.id);
-        const result = this.basketLineRepository.findOne({
+        return this.basketLineRepository.findOne({
             where: { id: saved.id },
             relations: ['product'],
         });
-        return result;
+    }
+    async removeBasket(basketId, userId) {
+        try {
+            const basket = await this.basketRepository.findOne({
+                where: { id: basketId, user: { id: userId } },
+                relations: ['basketLines'],
+            });
+            if (!basket) {
+                throw new common_1.NotFoundException('Basket not found or does not belong to the user');
+            }
+            const user = await this.userRepository.findOne({
+                where: { basket: { id: basketId } },
+                relations: ['basket'],
+            });
+            if (user) {
+                user.basket = null;
+                await this.userRepository.save(user);
+            }
+            if (basket.basketLines && basket.basketLines.length > 0) {
+                await this.basketLineRepository.remove(basket.basketLines);
+            }
+            await this.basketRepository.remove(basket);
+            return { message: 'Basket and its lines have been successfully removed' };
+        }
+        catch (error) {
+            console.error('Error removing basket:', error);
+            throw new common_1.InternalServerErrorException('Failed to remove basket');
+        }
     }
     create(createBasketDto) {
         return 'This action adds a new basket';
@@ -116,8 +143,7 @@ let BasketsService = class BasketsService {
         basket.totalCount = totalCount;
         basket.subTotalAmount = subTotalAmount;
         basket.totalAmount = totalCount * subTotalAmount;
-        console.log(`[updateBasketTotalQtyAndPrice] totalCount: ${totalCount}, subTotalAmount: ${subTotalAmount}, totalAmount: ${totalCount * subTotalAmount}`);
-        const basket_ = await this.basketRepository.save(basket);
+        await this.basketRepository.save(basket);
     }
 };
 exports.BasketsService = BasketsService;

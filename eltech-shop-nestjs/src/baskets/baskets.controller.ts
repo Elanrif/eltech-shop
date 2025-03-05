@@ -41,6 +41,13 @@ export class BasketsController {
     }
   }
 
+  @Delete(':basketId/users/:userId/delete')
+  async removeBasket(
+    @Param('userId') userId: number,
+    @Param('basketId') basketId: number,
+  ) {
+    await this.basketsService.removeBasket(basketId, userId);
+  }
   @Post()
   create(@Body() createBasketDto: CreateBasketDto) {
     return this.basketsService.create(createBasketDto);

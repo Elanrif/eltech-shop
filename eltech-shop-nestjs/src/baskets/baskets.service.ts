@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateBasketDto } from './dto/create-basket.dto';
 import { UpdateBasketDto } from './dto/update-basket.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -77,11 +81,45 @@ export class BasketsService {
     const saved = await this.basketLineRepository.save(basketLine);
     // Update basket data
     await this.updateBasketTotalQtyAndPrice(basket.id);
-    const result = this.basketLineRepository.findOne({
+    return this.basketLineRepository.findOne({
       where: { id: saved.id },
       relations: ['product'],
     });
-    return result;
+  }
+
+  async removeBasket(basketId: number, userId: number) {
+    try {
+      const basket = await this.basketRepository.findOne({
+        where: { id: basketId, user: { id: userId } },
+        relations: ['basketLines'],
+      });
+
+      if (!basket) {
+        throw new NotFoundException(
+          'Basket not found or does not belong to the user',
+        );
+      }
+      const user = await this.userRepository.findOne({
+        where: { basket: { id: basketId } },
+        relations: ['basket'],
+      });
+      if (user) {
+        user.basket = null;
+        await this.userRepository.save(user);
+      }
+
+      if (basket.basketLines && basket.basketLines.length > 0) {
+        await this.basketLineRepository.remove(basket.basketLines);
+      }
+
+      // delete basket
+      await this.basketRepository.remove(basket);
+
+      return { message: 'Basket and its lines have been successfully removed' };
+    } catch (error) {
+      console.error('Error removing basket:', error);
+      throw new InternalServerErrorException('Failed to remove basket');
+    }
   }
 
   create(createBasketDto: CreateBasketDto) {
@@ -140,10 +178,6 @@ export class BasketsService {
     basket.totalCount = totalCount;
     basket.subTotalAmount = subTotalAmount;
     basket.totalAmount = totalCount * subTotalAmount;
-    console.log(
-      `[updateBasketTotalQtyAndPrice] totalCount: ${totalCount}, subTotalAmount: ${subTotalAmount}, totalAmount: ${totalCount * subTotalAmount}`,
-    );
-
-    const basket_ = await this.basketRepository.save(basket);
+    await this.basketRepository.save(basket);
   }
 }
