@@ -15,11 +15,11 @@ class CreateBasketDto {
 }
 exports.CreateBasketDto = CreateBasketDto;
 __decorate([
-    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateBasketDto.prototype, "amount", void 0);
 __decorate([
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
 ], CreateBasketDto.prototype, "count", void 0);
 //# sourceMappingURL=create-basket.dto.js.map

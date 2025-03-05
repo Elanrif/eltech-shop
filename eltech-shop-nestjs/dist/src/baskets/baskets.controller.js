@@ -23,9 +23,9 @@ let BasketsController = class BasketsController {
     constructor(basketsService) {
         this.basketsService = basketsService;
     }
-    async addProductToBasket(userId, productId, variant, clientQty = 1) {
+    async addProductToBasket(userId, productId, variant, count) {
         try {
-            const basketLine = await this.basketsService.addProductToBasket(userId, productId, variant, clientQty);
+            const basketLine = await this.basketsService.addProductToBasket(userId, productId, variant, count);
             return { message: 'Product added to basket', basketLine };
         }
         catch (error) {
@@ -54,7 +54,7 @@ __decorate([
     __param(0, (0, common_1.Param)('userId')),
     __param(1, (0, common_1.Param)('productId')),
     __param(2, (0, common_1.Body)('variant')),
-    __param(3, (0, common_1.Body)('clientQty')),
+    __param(3, (0, common_1.Body)('count')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number, String, Number]),
     __metadata("design:returntype", Promise)

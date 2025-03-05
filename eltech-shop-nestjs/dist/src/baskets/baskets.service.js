@@ -27,7 +27,7 @@ let BasketsService = class BasketsService {
         this.productRepository = productRepository;
         this.userRepository = userRepository;
     }
-    async addProductToBasket(userId, productId, variant, count = 1) {
+    async addProductToBasket(userId, productId, variant, count) {
         const user = await this.userRepository.findOne({
             where: { id: userId },
             relations: ['basket'],
@@ -52,13 +52,11 @@ let BasketsService = class BasketsService {
             where: { basket: { id: basket.id }, product: { id: productId }, variant },
         });
         if (basketLine) {
-            console.log('[basketService] update a basket line');
             basketLine.count = count;
             basketLine.unitPrice = product.price;
             basketLine.amount = product.price * count;
         }
         else {
-            console.log('[basketService] create a basket line');
             basketLine = this.basketLineRepository.create({
                 basket,
                 product,
@@ -70,10 +68,11 @@ let BasketsService = class BasketsService {
         }
         const saved = await this.basketLineRepository.save(basketLine);
         await this.updateBasketTotalQtyAndPrice(basket.id);
-        return this.basketLineRepository.findOne({
+        const result = this.basketLineRepository.findOne({
             where: { id: saved.id },
             relations: ['product'],
         });
+        return result;
     }
     create(createBasketDto) {
         return 'This action adds a new basket';
@@ -105,13 +104,20 @@ let BasketsService = class BasketsService {
         if (!basket) {
             throw new common_1.NotFoundException('Basket not found');
         }
-        const totalCount = basket.basketLines?.reduce((sum, basketLine) => sum + basketLine.count, 0);
-        const subTotalAmount = basket.basketLines?.reduce((sum, basketLine) => sum + basketLine.amount, 0);
+        const totalCount = (basket.basketLines || []).reduce((sum, basketLine) => sum + (basketLine.count || 0), 0);
+        const subTotalAmount = (basket.basketLines || []).reduce((sum, basketLine) => {
+            const amount = basketLine.amount;
+            if (isNaN(amount)) {
+                console.warn('Invalid amount found in basketLine:', basketLine);
+                return sum;
+            }
+            return sum + amount;
+        }, 0);
         basket.totalCount = totalCount;
         basket.subTotalAmount = subTotalAmount;
         basket.totalAmount = totalCount * subTotalAmount;
+        console.log(`[updateBasketTotalQtyAndPrice] totalCount: ${totalCount}, subTotalAmount: ${subTotalAmount}, totalAmount: ${totalCount * subTotalAmount}`);
         const basket_ = await this.basketRepository.save(basket);
-        console.log('[updateBasketTotalQtyAndPrice] : ', basket_);
     }
 };
 exports.BasketsService = BasketsService;

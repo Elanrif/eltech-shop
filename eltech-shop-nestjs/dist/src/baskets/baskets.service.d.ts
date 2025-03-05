@@ -12,7 +12,7 @@ export declare class BasketsService {
     private productRepository;
     private userRepository;
     constructor(basketLineRepository: Repository<BasketLine>, basketRepository: Repository<Basket>, productRepository: Repository<Product>, userRepository: Repository<User>);
-    addProductToBasket(userId: number, productId: number, variant: VariantType, count?: number): Promise<BasketLine>;
+    addProductToBasket(userId: number, productId: number, variant: VariantType, count: number): Promise<BasketLine>;
     create(createBasketDto: CreateBasketDto): string;
     findAll(): string;
     findOne(id: number): Promise<Basket>;

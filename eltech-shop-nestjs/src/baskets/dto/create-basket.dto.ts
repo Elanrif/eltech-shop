@@ -7,9 +7,9 @@ export class CreateBasketDto {
 
   basketLines: BasketLine[];
 
-  @IsInt()
+  @IsNumber()
   amount: number;
 
-  @IsNumber()
+  @IsInt()
   count: number;
 }

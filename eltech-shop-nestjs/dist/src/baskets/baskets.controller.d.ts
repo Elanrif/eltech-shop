@@ -5,7 +5,7 @@ import { VariantType } from '../basket-lines/dto/variant.enum';
 export declare class BasketsController {
     private readonly basketsService;
     constructor(basketsService: BasketsService);
-    addProductToBasket(userId: number, productId: number, variant: VariantType, clientQty?: number): Promise<{
+    addProductToBasket(userId: number, productId: number, variant: VariantType, count: number): Promise<{
         message: string;
         basketLine: import("../basket-lines/entities/basket-line.entity").BasketLine;
     }>;

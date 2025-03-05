@@ -11,11 +11,11 @@ export class CreateBasketLineDto {
   product: Product;
 
   @IsInt()
-  clientQty: number;
+  count: number;
 
   @IsEnum(VariantType)
   variant: string;
 
   @IsNumber()
-  totalPrice: number;
+  amount: number;
 }

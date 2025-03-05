@@ -28,7 +28,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
-], CreateBasketLineDto.prototype, "clientQty", void 0);
+], CreateBasketLineDto.prototype, "count", void 0);
 __decorate([
     (0, class_validator_1.IsEnum)(variant_enum_1.VariantType),
     __metadata("design:type", String)
@@ -36,5 +36,5 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], CreateBasketLineDto.prototype, "totalPrice", void 0);
+], CreateBasketLineDto.prototype, "amount", void 0);
 //# sourceMappingURL=create-basket-line.dto.js.map

@@ -26,14 +26,14 @@ export class BasketsController {
     @Param('userId') userId: number,
     @Param('productId') productId: number,
     @Body('variant') variant: VariantType,
-    @Body('clientQty') clientQty: number = 1,
+    @Body('count') count: number,
   ) {
     try {
       const basketLine = await this.basketsService.addProductToBasket(
         userId,
         productId,
         variant,
-        clientQty,
+        count,
       );
       return { message: 'Product added to basket', basketLine };
     } catch (error) {
